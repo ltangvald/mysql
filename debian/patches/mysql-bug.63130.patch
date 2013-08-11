@@ -1,0 +1,116 @@
+From d2619556a1680088ee28e60795a4ce5be1c29fd7 Mon Sep 17 00:00:00 2001
+From: Davi Arnaut <davi@twitter.com>
+Date: Mon, 7 Nov 2011 15:50:06 -0200
+Subject: [PATCH] Bug#63130: CMake-based check for the presence of a system
+ readline            library is not reliable.
+
+The MYSQL_FIND_SYSTEM_READLINE macro, which tests whether the
+Readline library is availability by trying to compile and link a
+test program, does not handle the case where the Readline library
+uses termcap functions, but does not link with the termcap or curses
+library itself.
+
+Also, the History library is not properly detected/used. The
+<readline/history.h> file should be include in any file that uses
+the History library's features. It supplies extern declarations for
+all of the library's public functions and variables, and declares
+all of the public data structures.
+
+The solution is to properly use the history library header and to
+link the available curses library.
+---
+ client/mysql.cc      |    6 ++++++
+ cmake/readline.cmake |   17 +++++++++++++----
+ config.h.cmake       |    1 +
+ 3 files changed, 20 insertions(+), 4 deletions(-)
+
+diff --git a/client/mysql.cc b/client/mysql.cc
+index b6bc2f4..7c4c6ce 100644
+--- a/client/mysql.cc
++++ b/client/mysql.cc
+@@ -89,6 +89,9 @@ extern "C" {
+ #include <conio.h>
+ #else
+ #include <readline/readline.h>
++#if HAVE_READLINE_HISTORY_H
++# include <readline/history.h>
++#endif
+ #define HAVE_READLINE
+ #define USE_POPEN
+ #endif
+@@ -1035,11 +1038,14 @@ typedef struct _hist_entry {
+ } HIST_ENTRY; 
+ #endif
+ 
++#if !defined(HAVE_READLINE_HISTORY_H)
+ extern "C" int add_history(const char *command); /* From readline directory */
+ extern "C" int read_history(const char *command);
+ extern "C" int write_history(const char *command);
+ extern "C" HIST_ENTRY *history_get(int num);
+ extern "C" int history_length;
++#endif
++
+ static int not_in_history(const char *line);
+ static void initialize_readline (char *name);
+ static void fix_history(String *final_command);
+--- a/cmake/readline.cmake
++++ b/cmake/readline.cmake
+@@ -128,20 +128,30 @@
+ ENDMACRO()
+ 
+ MACRO (FIND_SYSTEM_LIBEDIT name)
+-  
++ 
++  FIND_CURSES() 
+   FIND_PATH(${name}_INCLUDE_DIR readline/readline.h ) 
+   FIND_LIBRARY(${name}_LIBRARY NAMES ${name})
+   MARK_AS_ADVANCED(${name}_INCLUDE_DIR  ${name}_LIBRARY)
+ 
+   INCLUDE(CheckCXXSourceCompiles)
+-  SET(CMAKE_REQUIRES_LIBRARIES ${${name}_LIBRARY})
++  SET(CMAKE_REQUIRES_LIBRARIES ${${name}_LIBRARY} ${CURSES_LIBRARY})
++
++  CHECK_INCLUDE_FILES("stdio.h;readline/readline.h;readline/history.h"
++		      HAVE_READLINE_HISTORY_H)
++  IF(HAVE_READLINE_HISTORY_H)
++    LIST(APPEND CMAKE_REQUIRED_DEFINITIONS -DHAVE_READLINE_HISTORY_H)
++  ENDIF()
+ 
+   IF(${name}_LIBRARY AND ${name}_INCLUDE_DIR)
+     SET(SYSTEM_READLINE_FOUND 1)
+-    SET(CMAKE_REQUIRED_LIBRARIES ${${name}_LIBRARY})
++    SET(CMAKE_REQUIRED_LIBRARIES ${${name}_LIBRARY} ${CURSES_LIBRARY})
+     CHECK_CXX_SOURCE_COMPILES("
+     #include <stdio.h>
+-    #include <readline/readline.h> 
++    #include <readline/readline.h>
++    #if HAVE_READLINE_HISTORY_H
++    #include <readline/history.h>
++    #endif
+     int main(int argc, char **argv)
+     {
+        HIST_ENTRY entry;
+@@ -170,7 +180,7 @@
+     ${name}_USE_NEW_READLINE_INTERFACE)
+   
+     IF(${name}_USE_LIBEDIT_INTERFACE  OR ${name}_USE_NEW_READLINE_INTERFACE)
+-      SET(READLINE_LIBRARY ${${name}_LIBRARY})
++      SET(READLINE_LIBRARY ${${name}_LIBRARY} ${CURSES_LIBRARY})
+       SET(READLINE_INCLUDE_DIR ${${name}_INCLUDE_DIR})
+       SET(HAVE_HIST_ENTRY ${${name}_HAVE_HIST_ENTRY})
+       SET(USE_LIBEDIT_INTERFACE ${${name}_USE_LIBEDIT_INTERFACE})
+diff --git a/config.h.cmake b/config.h.cmake
+index 8c14601..ba593fe 100644
+--- a/config.h.cmake
++++ b/config.h.cmake
+@@ -121,6 +121,7 @@
+ #cmakedefine HAVE_HIST_ENTRY 1
+ #cmakedefine USE_LIBEDIT_INTERFACE 1
+ #cmakedefine USE_NEW_READLINE_INTERFACE 1
++#cmakedefine HAVE_READLINE_HISTORY_H 1
+ 
+ #cmakedefine FIONREAD_IN_SYS_IOCTL 1
+ #cmakedefine GWINSZ_IN_SYS_IOCTL 1
+-- 
+1.7.5.4
+

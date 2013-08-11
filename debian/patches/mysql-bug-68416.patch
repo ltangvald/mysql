@@ -1,0 +1,37 @@
+Index: mysql-5.6-5.6.10+dfsg.obsolete.0.012252664034353/scripts/mysql_install_db.pl.in
+===================================================================
+--- mysql-5.6-5.6.10+dfsg.obsolete.0.012252664034353.orig/scripts/mysql_install_db.pl.in	2013-02-18 17:13:47.000000000 +0100
++++ mysql-5.6-5.6.10+dfsg.obsolete.0.012252664034353/scripts/mysql_install_db.pl.in	2013-02-18 17:14:05.000000000 +0100
+@@ -425,32 +425,6 @@
+ my $copy_cfg_file;
+ 
+ # ----------------------------------------------------------------------
+-# This will be the default config file
+-# ----------------------------------------------------------------------
+-
+-$config_file= "$basedir/my.cnf";
+-
+-my $cfg_template= find_in_basedir($opt,"file","my-default.cnf",
+-				  "share","share/mysql","support-files");
+--e $cfg_template or cannot_find_file("my-default.cnf");
+-
+-$copy_cfg_file= $config_file;
+-if (-e $copy_cfg_file)
+-{
+-  $copy_cfg_file =~ s/my.cnf/my-new.cnf/;
+-  # Too early to print warning here, the user may not notice
+-}
+-open (TEMPL, $cfg_template) or error("Could not open config template");
+-open (CFG, "> $copy_cfg_file") or error("Could not open config file");
+-while (<TEMPL>)
+-{
+-  # Remove lines beginning with # *** which are template comments
+-  print CFG $_ unless /^# \*\*\*/;
+-}
+-close CFG;
+-close TEMPL;
+-
+-# ----------------------------------------------------------------------
+ # Now we can get arguments from the groups [mysqld] and [mysql_install_db]
+ # in the my.cfg file, then re-run to merge with command line arguments.
+ # ----------------------------------------------------------------------
