@@ -1,4 +1,4 @@
-mysql-5.6 (5.6.15-1) UNRELEASED; urgency=low
+mysql-5.6 (5.6.14-1) UNRELEASED; urgency=low
 
   * new upstream release
   * Docs/mysql.info has been removed in the mysql 5.6.15 source
