@@ -1,3 +1,35 @@
+mysql-5.6 (5.6.15-1) UNRELEASED; urgency=low
+
+  * new upstream release
+  * Docs/mysql.info has been removed in the mysql 5.6.15 source
+  * removed debian/repack.* and 'DFSG and repacking' section in
+    debian/README.source because repack not needed
+  * dropped '+dfsg' from version in changelog since there is no repack
+  * simplified debian/watch since there is no repack
+  * removed redundant *_r* links to mysql client library in libmysqlclient18
+    and libmysqlclient-dev packages
+  * updated debian/control to allow mysql-*-5.6 packages upgrade/ replace
+    an existing installation of mysql-*-5.5 packages
+  * modified debian/rules to use system zlib library, install additional
+    man pages and remove execute bit on few test and result files
+  * added patches to fix link path in man page mysql_client_test_embedded.1
+    and mysqltest_embedded.1
+  * added man page for mysql_config_pic at debian/additions/mysql_config_pic.1
+  * added man page for mysql_embedded at debian/additions/mysql_embedded.1
+  * moved libmysqlcient.so link from libmysqlclient18 to libmysqlclient-dev
+    based on lintian warning non-dev-pkg-with-shlib-symlink
+  * moved mysql_client_test_embedded binary from mysql-testsuite-5.6 
+    package to mysql-client-5.6 package
+  * moved mysql_config_editor.1 man page to mysql-client-5.6 package
+  * moved mysql_embedded from mysql-testsuite-5.6 package to mysql-client-5.6
+    package
+  * moved mysqltest_embedded binary from mysql-testsuite-5.6
+    package to mysql-server-5.6 package
+  * removed absolute path for mysql_install_db script in mysql-server-5.6
+    postinst script based on lintian warning
+
+ -- Akhil Mohan <akhil.mohan@oracle.com>  Mon, 18 Nov 2013 18:09:41 +0530
+
 mysql-5.6 (5.6.14+dfsg-1) UNRELEASED; urgency=low
 
   * new upstream release 

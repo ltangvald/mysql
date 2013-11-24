@@ -96,6 +96,7 @@ configure-stamp configure-pic-stamp:
 	       	-DMYSQL_USER=mysql \
 		-DWITH_LIBWRAP=ON \
 		-DWITH_READLINE=OFF \
+		-DWITH_ZLIB=system \
 		-DWITH_LIBEDIT=OFF \
 		$(USE_STATIC_MYSQLD) \
 		$(USE_LINUX_NATIVE_AIO) \
@@ -170,12 +171,28 @@ auto_install-stamp:
 	install -m 0755 debian/additions/echo_stderr $(TMP)/usr/share/mysql/
 	install -m 0755 debian/additions/debian-start $(TMP)/etc/mysql/
 	install -m 0755 debian/additions/debian-start.inc.sh $(TMP)/usr/share/mysql/
+	install -m 0644 debian/additions/mysql_config_pic.1 $(TMP)/usr/share/man/man1
+	install -m 0644 debian/additions/mysql_embedded.1 $(TMP)/usr/share/man/man1
 	chmod 0755 $(TMP)/usr/share/mysql-test/std_data/checkDBI_DBD-mysql.pl
 	# chmod 0644 $(TMP)/usr/share/mysql/*.ini
 	chmod 0644 $(TMP)/usr/share/mysql-test/[rt]/*
 	chmod 0644 $(TMP)/usr/share/mysql-test/collections/default.weekly
 	chmod 0644 $(TMP)/usr/share/mysql-test/suite/innodb/[rt]/*
 	chmod 0644 $(TMP)/usr/bin/mysqlaccess.conf
+	# http://bugs.mysql.com/bug.php?id=68517 --- Some test and result files have executable bit set.
+	# removing execute bit from file permissions
+	chmod 0644 $(TMP)/usr/share/mysql-test/include/have_QC_Disabled.inc
+	chmod 0644 $(TMP)/usr/share/mysql-test/include/check_ipv4_mapped.inc
+	chmod 0644 $(TMP)/usr/share/mysql-test/include/start_mysqld.inc
+	chmod 0644 $(TMP)/usr/share/mysql-test/include/shutdown_mysqld.inc
+	chmod 0644 $(TMP)/usr/share/mysql-test/suite/ndb/t/ndb_show_tables_result.inc
+	chmod 0644 $(TMP)/usr/share/mysql-test/suite/parts/r/partition_exch_innodb.result
+	chmod 0644 $(TMP)/usr/share/mysql-test/suite/parts/r/partition_exch_myisam*.result
+	chmod 0644 $(TMP)/usr/share/mysql-test/suite/parts/r/partition_exch_qa*.result
+	chmod 0644 $(TMP)/usr/share/mysql-test/suite/sys_vars/r/sort_buffer_size_basic_32.result
+	chmod 0644 $(TMP)/usr/share/mysql/innodb_memcached_config.sql
+	# removing all redundant library links at debian/tmp/usr/lib/*/*_r*
+	rm debian/tmp/usr/lib/*/*_r*
 	touch $@
 
 # Use the --fail-missing to check for stuff that we should be installing
