@@ -181,7 +181,7 @@ auto_install-stamp:
 	chmod 0644 $(TMP)/usr/bin/mysqlaccess.conf
 	# http://bugs.mysql.com/bug.php?id=68517 --- Some test and result files have executable bit set.
 	# removing execute bit from file permissions
-	chmod 0644 $(TMP)/usr/share/mysql-test/include/have_QC_Disabled.inc
+	#chmod 0644 $(TMP)/usr/share/mysql-test/include/have_QC_Disabled.inc
 	chmod 0644 $(TMP)/usr/share/mysql-test/include/check_ipv4_mapped.inc
 	chmod 0644 $(TMP)/usr/share/mysql-test/include/start_mysqld.inc
 	chmod 0644 $(TMP)/usr/share/mysql-test/include/shutdown_mysqld.inc
