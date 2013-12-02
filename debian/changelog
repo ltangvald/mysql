@@ -1,5 +1,6 @@
 mysql-5.6 (5.6.14-1) UNRELEASED; urgency=low
 
+  [ Akhil Mohan ]
   * new upstream release
   * Docs/mysql.info has been removed in the mysql 5.6.15 source
   * removed debian/repack.* and 'DFSG and repacking' section in
@@ -27,6 +28,10 @@ mysql-5.6 (5.6.14-1) UNRELEASED; urgency=low
     package to mysql-server-5.6 package
   * removed absolute path for mysql_install_db script in mysql-server-5.6
     postinst script based on lintian warning
+
+  [ Bjoern Boschman ]
+  * new upstream release (Fixes: #731076)
+  * 
 
  -- Akhil Mohan <akhil.mohan@oracle.com>  Mon, 18 Nov 2013 18:09:41 +0530
 
