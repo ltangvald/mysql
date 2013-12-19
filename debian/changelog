@@ -1,3 +1,14 @@
+mysql-5.6 (5.6.15-1) trusty-proposed; urgency=low
+
+  [ Akhil Mohan ]
+  * new upstream release
+  * changed mirror to download source tar
+  * replaced mysql_install_db script with small shell script to create
+    root accounts. This avoids creating anonymous users which were
+    security concern.
+
+ -- Akhil Mohan <akhil.mohan@oracle.com>  Mon, 19 Dec 2013 18:09:41 +0530
+
 mysql-5.6 (5.6.14-1) UNRELEASED; urgency=low
 
   [ Akhil Mohan ]

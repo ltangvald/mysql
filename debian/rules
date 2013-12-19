@@ -173,6 +173,7 @@ auto_install-stamp:
 	install -m 0755 debian/additions/debian-start.inc.sh $(TMP)/usr/share/mysql/
 	install -m 0644 debian/additions/mysql_config_pic.1 $(TMP)/usr/share/man/man1
 	install -m 0644 debian/additions/mysql_embedded.1 $(TMP)/usr/share/man/man1
+	install -m 0644 debian/additions/debian_create_root_user.sql $(TMP)/usr/share/mysql/
 	chmod 0755 $(TMP)/usr/share/mysql-test/std_data/checkDBI_DBD-mysql.pl
 	# chmod 0644 $(TMP)/usr/share/mysql/*.ini
 	chmod 0644 $(TMP)/usr/share/mysql-test/[rt]/*
@@ -181,7 +182,7 @@ auto_install-stamp:
 	chmod 0644 $(TMP)/usr/bin/mysqlaccess.conf
 	# http://bugs.mysql.com/bug.php?id=68517 --- Some test and result files have executable bit set.
 	# removing execute bit from file permissions
-	#chmod 0644 $(TMP)/usr/share/mysql-test/include/have_QC_Disabled.inc
+	chmod 0644 $(TMP)/usr/share/mysql-test/include/have_QC_Disabled.inc
 	chmod 0644 $(TMP)/usr/share/mysql-test/include/check_ipv4_mapped.inc
 	chmod 0644 $(TMP)/usr/share/mysql-test/include/start_mysqld.inc
 	chmod 0644 $(TMP)/usr/share/mysql-test/include/shutdown_mysqld.inc

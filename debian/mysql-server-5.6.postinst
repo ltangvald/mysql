@@ -102,16 +102,16 @@ case "$1" in
 
     # initiate databases. Output is not allowed by debconf :-(
     # Debian: can safely run on upgrades with existing databases 
+
     set +e
-    mysql_install_db --rpm 2>&1 | $ERR_LOGGER
-    if [ "$?" != "0" ]; then
-      echo "ATTENTION: An error has occured. More info is in the syslog!"
-    fi
-    #added to make sure database directories and files are owned by user mysql
-    chown -R mysql $mysql_statedir
-    chmod 700 $mysql_statedir $mysql_statedir/mysql
+    tfile_select_db=`mktemp`
+    echo "USE mysql;" > $tfile_select_db
+    MYSQL_EXTRA_OPTS=" --default-storage-engine=myisam --lc-messages-dir=/usr/share/mysql/english/.."
+    MYSQL_CMDLINE=$MYSQL_BOOTSTRAP$MYSQL_EXTRA_OPTS
+    cat $tfile_select_db $mysql_datadir/mysql_system_tables.sql $mysql_datadir/debian_create_root_user.sql $mysql_datadir/fill_help_tables.sql | $MYSQL_CMDLINE 2>&1 | $ERR_LOGGER
+    rm $tfile_select_db
     set -e
-    
+
     ## On every reconfiguration the maintenance user is recreated.
     #
     # - It is easier to regenerate the password every time but as people
@@ -154,10 +154,6 @@ case "$1" in
     chown 0:0 $dc
     chmod 0600 $dc
 
-    # update privilege tables
-    password_column_fix_query=`echo -e \
-        "USE mysql;\n" \
-        "ALTER TABLE user CHANGE Password Password char(41) character set latin1 collate latin1_bin DEFAULT '' NOT NULL"`;
     replace_query=`echo -e \
         "USE mysql;\n" \
         "REPLACE INTO user SET " \
@@ -170,15 +166,6 @@ case "$1" in
         "  Repl_slave_priv='Y', Repl_client_priv='Y', Create_view_priv='Y', "\
         "  Show_view_priv='Y', Create_routine_priv='Y', Alter_routine_priv='Y', "\
         "  Create_user_priv='Y', Event_priv='Y', Trigger_priv='Y'; "`;
-    fix_privs=`echo -e \
-        "USE mysql;\n" \
-        "ALTER TABLE user ADD column Create_view_priv enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N'; " \
-        "ALTER TABLE user ADD column Show_view_priv enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N'; " \
-        "ALTER TABLE user ADD column Create_routine_priv enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N'; " \
-        "ALTER TABLE user ADD column Alter_routine_priv enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N'; " \
-        "ALTER TABLE user ADD column Create_user_priv enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N'; " \
-        "ALTER TABLE user ADD column Event_priv enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N'; " \
-        "ALTER TABLE user ADD column Trigger_priv enum('N','Y') CHARACTER SET utf8 NOT NULL DEFAULT 'N'; " `
     # Engines supported by etch should be installed per default. The query sequence is supposed
     # to be aborted if the CREATE TABLE fails due to an already existent table in which case the
     # admin might already have chosen to remove one or more plugins. Newlines are necessary.
@@ -192,15 +179,11 @@ case "$1" in
         "INSERT INTO plugin VALUES ('blackhole', 'ha_blackhole.so');\n" \
         "INSERT INTO plugin VALUES ('archive',   'ha_archive.so');" `
 
-    # Upgrade password column format before the root password gets set.
-    #echo "$password_column_fix_query"                        | $MYSQL_BOOTSTRAP 2>&1 | $ERR_LOGGER
-
     db_get mysql-server/root_password && rootpw="$RET"
     if ! set_mysql_rootpw; then
         password_error="yes"
     fi
 
-    #echo "$fix_privs"                                        | $MYSQL_BOOTSTRAP 2>&1 | $ERR_LOGGER
     echo "$replace_query"                                    | $MYSQL_BOOTSTRAP 2>&1 | $ERR_LOGGER
     set +e
     echo "$install_plugins"                                  | $MYSQL_BOOTSTRAP 2>&1 | $ERR_LOGGER
@@ -239,6 +222,11 @@ if [ "$1" = "configure" ]; then
 fi
 
 db_stop # in case invoke failes
+
+if [ -x "/etc/init.d/mysql" ]; then
+       update-rc.d mysql defaults 19 21 >/dev/null
+       invoke-rc.d mysql start || exit $?
+fi
 
 #DEBHELPER#
 
