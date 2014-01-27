@@ -1,6 +1,9 @@
-usr/lib/mysql/plugin/*.so
-etc/mysql/debian-start
+#usr/share/mysql/config.huge.ini
+#usr/share/mysql/config.medium.ini
+#usr/share/mysql/config.small.ini
+#usr/share/mysql/ndb-config-2-node.ini
 debian/additions/mysqld_safe_syslog.cnf etc/mysql/conf.d/
+etc/mysql/debian-start
 usr/bin/msql2mysql
 usr/bin/myisamchk
 usr/bin/myisamlog
@@ -20,14 +23,11 @@ usr/bin/perror
 usr/bin/replace
 usr/bin/resolve_stack_dump
 usr/bin/resolveip
+usr/lib/mysql/plugin/*.so
 usr/share/doc/mysql-server-5.6/
 usr/share/mysql/debian-start.inc.sh
+usr/share/mysql/debian_create_root_user.sql
 usr/share/mysql/echo_stderr
 usr/share/mysql/errmsg-utf8.txt
-usr/share/mysql/mysqld_multi.server
 usr/share/mysql/mysql_test_data_timezone.sql
-usr/share/mysql/debian_create_root_user.sql
-#usr/share/mysql/config.huge.ini
-#usr/share/mysql/config.medium.ini
-#usr/share/mysql/config.small.ini
-#usr/share/mysql/ndb-config-2-node.ini
+usr/share/mysql/mysqld_multi.server
