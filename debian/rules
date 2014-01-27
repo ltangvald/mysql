@@ -32,14 +32,19 @@ EXPORTED_SOURCE_TARBALL := debian/mysql-source-5.6.tar.gz
 
 DISTRIBUTION := $(shell lsb_release -i -s)
 
-MAKE_TEST_TARGET:=test
+MAKE_TEST_TARGET:=test-force
 ifneq ($(findstring fulltest,$(DEB_BUILD_OPTIONS)),)
 # make test-bt is the testsuite run by the MySQL build team 
 # before a release, but it is long
     MAKE_TEST_TARGET:=test-bt
 endif
+ifeq ($(ARCH_OS),hurd)
+# Tests not fully working under Hurd
+# See http://bugs.mysql.com/bug.php?id=64685
+    MAKE_TEST_TARGET:=test
+endif
 
-USE_ASSEMBLER:=--enable-assembler 
+USE_ASSEMBLER:=--enable-assembler
 
 ifneq (,$(filter $(ARCH), amd64 i386 kfreebsd-i386))
     TESTSUITE_FAIL_CMD:=exit 1
