@@ -223,11 +223,6 @@ fi
 
 db_stop # in case invoke failes
 
-if [ -x "/etc/init.d/mysql" ]; then
-       update-rc.d mysql defaults 19 21 >/dev/null
-       invoke-rc.d mysql start || exit $?
-fi
-
 #DEBHELPER#
 
 exit 0

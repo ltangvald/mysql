@@ -15,11 +15,11 @@ DEB_BUILD_GNU_SYSTEM ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_SYSTEM)
 DEBVERSION := $(shell dpkg-parsechangelog | awk '/^Version: / { print $$2 }' | sed 's/^.*-//' )
 
 ifneq (,$(filter $(ARCH), i386 kfreebsd-i386 hurd-i386))
-    USE_THIS_GCC_VERSION:=-4.4
+	TAOCRYPT_OPT="-DTAOCRYPT_DISABLE_X86ASM"
 endif
 
-export MYSQL_BUILD_CC=$(DEB_HOST_GNU_TYPE)-gcc$(USE_THIS_GCC_VERSION)
-export MYSQL_BUILD_CXX=$(DEB_HOST_GNU_TYPE)-g++$(USE_THIS_GCC_VERSION)
+export MYSQL_BUILD_CC=$(DEB_HOST_GNU_TYPE)-gcc
+export MYSQL_BUILD_CXX=$(DEB_HOST_GNU_TYPE)-g++
 
 DEB_SOURCE_PACKAGE ?= $(strip $(shell egrep '^Source: ' debian/control | cut -f 2 -d ':'))
 DEB_VERSION ?= $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
@@ -86,9 +86,9 @@ configure-stamp configure-pic-stamp:
 	( test -d $(builddir) || mkdir $(builddir) ) && cd $(builddir) && \
 	sh -c  'PATH=$${MYSQL_BUILD_PATH:-"/bin:/usr/bin"} \
 	    	CC=$${MYSQL_BUILD_CC:-gcc} \
-		CFLAGS=$${MYSQL_BUILD_CFLAGS:-"-O2 -DBIG_JOINS=1 ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing"} \
+		CFLAGS=$${MYSQL_BUILD_CFLAGS:-"-O2 -DBIG_JOINS=1 ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing ${TAOCRYPT_OPT}"} \
 	    	CXX=$${MYSQL_BUILD_CXX:-g++} \
-	    	CXXFLAGS=$${MYSQL_BUILD_CXXFLAGS:-"-O3 -DBIG_JOINS=1 -felide-constructors -fno-exceptions -fpermissive -fno-rtti ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing"} \
+	    	CXXFLAGS=$${MYSQL_BUILD_CXXFLAGS:-"-O3 -DBIG_JOINS=1 -felide-constructors -fno-exceptions -fpermissive -fno-rtti ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing ${TAOCRYPT_OPT}"} \
 	    cmake -DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_VERBOSE_MAKEFILE=ON \
 		$(FORCE_FPIC) \
@@ -193,13 +193,16 @@ auto_install-stamp:
 	chmod 0644 $(TMP)/usr/share/mysql-test/suite/sys_vars/r/sort_buffer_size_basic_32.result
 	chmod 0644 $(TMP)/usr/share/mysql/innodb_memcached_config.sql
 	# removing all redundant library links at debian/tmp/usr/lib/*/*_r*
-	rm debian/tmp/usr/lib/*/*_r*
+	rm $(TMP)/usr/lib/$(DEB_HOST_MULTIARCH)/*_r*
+	# we have to make 5.6 client libs as alternate to 5.5 client libs
+	rm -f $(TMP)/usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18
+	# getting rid of other extra files
+	rm -f $(TMP)/etc/mysql/conf.d/.keepme
 	touch $@
 
 # Use the --fail-missing to check for stuff that we should be installing
 #       Exclusion                                       Package         Type
 #       usr/share/man/                                  various         man
-#       libmysqlclient_r.so                             libMclient-dev  links
 #       usr/share/mysql/magic                           M-server-5.6    example
 #       usr/bin/mysqlaccess.conf                        M-client-5.6    example
 #       usr/lib/mysql/plugin/daemon_example.ini         M-server-5.6    example
@@ -214,7 +217,6 @@ override_dh_install:
 	dh_install --fail-missing                       \
         -Xusr/share/man/                                \
         -Xusr/share/info/mysql.info                     \
-        -Xlibmysqlclient_r.so                           \
         -Xusr/share/mysql/magic                         \
 	-Xusr/share/mysql/solaris/postinstall-solaris	\
         -Xusr/lib/mysql/plugin/daemon_example.ini       \
@@ -227,17 +229,8 @@ override_dh_install:
 
 libmysqlclient-links-stamp: auto_install-stamp
 	@echo "RULES.$@"
-	# libmysqlclient_r is now a symlink to libmysqlclient. But it is
-	# created wrong by the cmake build system and points at
-	# libmysqlclient.so instead of the corresponding versioned lib.
-	echo usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient_r.so > debian/libmysqlclient-dev.links
-	rm -f debian/libmysqlclient18.links
-	for i in `ls $(TMP)/usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.*`; \
-	do \
-	    source=`basename $$i`; \
-	    dest=`echo $$source | sed -e's/libmysqlclient/libmysqlclient_r/'`; \
-	    echo usr/lib/$(DEB_HOST_MULTIARCH)/$$source usr/lib/$(DEB_HOST_MULTIARCH)/$$dest >> debian/libmysqlclient18.links; \
-	done
+	echo usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18.1.0 usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18.1 >> debian/libmysqlclient18.1.links
+	echo usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18.1 usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18 >> debian/libmysqlclient18.1.links
 	touch $@
 
 override_dh_link-arch: libmysqlclient-links-stamp
@@ -261,7 +254,7 @@ override_dh_installcron-arch:
 	dh_installcron --name mysql-server
 
 override_dh_makeshlibs-arch:
-	dh_makeshlibs -plibmysqlclient18 -V'libmysqlclient18 (>= 5.6.8-rc+dfsg-1)'
+	dh_makeshlibs -plibmysqlclient18.1 -V'libmysqlclient18.1 (>= 5.6.15-1)'
 
 binary:	binary-indep binary-arch
 

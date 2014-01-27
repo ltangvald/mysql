@@ -1,3 +1,28 @@
+mysql-5.6 (5.6.15-2) UNRELEASED; urgency=low
+
+  * mysql-server-5.6 and mysql-client-5.6 now depend on mysql-common (>= 5.5)
+  * mysql-server-5.6 now provides only virtual-mysql-server
+  * mysql-client-5.6 now provides only virtual-mysql-client
+  * MySQL 5.6 now contains mysql-common-5.6 which is only suggested
+  * moved mysql-common/etc/mysql/my.cnf to
+      mysql-common-5.6/usr/share/mysql/my.cnf
+  * MySQL 5.6 now gives libmysqlclient18.1, libmysqlclient18.1-dev,
+      libmysqld-5.6-dev and libmysqld-5.6-pic
+  * libmysqlclient18.1-dev, libmysqld-5.6-dev and libmysqld-5.6-pic packages
+      conflict with their respective counterparts from MySQL 5.5
+  * link traversal for libmysqlclient is
+      libmysqlclient.so (contained in libmysqclient18.1-dev)  ->
+      libmysqlclient.so.18 (contained in libmysqclient18.1)   ->
+      libmysqlclient.so.18.1 (contained in libmysqclient18.1) ->
+      libmysqlclient.so.18.1.0 (contained in libmysqclient18.1)
+  * Placeholder packages mysql-server, mysql-client, mysql-testsuite 
+    have been discontinued
+  * d/rules, d/control removed gcc-4.4 dependency and disable X86 assembly in
+    taocrypt (LP: #1162139).
+    - Cherry-pick from Debian svn r2231 with thanks to Clint Byrum.
+
+ -- Akhil Mohan <akhil.mohan@oracle.com>  Mon, 16 Jan 2014 18:09:41 +0530
+
 mysql-5.6 (5.6.15-1) UNRELEASED; urgency=low
 
   [ Akhil Mohan ]

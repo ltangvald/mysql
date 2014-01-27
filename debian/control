@@ -4,17 +4,18 @@ Priority: optional
 Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
 Uploaders: Norbert Tretkowski <norbert@tretkowski.de>,
  Clint Byrum <clint@ubuntu.com>, Nicholas Bamber <nicholas@periapt.co.uk>
-Build-Depends: debhelper (>= 8.1.3~), libaio-dev[linux-any], libncurses5-dev (>= 5.0-6), perl, libwrap0-dev (>= 7.6-8.3), zlib1g-dev (>= 1:1.1.3-5), libreadline-dev, po-debconf, psmisc, chrpath, gawk, bison, lsb-release, hardening-wrapper, cmake, gcc-4.4 [any-i386], g++-4.4 [any-i386]
+Build-Depends: debhelper (>= 8.1.3~), libaio-dev[linux-any], libncurses5-dev (>= 5.0-6), perl, libwrap0-dev (>= 7.6-8.3), zlib1g-dev (>= 1:1.1.3-5), libreadline-dev, po-debconf, psmisc, chrpath, gawk, bison, lsb-release, hardening-wrapper, cmake
 Standards-Version: 3.9.3
 Homepage: http://dev.mysql.com/
 Vcs-Git: git://git.debian.org/git/pkg-mysql/mysql-5.6.git
 Vcs-Browser: http://git.debian.org/?p=pkg-mysql/mysql-5.6.git
 
-Package: libmysqlclient18
+Package: libmysqlclient18.1
 Section: libs
 Architecture: any
-Depends: mysql-common (>= ${source:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: mysql-common (>= 5.5), ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: multiarch-support, ${misc:Pre-Depends}
+Recommends: mysql-common-5.6
 Multi-Arch: same
 Description: MySQL database client library
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
@@ -24,10 +25,11 @@ Description: MySQL database client library
  .
  This package includes the client library.
 
-Package: libmysqld-pic
+Package: libmysqld-5.6-pic
 Architecture: any
 Section: libdevel
-Depends: libmysqlclient-dev (>= ${source:Version}), ${misc:Depends}
+Depends: libmysqlclient18.1-dev (>= ${source:Version}), ${misc:Depends}
+Conflicts: libmysqld-pic
 Description: PIC version of MySQL embedded server development files
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -36,10 +38,11 @@ Description: PIC version of MySQL embedded server development files
  .
  This package includes the -fPIC version of the embedded server library.
 
-Package: libmysqld-dev
+Package: libmysqld-5.6-dev
 Architecture: any
 Section: libdevel
-Depends: libmysqlclient-dev (>= ${source:Version}), ${misc:Depends}
+Depends: libmysqlclient18.1-dev (>= ${source:Version}), ${misc:Depends}
+Conflicts: libmysqld-dev
 Description: MySQL embedded database development files
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -48,13 +51,11 @@ Description: MySQL embedded database development files
  .
  This package includes the embedded server library and header files.
 
-Package: libmysqlclient-dev
+Package: libmysqlclient18.1-dev
 Architecture: any
 Section: libdevel
-Depends: libmysqlclient18 (= ${binary:Version}), zlib1g-dev, , ${shlibs:Depends}, ${misc:Depends}
-Conflicts: libmysqlclient10-dev, libmysqlclient12-dev, libmysqlclient14-dev
-Replaces: libmysqlclient15-dev
-Provides: libmysqlclient18-dev
+Depends: libmysqlclient18.1 (= ${binary:Version}), zlib1g-dev, , ${shlibs:Depends}, ${misc:Depends}
+Conflicts: libmysqlclient-dev
 Description: MySQL database development files
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -63,30 +64,21 @@ Description: MySQL database development files
  .
  This package includes development libraries and header files.
 
-Package: mysql-common
+Package: mysql-common-5.6
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Conflicts: mysql-server-5.0, mysql-server-core-5.0, mysql-client-5.0, mysql-client-core-5.0,
-  mysql-server-5.1, mysql-server-core-5.1, mysql-client-5.1, mysql-client-core-5.1
-Replaces: mysql-common (<< ${source:Version})
-Provides: mysql-common
+Depends: ${shlibs:Depends}, ${misc:Depends}, mysql-common
 Multi-Arch: foreign
-Description: MySQL database common files, e.g. /etc/mysql/my.cnf
+Description: MySQL 5.6 specific common files, e.g. /etc/mysql/conf.d/my-5.6.cnf
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
  language in the world. The main goals of MySQL are speed, robustness and
  ease of use.
- .
- This package includes files needed by all versions of the client library,
- e.g. /etc/mysql/my.cnf.
 
 Package: mysql-client-core-5.6
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Conflicts: mysql-client-core-5.0, mysql-client-core-5.1,
-  mysql-client-5.0, mysql-client-5.1
-Replaces: mysql-client-core (<< ${source:Version}), mysql-client-core-5.5, mysql-client-5.5
-Provides: mysql-client-core
+Conflicts: mysql-client-core-5.0, mysql-client-core-5.1, mysql-client-core-5.5,
+  mysql-client-5.0, mysql-client-5.1, mysql-client-5.5
 Description: MySQL database core client binaries
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -97,11 +89,11 @@ Description: MySQL database core client binaries
 
 Package: mysql-client-5.6
 Architecture: any
-Depends: debianutils (>=1.6), libdbi-perl, libdbd-mysql-perl (>= 1.2202), mysql-common (>= ${source:Version}), ${perl:Depends}, ${shlibs:Depends}, ${misc:Depends}, mysql-client-core-5.6
+Depends: debianutils (>=1.6), libdbi-perl, libdbd-mysql-perl (>= 1.2202), mysql-common (>= 5.5), ${perl:Depends}, ${shlibs:Depends}, ${misc:Depends}, mysql-client-core-5.6
 Suggests: libterm-readkey-perl
-Conflicts: mysql-client-5.0, mysql-client-5.1
-Replaces: mysql-client (<< ${source:Version}), mysql-client-5.5
-Provides: mysql-client, virtual-mysql-client
+Recommends: mysql-common-5.6
+Conflicts: mysql-client-5.0, mysql-client-5.1, mysql-client-5.5, mysql-client
+Provides: virtual-mysql-client
 Description: MySQL database client binaries
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -114,9 +106,8 @@ Description: MySQL database client binaries
 Package: mysql-server-core-5.6
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Conflicts: mysql-server-core-5.0, mysql-server-core-5.1
-Replaces: mysql-server-core (<< ${source:Version}), mysql-server-core-5.5
-Provides: mysql-server-core
+Conflicts: mysql-server-core-5.0, mysql-server-core-5.1, mysql-server-core-5.5,
+  mysql-server-5.0, mysql-server-5.1, mysql-server-5.5 
 Description: MySQL database server binaries
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -128,13 +119,12 @@ Description: MySQL database server binaries
 
 Package: mysql-server-5.6
 Architecture: any
-Recommends: libhtml-template-perl
+Recommends: libhtml-template-perl, mysql-common-5.6
 Suggests: tinyca, mailx
-Pre-Depends: mysql-common (>= ${source:Version}), adduser (>= 3.40), debconf
-Depends: mysql-client-5.6 (>= ${source:Version}), mysql-server-core-5.6 (= ${binary:Version}), libdbi-perl, perl (>= 5.6), psmisc, passwd, lsb-base (>= 3.0-10), initscripts, ${shlibs:Depends}, ${misc:Depends}
-Conflicts: mysql-server-5.0, mysql-server-5.1
-Replaces: mysql-server (<< ${source:Version}), mysql-server-5.5
-Provides: mysql-server, virtual-mysql-server
+Pre-Depends: mysql-common (>= 5.5), adduser (>= 3.40), debconf
+Depends: mysql-client-5.6 (>= ${binary:Version}), mysql-server-core-5.6 (= ${binary:Version}), libdbi-perl, perl (>= 5.6), psmisc, passwd, lsb-base (>= 3.0-10), initscripts, ${shlibs:Depends}, ${misc:Depends}
+Conflicts: mysql-server-5.0, mysql-server-5.1, mysql-server-5.5, mysql-server
+Provides: virtual-mysql-server
 Description: MySQL database server binaries and system database setup 
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -144,46 +134,11 @@ Description: MySQL database server binaries and system database setup
  This package contains all the infrastructure needed to setup system
  databases.
 
-Package: mysql-server
-Architecture: all
-Depends: mysql-server-5.6, ${misc:Depends}
-Description: MySQL database server (metapackage depending on the latest version)
- This is an empty package that depends on the current "best" version of
- mysql-server (currently mysql-server-5.6), as determined by the MySQL
- maintainers. Install this package if in doubt about which MySQL
- version you need. That will install the version recommended by the
- package maintainers.
- .
- MySQL is a fast, stable and true multi-user, multi-threaded SQL database
- server. SQL (Structured Query Language) is the most popular database query
- language in the world. The main goals of MySQL are speed, robustness and
- ease of use.
-
-Package: mysql-client
-Architecture: all
-Depends: mysql-client-5.6, ${misc:Depends}
-Description: MySQL database client (metapackage depending on the latest version)
- This is an empty package that depends on the current "best" version of
- mysql-client (currently mysql-client-5.6), as determined by the MySQL
- maintainers.  Install this package if in doubt about which MySQL version
- you want, as this is the one considered to be in the best shape by the
- Maintainers.
-
-Package: mysql-testsuite
-Architecture: all
-Depends: mysql-testsuite-5.6, ${misc:Depends}
-Description: MySQL testsuite
- This is an empty package that depends on the current "best" version of
- mysql-testsuite (currently mysql-testsuite-5.6), as determined by the
- MySQL maintainers.  Install this package if in doubt about which MySQL
- version you want, as this is the one considered to be in the best shape.
-
 Package: mysql-testsuite-5.6
 Architecture: any
-Depends: mysql-server (= ${source:Version}), mysql-client (= ${source:Version}),  ${shlibs:Depends}, ${misc:Depends}
-Conflicts: mysql-testsuite-5.0, mysql-testsuite-5.1
-Replaces: mysql-testsuite (<< ${source:Version}), mysql-testsuite-5.5
-Provides: mysql-testsuite
+Depends: mysql-server-5.6 (= ${binary:Version}), mysql-client-5.6 (= ${binary:Version}),  ${shlibs:Depends}, ${misc:Depends}
+Conflicts: mysql-testsuite-5.0, mysql-testsuite-5.1, mysql-testsuite-5.5,
+  mysql-testsuite
 Description: MySQL 5.6 testsuite
  MySQL is a fast, stable, and true multi-user, multi-threaded SQL database
  server.  SQL (Structured Query Language) is the most popular database query
