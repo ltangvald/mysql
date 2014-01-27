@@ -1,5 +1,6 @@
-mysql-5.6 (5.6.15-2) UNRELEASED; urgency=low
+mysql-5.6 (5.6.15-1) UNRELEASED; urgency=low
 
+  [ Akhil Mohan ]
   * mysql-server-5.6 and mysql-client-5.6 now depend on mysql-common (>= 5.5)
   * mysql-server-5.6 now provides only virtual-mysql-server
   * mysql-client-5.6 now provides only virtual-mysql-client
@@ -18,26 +19,12 @@ mysql-5.6 (5.6.15-2) UNRELEASED; urgency=low
   * Placeholder packages mysql-server, mysql-client, mysql-testsuite 
     have been discontinued
   * d/rules, d/control removed gcc-4.4 dependency and disable X86 assembly in
-    taocrypt (LP: #1162139).
+    taocrypt.
     - Cherry-pick from Debian svn r2231 with thanks to Clint Byrum.
-
- -- Akhil Mohan <akhil.mohan@oracle.com>  Mon, 16 Jan 2014 18:09:41 +0530
-
-mysql-5.6 (5.6.15-1) UNRELEASED; urgency=low
-
-  [ Akhil Mohan ]
-  * new upstream release
   * changed mirror to download source tar
   * replaced mysql_install_db script with small shell script to create
     root accounts. This avoids creating anonymous users which were
     security concern.
-
- -- Akhil Mohan <akhil.mohan@oracle.com>  Mon, 19 Dec 2013 18:09:41 +0530
-
-mysql-5.6 (5.6.14-1) UNRELEASED; urgency=low
-
-  [ Akhil Mohan ]
-  * new upstream release
   * Docs/mysql.info has been removed in the mysql 5.6.15 source
   * removed debian/repack.* and 'DFSG and repacking' section in
     debian/README.source because repack not needed
@@ -66,14 +53,7 @@ mysql-5.6 (5.6.14-1) UNRELEASED; urgency=low
     postinst script based on lintian warning
 
   [ Bjoern Boschman ]
-  * new upstream release (Fixes: #731076)
-  * 
-
- -- Akhil Mohan <akhil.mohan@oracle.com>  Mon, 18 Nov 2013 18:09:41 +0530
-
-mysql-5.6 (5.6.14+dfsg-1) UNRELEASED; urgency=low
-
-  * new upstream release 
+  * Initial release of mysql-5.6 package.
   * mysql_install_db is now a perl script. Do not run it with bash
   * added innodb_data_file_path to my.cnf for mysql-5.1 => mysql-5.6 upgrade path
   * added multiarch support 
