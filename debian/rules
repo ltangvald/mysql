@@ -230,7 +230,7 @@ override_dh_install:
 libmysqlclient-links-stamp: auto_install-stamp
 	@echo "RULES.$@"
 	echo usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18.1.0 usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18.1 >> debian/libmysqlclient18.1.links
-	echo usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18.1 usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18 >> debian/libmysqlclient18.1.links
+	echo usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so.18.1 usr/lib/$(DEB_HOST_MULTIARCH)/libmysqlclient.so >> debian/libmysqlclient18.1-dev.links
 	touch $@
 
 override_dh_link-arch: libmysqlclient-links-stamp
