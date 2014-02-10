@@ -1,21 +1,7 @@
 hurd.patch
 fix-man-page-links.patch
-#mysql_install_db.patch
-#fix-man-mysql_client_test_embedded.1.patch
-#fix-man-mysqltest_embedded.1.patch
-#scripts__mysqld_safe.sh__signals.patch
-#disable_tests.patch
-#mysql_va_list.patch
-#disable_rpl_tests.patch
-#fix_standalone_tests.patch
-#mysqlcheck_tests.patch
-#kfreebsd_tests.patch
-#spelling.patch
-#fix-mysqldump-test.patch
-#hyphens-in-manpages.patch
-#regex_plus.patch
-#kfreebsd_fails.patch
-#versioned_symbols.patch
-#mysql-bug.67018.patch
-# mysql-bug.63130.patch
-#mysql-bug-68416.patch
+scripts__mysqld_safe.sh__signals.patch
+disable_tests.patch
+fix_standalone_tests.patch
+kfreebsd_tests.patch
+spelling.patch
