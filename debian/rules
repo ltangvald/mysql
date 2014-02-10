@@ -98,7 +98,8 @@ configure-stamp configure-pic-stamp:
 		-DCMAKE_VERBOSE_MAKEFILE=ON \
 		$(FORCE_FPIC) \
 		-DMYSQL_UNIX_ADDR=/var/run/mysqld/mysqld.sock \
-	       	-DMYSQL_USER=mysql \
+		-DMYSQL_USER=mysql \
+		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 		-DWITH_LIBWRAP=ON \
 		-DWITH_READLINE=OFF \
 		-DWITH_ZLIB=system \
