@@ -1,4 +1,4 @@
-mysql-5.6 (5.6.15-1) UNRELEASED; urgency=low
+mysql-5.6 (5.6.15-1~exp1) experimental; urgency=low
 
   [ Akhil Mohan ]
   * added libmysqlclient.so link to libmysqlclient18.1-dev package
@@ -63,7 +63,7 @@ mysql-5.6 (5.6.15-1) UNRELEASED; urgency=low
   * added multiarch support 
   * do not include .a files within libmysqlclient18
 
- -- Bjoern Boschman <bjoern@boschman.de>  Sun, 11 Aug 2013 14:09:41 +0200
+ -- James Page <jamespage@debian.org>  Wed, 12 Feb 2014 12:11:53 +0000
 
 mysql-5.5 (5.5.25+dfsg-2) quantal; urgency=low
 
