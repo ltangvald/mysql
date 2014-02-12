@@ -57,8 +57,9 @@ mysql-5.6 (5.6.15-1) UNRELEASED; urgency=low
 
   [ Bjoern Boschman ]
   * Initial release of mysql-5.6 package.
-  * mysql_install_db is now a perl script. Do not run it with bash
-  * added innodb_data_file_path to my.cnf for mysql-5.1 => mysql-5.6 upgrade path
+  * mysql_install_db is now a perl script. Do not run it with bash.
+  * added innodb_data_file_path to my.cnf for mysql-5.1 => mysql-5.6 upgrade
+    path.
   * added multiarch support 
   * do not include .a files within libmysqlclient18
 
