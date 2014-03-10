@@ -5,7 +5,6 @@ Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
 Uploaders:
  Norbert Tretkowski <norbert@tretkowski.de>,
  Clint Byrum <clint@ubuntu.com>,
- Nicholas Bamber <nicholas@periapt.co.uk>,
  James Page <jamespage@debian.org>
 Build-Depends:
  bison,
@@ -41,13 +40,9 @@ Description: MySQL 5.6 specific common files, e.g. /etc/mysql/conf.d/my-5.6.cnf
 Package: mysql-client-core-5.6
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Conflicts:
- mysql-client-5.0,
- mysql-client-5.1,
- mysql-client-5.5,
- mysql-client-core-5.0,
- mysql-client-core-5.1,
- mysql-client-core-5.5
+Provides: virtual-mysql-client-core
+Breaks: mysql-client-5.5, mysql-client-core-5.5, virtual-mysql-client-core
+Replaces: mysql-client-5.5, mysql-client-core-5.5, virtual-mysql-client-core
 Description: MySQL database core client binaries
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -69,8 +64,9 @@ Depends:
  ${perl:Depends},
  ${shlibs:Depends}
 Recommends: mysql-common-5.6
-Conflicts: mysql-client, mysql-client-5.0, mysql-client-5.1, mysql-client-5.5
 Provides: virtual-mysql-client
+Breaks: mysql-client-5.5, virtual-mysql-client
+Replaces: mysql-client-5.5, virtual-mysql-client
 Description: MySQL database client binaries
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -83,13 +79,9 @@ Description: MySQL database client binaries
 Package: mysql-server-core-5.6
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Conflicts:
- mysql-server-5.0,
- mysql-server-5.1,
- mysql-server-5.5,
- mysql-server-core-5.0,
- mysql-server-core-5.1,
- mysql-server-core-5.5
+Provides: virtual-mysql-server-core
+Breaks: mysql-server-core-5.5, virtual-mysql-server-core
+Replaces: mysql-server-core-5.5, virtual-mysql-server-core
 Description: MySQL database server binaries
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -115,8 +107,9 @@ Depends:
  psmisc,
  ${misc:Depends},
  ${shlibs:Depends}
-Conflicts: mysql-server, mysql-server-5.0, mysql-server-5.1, mysql-server-5.5
 Provides: virtual-mysql-server
+Breaks: mysql-server-5.5, virtual-mysql-server
+Replaces: mysql-server-5.5, virtual-mysql-server
 Description: MySQL database server binaries and system database setup
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -133,11 +126,9 @@ Depends:
  mysql-server-5.6 (= ${binary:Version}),
  ${misc:Depends},
  ${shlibs:Depends}
-Conflicts:
- mysql-testsuite,
- mysql-testsuite-5.0,
- mysql-testsuite-5.1,
- mysql-testsuite-5.5
+Provides: virtual-mysql-testsuite
+Breaks: mysql-testsuite-5.5, virtual-mysql-testsuite
+Replaces: mysql-testsuite-5.5, virtual-mysql-testsuite
 Description: MySQL 5.6 testsuite
  MySQL is a fast, stable, and true multi-user, multi-threaded SQL database
  server.  SQL (Structured Query Language) is the most popular database query
