@@ -1,3 +1,11 @@
+mysql-5.6 (5.6.16-1~exp1) UNRELEASED; urgency=medium
+
+  * New upstream point release:
+    - d/p/fix-man-page-links.patch: Dropped - no longer required.
+    - d/p/*: Refreshed.
+
+ -- James Page <james.page@ubuntu.com>  Tue, 11 Mar 2014 13:08:11 +0000
+
 mysql-5.6 (5.6.15-1~exp2) experimental; urgency=medium
 
   * d/control,rules: Drop libmysqlclient18.1* and libmysqld-5.6* due to conflicts

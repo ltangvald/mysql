@@ -29,7 +29,7 @@ Forwarded: no
  #       effects like failing 'sync_slave_with_master', crashes of the slave or
 --- a/mysql-test/extra/rpl_tests/rpl_row_basic.test
 +++ b/mysql-test/extra/rpl_tests/rpl_row_basic.test
-@@ -221,7 +221,7 @@ INSERT INTO t7 VALUES (1,3), (2,6), (3,9);
+@@ -221,7 +221,7 @@ INSERT INTO t7 VALUES (1,3), (2,6), (3,9
  SELECT * FROM t7 ORDER BY C1;
  
  # since bug#31552/31609 idempotency is not default any longer. In order
@@ -38,7 +38,7 @@ Forwarded: no
  # temprorarily
  set @@global.slave_exec_mode= 'IDEMPOTENT';
  
-@@ -260,7 +260,7 @@ INSERT INTO t8 VALUES (1,2,3), (2,4,6), (3,6,9);
+@@ -260,7 +260,7 @@ INSERT INTO t8 VALUES (1,2,3), (2,4,6),
  SELECT * FROM t8 ORDER BY a;
  
  # since bug#31552/31609 idempotency is not default any longer. In order
@@ -134,7 +134,7 @@ Forwarded: no
          DBUG_PRINT("info",
 --- a/sql/ha_ndbcluster_push.cc
 +++ b/sql/ha_ndbcluster_push.cc
-@@ -1271,7 +1271,7 @@ ndb_pushed_builder_ctx::build_key(const AQP::Table_access* table,
+@@ -1271,7 +1271,7 @@ ndb_pushed_builder_ctx::build_key(const
          if (m_join_scope.contain(referred_table_no))
          {
            // Locate the parent operation for this 'join_items[]'.
@@ -145,7 +145,7 @@ Forwarded: no
  
 --- a/sql/log_event.cc
 +++ b/sql/log_event.cc
-@@ -4595,7 +4595,7 @@ int Query_log_event::do_apply_event(Relay_log_info const *rli,
+@@ -4607,7 +4607,7 @@ int Query_log_event::do_apply_event(Rela
      if ((error= rows_event_stmt_cleanup(const_cast<Relay_log_info*>(rli), thd)))
      {
        const_cast<Relay_log_info*>(rli)->report(ERROR_LEVEL, error,
@@ -156,7 +156,7 @@ Forwarded: no
                    llstr(const_cast<Relay_log_info*>(rli)->get_group_master_log_pos(),
 --- a/sql/rpl_utility.cc
 +++ b/sql/rpl_utility.cc
-@@ -1575,7 +1575,7 @@ bool Deferred_log_events::execute(Relay_log_info *rli)
+@@ -1564,7 +1564,7 @@ bool Deferred_log_events::execute(Relay_
  void Deferred_log_events::rewind()
  {
    /*
@@ -167,7 +167,7 @@ Forwarded: no
    if (!is_empty())
 --- a/sql/sql_optimizer.cc
 +++ b/sql/sql_optimizer.cc
-@@ -970,7 +970,7 @@ JOIN::optimize()
+@@ -971,7 +971,7 @@ JOIN::optimize()
          }
        }
      }
@@ -187,7 +187,7 @@ Forwarded: no
    For numeric values.
  
    @param           str                  The string to append to
-@@ -72,7 +72,7 @@ bool append_int(String *str, bool comma, const char *txt, size_t len,
+@@ -72,7 +72,7 @@ bool append_int(String *str, bool comma,
  
  /**
    Append a key/value pair to a string if the value is non-NULL,
@@ -238,7 +238,7 @@ Forwarded: no
            {
 --- a/storage/myisam/mi_rnext.c
 +++ b/storage/myisam/mi_rnext.c
-@@ -65,7 +65,7 @@ int mi_rnext(MI_INFO *info, uchar *buf, int inx)
+@@ -65,7 +65,7 @@ int mi_rnext(MI_INFO *info, uchar *buf,
        Normally SQL layer would never request "search next" if
        "search first" failed. But HANDLER may do anything.
  

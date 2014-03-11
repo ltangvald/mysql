@@ -1,5 +1,4 @@
 hurd.patch
-fix-man-page-links.patch
 scripts__mysqld_safe.sh__signals.patch
 disable_tests.patch
 fix_standalone_tests.patch
