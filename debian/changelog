@@ -8,6 +8,7 @@ mysql-5.6 (5.6.16-1~exp1) UNRELEASED; urgency=medium
   * d/p/CVE-2014-0001.patch:
     - Fix buffer overflow in client/mysql.cc via a long server version string.
       CVE-2014-0001 (Closes: #741590).
+  * d/mysql-server-5.6.mysql.upstart: Add upstart configuration.
 
  -- James Page <james.page@ubuntu.com>  Tue, 11 Mar 2014 13:08:11 +0000
 
