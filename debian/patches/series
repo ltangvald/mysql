@@ -4,3 +4,4 @@ disable_tests.patch
 fix_standalone_tests.patch
 kfreebsd_tests.patch
 spelling.patch
+CVE-2014-0001.patch
