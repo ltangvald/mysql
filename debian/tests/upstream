@@ -1,0 +1,25 @@
+#!/bin/sh
+# autopkgtest check: Build and run the upstream test suite.
+# (C) 2012 Canonical Ltd.
+# Author: Daniel Kessel <d.kessel@gmx.de>
+
+# running the mysql testsuite as described in:
+# https://bugs.launchpad.net/ubuntu/+source/mysql-5.5/+bug/959683
+
+echo "running test 'testsuite'"
+set -e
+
+WORKDIR=$(mktemp -d)
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+cd $WORKDIR
+
+mkdir var
+mkdir tmp
+
+echo "using vardir: $WORKDIR/var"
+echo "using tmpdir: $WORKDIR/tmp"
+
+cd /usr/lib/mysql-testsuite
+echo "starting mysql-test-tun.pl..."
+./mysql-test-run.pl --force --vardir=$WORKDIR/var --tmpdir=$WORKDIR/tmp --comment=normal --timer --skip-ndbcluster --report-features 2>&1
+echo "run: OK"
