@@ -12,7 +12,8 @@ mysql-5.6 (5.6.16-1~exp1) UNRELEASED; urgency=medium
   * d/tests/*,control: Add autopkgtest from mysql-5.5:
     - disable binlog.binlog_server_start_options as it requires writable /usr.
     - disable build autopkgtest until package ships libmysqlclient18.
-  * d/rules: Always install apparmor profile.
+  * d/rules,mysql-server-5.6.install,apparmor-profile: Fixup install of
+    apparmor profile.
 
  -- James Page <james.page@ubuntu.com>  Tue, 11 Mar 2014 13:08:11 +0000
 
