@@ -97,7 +97,7 @@ Forwarded: no
  #         effects like failing 'sync_slave_with_master', crashes of the slave or
 --- a/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
 +++ b/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
-@@ -239,7 +239,7 @@ sync_slave_with_master;
+@@ -239,7 +239,7 @@ INSERT INTO t1 VALUES (1,'master,slave')
  UPDATE t1 SET a = 5, b = 'slave' WHERE a = 1;
  SELECT * FROM t1 ORDER BY a;
  # since bug#31552/31609 idempotency is not default any longer. In
@@ -145,7 +145,7 @@ Forwarded: no
  
 --- a/sql/log_event.cc
 +++ b/sql/log_event.cc
-@@ -4607,7 +4607,7 @@ int Query_log_event::do_apply_event(Rela
+@@ -4625,7 +4625,7 @@ int Query_log_event::do_apply_event(Rela
      if ((error= rows_event_stmt_cleanup(const_cast<Relay_log_info*>(rli), thd)))
      {
        const_cast<Relay_log_info*>(rli)->report(ERROR_LEVEL, error,
@@ -198,7 +198,7 @@ Forwarded: no
    @param           comma                Prepend a comma?
 --- a/sql/sql_yacc.cc
 +++ b/sql/sql_yacc.cc
-@@ -39064,7 +39064,7 @@ yyreduce:
+@@ -35151,7 +35151,7 @@ yyreduce:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -209,7 +209,7 @@ Forwarded: no
                MYSQL_YYABORT;
 --- a/sql/sql_yacc.yy
 +++ b/sql/sql_yacc.yy
-@@ -14559,7 +14559,7 @@ opt_var_ident_type:
+@@ -14573,7 +14573,7 @@ opt_var_ident_type:
          | SESSION_SYM '.' { $$=OPT_SESSION; }
          ;
  
@@ -218,7 +218,7 @@ Forwarded: no
  option_value_following_option_type:
            internal_variable_name equal set_expr_or_default
            {
-@@ -14576,7 +14576,7 @@ option_value_following_option_type:
+@@ -14590,7 +14590,7 @@ option_value_following_option_type:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -227,7 +227,7 @@ Forwarded: no
                */
                my_parse_error(ER(ER_SYNTAX_ERROR));
                MYSQL_YYABORT;
-@@ -14584,7 +14584,7 @@ option_value_following_option_type:
+@@ -14598,7 +14598,7 @@ option_value_following_option_type:
            }
          ;
  

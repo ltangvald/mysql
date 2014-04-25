@@ -7,7 +7,7 @@ Forwarded: no
 Last-Update: 2012-04-28
 --- a/mysql-test/lib/My/Platform.pm
 +++ b/mysql-test/lib/My/Platform.pm
-@@ -113,6 +113,8 @@
+@@ -113,6 +113,8 @@ sub check_socket_path_length {
    # Similarly the path length is hidden.
    # See Debian bug #651002
    return 0 if ($^O eq 'gnu');

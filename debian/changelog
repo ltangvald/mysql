@@ -1,3 +1,17 @@
+mysql-5.6 (5.6.17-1~exp1) experimental; urgency=medium
+
+  * SECURITY UPDATE: New upstream release (Closes: #744970).
+    - http://www.oracle.com/technetwork/topics/security/cpuapr2014-1972952.html
+    - CVE-2014-0001
+    - CVE-2014-2430
+    - CVE-2014-2431
+    - CVE-2014-2435
+    - CVE-2014-2436
+    - CVE-2014-2440
+  * d/p/CVE-2014-0001.patch: Dropped, included in security update.
+
+ -- James Page <jamespage@debian.org>  Fri, 25 Apr 2014 08:06:10 +0100
+
 mysql-5.6 (5.6.16-1~exp1) experimental; urgency=medium
 
   * New upstream point release:
