@@ -46,11 +46,7 @@ endif
 
 USE_ASSEMBLER:=--enable-assembler
 
-ifneq (,$(filter $(ARCH), amd64 i386 kfreebsd-i386))
-    TESTSUITE_FAIL_CMD:=exit 1
-else
-    TESTSUITE_FAIL_CMD:=true
-endif
+TESTSUITE_FAIL_CMD:=true
 
 BUILDDIR := builddir
 BUILDDIR_PIC := builddir-pic
