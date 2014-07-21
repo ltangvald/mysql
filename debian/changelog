@@ -1,5 +1,6 @@
 mysql-5.6 (5.6.19-1~exp1) experimental; urgency=low
 
+  [ Bjoern Boschman ]
   * SECURITY UPDATE: New upstream release (LP: #1330168).
     - www.oracle.com/technetwork/topics/security/cpujul2014-1972956.html
     - CVE-2014-2484
@@ -10,7 +11,7 @@ mysql-5.6 (5.6.19-1~exp1) experimental; urgency=low
     - CVE-2014-4240
     - CVE-2014-4214
 
- -- Bjoern Boschman <bjoern@boschman.de>  Fri, 13 Jun 2014 12:27:30 +0200
+ -- James Page <james.page@ubuntu.com>  Mon, 21 Jul 2014 14:01:12 +0100
 
 mysql-5.6 (5.6.17-1~exp1) experimental; urgency=medium
 
