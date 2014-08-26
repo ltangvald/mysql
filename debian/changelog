@@ -1,8 +1,23 @@
 mysql-5.6 (5.6.20-1~exp1) experimental; urgency=low
 
+  [ Bjoern Boschman ]
   * New upstream release.
 
- -- Bjoern Boschman <bjoern@boschman.de>  Fri, 01 Aug 2014 12:55:32 +0200
+  [ Robie Basak ]
+  * Add dep8 smoke test.
+  * Re-enable libmysqld-pic, libmysqld-dev, libmysqlclient18 and
+    libmysqlclient-dev (renamed accordingly) to replace binary packages
+    provided by src:mysql-5.5.
+  * Add mysql-server, mysql-client and mysql-testsuite to be switched
+    over from src:mysql-5.5.
+  * Import mysql-commom from src:mysql-5.5 for 5.5 -> 5.6 switchover.
+  * Cherry-pick relevant parts of Ubuntu delta from mysql-5.5:
+    - d/mysql-server-5.5.postrm: restoring postrm debhelper token to get
+      proper behaviors from dh_installinit and dh_apparmor.
+    - Add Apport hook.
+  * Temporarily disable upstream testsuite dep8 test.
+
+ -- Bjoern Boschman <bjoern@boschman.de>  Tue, 26 Aug 2014 11:43:32 +0200
 
 mysql-5.6 (5.6.19-1~exp1) experimental; urgency=low
 

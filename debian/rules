@@ -179,6 +179,8 @@ auto_install-stamp:
 	# install AppArmor profile
 	install -D -m 644 debian/apparmor-profile $(TMP)/etc/apparmor.d/usr.sbin.mysqld
 	chmod 0755 $(TMP)/usr/share/mysql-test/std_data/checkDBI_DBD-mysql.pl
+	# install Apport hook
+	install -D -m 644 debian/mysql-server-5.6.py $(TMP)/usr/share/apport/package-hooks/source_mysql-5.6.py
 	# chmod 0644 $(TMP)/usr/share/mysql/*.ini
 	chmod 0644 $(TMP)/usr/share/mysql-test/[rt]/*
 	chmod 0644 $(TMP)/usr/share/mysql-test/collections/default.weekly
@@ -196,10 +198,6 @@ auto_install-stamp:
 	chmod 0644 $(TMP)/usr/share/mysql-test/suite/parts/r/partition_exch_qa*.result
 	chmod 0644 $(TMP)/usr/share/mysql-test/suite/sys_vars/r/sort_buffer_size_basic_32.result
 	chmod 0644 $(TMP)/usr/share/mysql/innodb_memcached_config.sql
-	# removing all redundant library links at debian/tmp/usr/lib/*/*_r*
-	rm $(TMP)/usr/lib/$(DEB_HOST_MULTIARCH)/*_r*
-	# getting rid of other extra files
-	rm -f $(TMP)/etc/mysql/conf.d/.keepme
 	touch $@
 
 # Use the --fail-missing to check for stuff that we should be installing
