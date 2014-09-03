@@ -59,12 +59,6 @@ ifeq ($(STATIC_MYSQLD), 1)
     USE_STATIC_MYSQLD:=--with-mysqld-ldflags=-all-static
 endif
 	
-# See http://blogs.innodb.com/wp/2010/04/innodb-performance-aio-linux/
-# Also #659565
-ifneq (,$(findstring linux-gnu,$(DEB_HOST_GNU_TYPE)))
-    USE_LINUX_NATIVE_AIO:=-DLINUX_NATIVE_AIO=ON
-endif
-
 override_dh_auto_clean:
 	@echo "RULES.$@"
 	dh_testdir 
@@ -94,14 +88,11 @@ configure-stamp configure-pic-stamp:
 		-DCMAKE_VERBOSE_MAKEFILE=ON \
 		$(FORCE_FPIC) \
 		-DMYSQL_UNIX_ADDR=/var/run/mysqld/mysqld.sock \
-		-DMYSQL_USER=mysql \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 		-DWITH_LIBWRAP=ON \
-		-DWITH_READLINE=OFF \
 		-DWITH_ZLIB=system \
-		-DWITH_LIBEDIT=OFF \
+		-DWITH_EDITLINE=system \
 		$(USE_STATIC_MYSQLD) \
-		$(USE_LINUX_NATIVE_AIO) \
 		-DWITH_SSL=bundled \
 	    -DCOMPILATION_COMMENT="($(DISTRIBUTION))" \
 	    -DMYSQL_SERVER_SUFFIX="-$(DEBVERSION)" \
@@ -110,7 +101,6 @@ configure-stamp configure-pic-stamp:
 	    -DINSTALL_LIBDIR=lib/$(DEB_HOST_MULTIARCH) \
 	    -DINSTALL_PLUGINDIR=lib/mysql/plugin \
         -DWITH_EMBEDDED_SERVER=ON \
-        -DHAVE_EMBEDDED_PRIVILEGE_CONTROL=ON \
 	    -DWITH_ARCHIVE_STORAGE_ENGINE=ON \
 	    -DWITH_BLACKHOLE_STORAGE_ENGINE=ON \
 	    -DWITH_FEDERATED_STORAGE_ENGINE=ON \
@@ -182,22 +172,7 @@ auto_install-stamp:
 	# install Apport hook
 	install -D -m 644 debian/mysql-server-5.6.py $(TMP)/usr/share/apport/package-hooks/source_mysql-5.6.py
 	# chmod 0644 $(TMP)/usr/share/mysql/*.ini
-	chmod 0644 $(TMP)/usr/share/mysql-test/[rt]/*
-	chmod 0644 $(TMP)/usr/share/mysql-test/collections/default.weekly
-	chmod 0644 $(TMP)/usr/share/mysql-test/suite/innodb/[rt]/*
 	chmod 0644 $(TMP)/usr/bin/mysqlaccess.conf
-	# http://bugs.mysql.com/bug.php?id=68517 --- Some test and result files have executable bit set.
-	# removing execute bit from file permissions
-	chmod 0644 $(TMP)/usr/share/mysql-test/include/have_QC_Disabled.inc
-	chmod 0644 $(TMP)/usr/share/mysql-test/include/check_ipv4_mapped.inc
-	chmod 0644 $(TMP)/usr/share/mysql-test/include/start_mysqld.inc
-	chmod 0644 $(TMP)/usr/share/mysql-test/include/shutdown_mysqld.inc
-	chmod 0644 $(TMP)/usr/share/mysql-test/suite/ndb/t/ndb_show_tables_result.inc
-	chmod 0644 $(TMP)/usr/share/mysql-test/suite/parts/r/partition_exch_innodb.result
-	chmod 0644 $(TMP)/usr/share/mysql-test/suite/parts/r/partition_exch_myisam*.result
-	chmod 0644 $(TMP)/usr/share/mysql-test/suite/parts/r/partition_exch_qa*.result
-	chmod 0644 $(TMP)/usr/share/mysql-test/suite/sys_vars/r/sort_buffer_size_basic_32.result
-	chmod 0644 $(TMP)/usr/share/mysql/innodb_memcached_config.sql
 	touch $@
 
 # Use the --fail-missing to check for stuff that we should be installing

@@ -1,4 +1,9 @@
 mysql-5.6 (5.6.20-1~exp1) experimental; urgency=low
+  [ Norvald H. Ryeng ]
+  * Remove unused build options.
+  * Add libedit dependency to mysql-client-core-5.6.
+  * Remove chmods not needed after fix for upstream bug #68517.
+  * Lintian fixes.
 
   [ Bjoern Boschman ]
   * New upstream release.
