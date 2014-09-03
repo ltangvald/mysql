@@ -10,6 +10,7 @@ mysql-5.6 (5.6.20-1~exp1) experimental; urgency=low
   * New upstream release.
   * Removed hardening-wrapper from build-deps.
   * Added python dep for mysql-testsuite-5.6.
+  * Cleanup a bit more. 
 
   [ Robie Basak ]
   * Add dep8 smoke test.
