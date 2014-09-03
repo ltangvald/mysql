@@ -4,41 +4,44 @@ export DH_VERBOSE=1
 
 # enable Debian Hardening
 # see: https://wiki.debian.org/Hardening
-export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie
 DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/buildflags.mk
 
-TMP:=$(CURDIR)/debian/tmp/
-
 ARCH := $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 ARCH_OS := $(shell dpkg-architecture -qDEB_BUILD_ARCH_OS)
-DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
-DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
-DEB_BUILD_GNU_SYSTEM ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_SYSTEM)
+BUILDDIR := builddir
+BUILDDIR_PIC := builddir-pic
+builddir = $(if $(findstring -pic,$@),$(BUILDDIR_PIC),$(BUILDDIR))
 DEBVERSION := $(shell dpkg-parsechangelog | awk '/^Version: / { print $$2 }' | sed 's/^.*-//' )
-
-ifneq (,$(filter $(ARCH), i386 kfreebsd-i386 hurd-i386))
-	TAOCRYPT_OPT="-DTAOCRYPT_DISABLE_X86ASM"
-endif
-
-export MYSQL_BUILD_CC=$(DEB_HOST_GNU_TYPE)-gcc
-export MYSQL_BUILD_CXX=$(DEB_HOST_GNU_TYPE)-g++
-
+DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_BUILD_GNU_SYSTEM ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_SYSTEM)
+DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_SOURCE_PACKAGE ?= $(strip $(shell egrep '^Source: ' debian/control | cut -f 2 -d ':'))
 DEB_VERSION ?= $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
 DEB_NOEPOCH_VERSION ?= $(shell echo $(DEB_VERSION) | cut -d: -f2-)
 DEB_UPSTREAM_VERSION ?= $(shell echo $(DEB_NOEPOCH_VERSION) | sed 's/-[^-]*$$//')
 DEB_UPSTREAM_VERSION_MAJOR_MINOR := $(shell echo $(DEB_UPSTREAM_VERSION) | sed -r -n 's/^([0-9]+\.[0-9]+).*/\1/p')
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
-
-EXPORTED_SOURCE_TARBALL := debian/mysql-source-5.6.tar.gz
-
 DISTRIBUTION := $(shell lsb_release -i -s)
+EXPORTED_SOURCE_TARBALL := debian/mysql-source-5.6.tar.gz
+TESTSUITE_FAIL_CMD:=true
+TMP := $(CURDIR)/debian/tmp/
+USE_ASSEMBLER:=--enable-assembler
 
-MAKE_TEST_TARGET:=test-mtr
-ifneq ($(findstring fulltest,$(DEB_BUILD_OPTIONS)),)
+
+export MYSQL_BUILD_CC=$(DEB_HOST_GNU_TYPE)-gcc
+export MYSQL_BUILD_CXX=$(DEB_HOST_GNU_TYPE)-g++
+
+
+ifneq (,$(filter $(ARCH), i386 kfreebsd-i386 hurd-i386))
+	TAOCRYPT_OPT="-DTAOCRYPT_DISABLE_X86ASM"
+endif
+
 # make test-bt is the testsuite run by the MySQL build team 
 # before a release, but it is long
+MAKE_TEST_TARGET:=test-mtr
+ifneq ($(findstring fulltest,$(DEB_BUILD_OPTIONS)),)
     MAKE_TEST_TARGET:=test-bt
 endif
 ifeq ($(ARCH_OS),hurd)
@@ -47,13 +50,6 @@ ifeq ($(ARCH_OS),hurd)
     MAKE_TEST_TARGET:=test
 endif
 
-USE_ASSEMBLER:=--enable-assembler
-
-TESTSUITE_FAIL_CMD:=true
-
-BUILDDIR := builddir
-BUILDDIR_PIC := builddir-pic
-builddir = $(if $(findstring -pic,$@),$(BUILDDIR_PIC),$(BUILDDIR))
 
 # This causes seg11 crashes if LDAP is used for groups in /etc/nsswitch.conf
 # so it is disabled by default although, according to MySQL, it brings >10%

@@ -229,7 +229,7 @@ Depends:
  mysql-server-5.6 (= ${binary:Version}),
  python,
  ${misc:Depends},
- ${shlibs:Depends},
+ ${shlibs:Depends}
 Provides: virtual-mysql-testsuite
 Breaks: mysql-testsuite-5.5, virtual-mysql-testsuite
 Replaces: mysql-testsuite-5.5, virtual-mysql-testsuite
