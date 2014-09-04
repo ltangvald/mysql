@@ -80,11 +80,11 @@ configure-stamp configure-pic-stamp:
 	dh_testdir
 	( test -d $(builddir) || mkdir $(builddir) ) && cd $(builddir) && \
 	sh -c  'PATH=$${MYSQL_BUILD_PATH:-"/bin:/usr/bin"} \
-	    	CC=$${MYSQL_BUILD_CC:-gcc} \
+		CC=$${MYSQL_BUILD_CC:-gcc} \
 		CFLAGS=$${MYSQL_BUILD_CFLAGS:-"-O2 -DBIG_JOINS=1 ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing ${TAOCRYPT_OPT}"} \
-	    	CXX=$${MYSQL_BUILD_CXX:-g++} \
-	    	CXXFLAGS=$${MYSQL_BUILD_CXXFLAGS:-"-O3 -DBIG_JOINS=1 -felide-constructors -fno-exceptions -fpermissive -fno-rtti ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing ${TAOCRYPT_OPT}"} \
-	    cmake -DCMAKE_INSTALL_PREFIX=/usr \
+		CXX=$${MYSQL_BUILD_CXX:-g++} \
+		CXXFLAGS=$${MYSQL_BUILD_CXXFLAGS:-"-O3 -DBIG_JOINS=1 -felide-constructors -fno-exceptions -fpermissive -fno-rtti ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing ${TAOCRYPT_OPT}"} \
+		cmake -DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_VERBOSE_MAKEFILE=ON \
 		$(FORCE_FPIC) \
 		-DMYSQL_UNIX_ADDR=/var/run/mysqld/mysqld.sock \
@@ -94,16 +94,16 @@ configure-stamp configure-pic-stamp:
 		-DWITH_EDITLINE=system \
 		$(USE_STATIC_MYSQLD) \
 		-DWITH_SSL=bundled \
-	    -DCOMPILATION_COMMENT="($(DISTRIBUTION))" \
-	    -DMYSQL_SERVER_SUFFIX="-$(DEBVERSION)" \
-	    -DSYSTEM_TYPE="debian-$(DEB_BUILD_GNU_SYSTEM)" \
-	    -DINSTALL_LAYOUT=RPM \
-	    -DINSTALL_LIBDIR=lib/$(DEB_HOST_MULTIARCH) \
-	    -DINSTALL_PLUGINDIR=lib/mysql/plugin \
-        -DWITH_EMBEDDED_SERVER=ON \
-	    -DWITH_ARCHIVE_STORAGE_ENGINE=ON \
-	    -DWITH_BLACKHOLE_STORAGE_ENGINE=ON \
-	    -DWITH_FEDERATED_STORAGE_ENGINE=ON \
+		-DCOMPILATION_COMMENT="($(DISTRIBUTION))" \
+		-DMYSQL_SERVER_SUFFIX="-$(DEBVERSION)" \
+		-DSYSTEM_TYPE="debian-$(DEB_BUILD_GNU_SYSTEM)" \
+		-DINSTALL_LAYOUT=RPM \
+		-DINSTALL_LIBDIR=lib/$(DEB_HOST_MULTIARCH) \
+		-DINSTALL_PLUGINDIR=lib/mysql/plugin \
+		-DWITH_EMBEDDED_SERVER=ON \
+		-DWITH_ARCHIVE_STORAGE_ENGINE=ON \
+		-DWITH_BLACKHOLE_STORAGE_ENGINE=ON \
+		-DWITH_FEDERATED_STORAGE_ENGINE=ON \
 		-DWITH_EXTRA_CHARSETS=all ..'
 	touch $@
 
