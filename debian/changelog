@@ -1,4 +1,4 @@
-mysql-5.6 (5.6.20-1~exp1) experimental; urgency=low
+mysql-5.6 (5.6.20-1~exp1) UNRELEASED; urgency=low
 
   [ Norvald H. Ryeng ]
   * Remove unused build options.
@@ -26,6 +26,10 @@ mysql-5.6 (5.6.20-1~exp1) experimental; urgency=low
       proper behaviors from dh_installinit and dh_apparmor.
     - Add Apport hook.
   * Temporarily disable upstream testsuite dep8 test.
+
+  [ James Page ]
+  * d/tests/upstream: Add main.ctype_uca to skip-test list as it requires
+    writable /usr.
 
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
