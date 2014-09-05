@@ -32,7 +32,6 @@ mysql-5.6 (5.6.20-1~exp1) UNRELEASED; urgency=low
   * d/p/fix-mysqlhotcopy-test-failure.patch: Add return code 255 to the
     list of allowed return codes.
   * d/tests/control: Re-enable upstream DEP-8 tests.
-  * d/rules: Only install apport hook for Ubuntu and derivatives. 
 
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
