@@ -25,13 +25,13 @@ mysql-5.6 (5.6.20-1~exp1) UNRELEASED; urgency=low
     - d/mysql-server-5.5.postrm: restoring postrm debhelper token to get
       proper behaviors from dh_installinit and dh_apparmor.
     - Add Apport hook.
-  * Temporarily disable upstream testsuite dep8 test.
 
   [ James Page ]
   * d/tests/upstream: Add main.ctype_uca to skip-test list as it requires
     writable /usr.
   * d/p/fix-mysqlhotcopy-test-failure.patch: Add return code 255 to the
     list of allowed return codes.
+  * d/tests/control: Re-enable upstream DEP-8 tests.
 
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
