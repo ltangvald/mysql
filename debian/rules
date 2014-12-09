@@ -33,6 +33,12 @@ USE_ASSEMBLER:=--enable-assembler
 export MYSQL_BUILD_CC=$(DEB_HOST_GNU_TYPE)-gcc
 export MYSQL_BUILD_CXX=$(DEB_HOST_GNU_TYPE)-g++
 
+# Parallel build support as adviced
+# at https://www.debian.org/doc/debian-policy/ch-source.html#s-debianrules-options
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+    NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+    MAKEFLAGS += -j $(NUMJOBS)
+endif
 
 ifneq (,$(filter $(ARCH), i386 kfreebsd-i386 hurd-i386))
 	TAOCRYPT_OPT="-DTAOCRYPT_DISABLE_X86ASM"
@@ -93,6 +99,7 @@ configure-stamp configure-pic-stamp:
 		-DWITH_ZLIB=system \
 		-DWITH_EDITLINE=system \
 		$(USE_STATIC_MYSQLD) \
+		-$(MAKEFLAGS) \
 		-DWITH_SSL=bundled \
 		-DCOMPILATION_COMMENT="($(DISTRIBUTION))" \
 		-DMYSQL_SERVER_SUFFIX="-$(DEBVERSION)" \

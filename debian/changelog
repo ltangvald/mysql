@@ -33,6 +33,9 @@ mysql-5.6 (5.6.21-1~exp1) UNRELEASED; urgency=low
     list of allowed return codes.
   * d/tests/control: Re-enable upstream DEP-8 tests.
 
+  [ Otto Kekäläinen ]
+  * Added parallel build support via DEB_BUILD_OPTIONS
+
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
 mysql-5.6 (5.6.19-1~exp1) experimental; urgency=low
