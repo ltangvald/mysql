@@ -152,6 +152,9 @@ Until we figure out a set of test for this, we continue with the main
 MTR suite, as before. We skip rpl tests (using --skip-rpl) to reduce the
 number of false positives.
 
+The build itself fails on the first error, and we do the same in testing
+by running MTR without --force. This shortens down build cycles in case
+of failures.
 
 DEP8 tests
 ----------
@@ -168,3 +171,12 @@ main suite earlier, upstream recommends that we continue to run this
 suite in DEP8.
 
 We skip rpl tests to reduce the number of false positives.
+
+We run MTR with --force in order not to stop at the first failure. Since
+DEP8 tests are expected to run for a while, and we expect the tests to
+pass since the build tests passed, it's more useful to come back and see
+that all tests have run, but a couple of them failed, than to see that
+the first test failure was after 5 minutes and that it aborted
+immediately. It will also give us more information, since we can see
+from the log if this was an unstable test that passed when rerun or if
+it is a real test failure.
