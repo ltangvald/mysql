@@ -52,13 +52,6 @@ ifeq ($(findstring fulltest,$(DEB_BUILD_OPTIONS)),)
 endif
 
 
-# This causes seg11 crashes if LDAP is used for groups in /etc/nsswitch.conf
-# so it is disabled by default although, according to MySQL, it brings >10%
-# performance gain if enabled. See #299382.
-ifeq ($(STATIC_MYSQLD), 1)
-    USE_STATIC_MYSQLD:=--with-mysqld-ldflags=-all-static
-endif
-	
 override_dh_auto_clean:
 	@echo "RULES.$@"
 	dh_testdir 
@@ -93,7 +86,6 @@ configure-stamp configure-pic-stamp:
 		-DWITH_LIBWRAP=ON \
 		-DWITH_ZLIB=system \
 		-DWITH_EDITLINE=system \
-		$(USE_STATIC_MYSQLD) \
 		-DWITH_SSL=bundled \
 		-DCOMPILATION_COMMENT="($(DISTRIBUTION))" \
 		-DMYSQL_SERVER_SUFFIX="-$(DEBVERSION)" \
