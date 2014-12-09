@@ -112,3 +112,59 @@ NEW:
         postinst (called on initial install and after each upgrade after unpacking):
           call update-rc.d
           call invoce-rc.d if the flag has been set
+
+
+Test plan
+=========
+
+This is the test plan agreed to at the meeting in London, December
+2014. Please revisit and keep this document up-to-date if you're
+changing any tests.
+
+
+Why we're changing the test plan
+--------------------------------
+
+Historically, the main suite of the upstream MTR tests have been run at
+build time. This has deteced real bugs, especially when building for
+platforms not supported by upstream, so we definitely see a value in
+running these tests.
+
+Test runs are taking a long time to finish. Some tests are unstable and
+may return false positives, leading to failed builds. In addition, we're
+testing a lot of things that have already been tested upstream and that
+are unlikely to change when packaged for Debian/Ubuntu.
+
+We're also adding DEP8 tests, so we have to decide what goes into the
+build tests and what goes into DEP8 tests.
+
+
+Build tests
+-----------
+
+Instead of running the main test suite for every build, we should spend
+time on testing the things that are actually different from upstream:
+
+ - Dependencies (both build and runtime)
+ - Install paths
+
+Until we figure out a set of test for this, we continue with the main
+MTR suite, as before. We skip rpl tests (using --skip-rpl) to reduce the
+number of false positives.
+
+
+DEP8 tests
+----------
+
+The time it takes to run the tests isn't that much of an issue for DEP8
+as it is for build tests, so we can do more thorough testing here.
+
+We run the build tests in DEP8 in order to detect when dependency
+updates that don't require a rebuild of MySQL will cause the MySQL
+package to break.
+
+Since bugs on platforms not supported by upstream has been found by the
+main suite earlier, upstream recommends that we continue to run this
+suite in DEP8.
+
+We skip rpl tests to reduce the number of false positives.
