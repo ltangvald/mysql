@@ -7,7 +7,6 @@ usr/bin/mysql_client_test_embedded
 usr/bin/mysql_config_editor
 usr/bin/mysql_find_rows
 usr/bin/mysql_fix_extensions
-usr/bin/mysql_plugin
 usr/bin/mysql_waitpid
 usr/bin/mysqlaccess
 usr/bin/mysqladmin
