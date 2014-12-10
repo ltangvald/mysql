@@ -2,27 +2,25 @@ Source: mysql-5.6
 Section: database
 Priority: optional
 Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
-Uploaders:
- Norbert Tretkowski <norbert@tretkowski.de>,
- Clint Byrum <clint@ubuntu.com>,
- James Page <jamespage@debian.org>
-Build-Depends:
- bison,
- chrpath,
- cmake,
- debhelper (>= 8.1.3~),
- dh-apparmor,
- dpkg-dev (>= 1.16.1~),
- gawk,
- libaio-dev[linux-any],
- libedit-dev,
- libncurses5-dev (>= 5.0-6),
- libwrap0-dev (>= 7.6-8.3),
- lsb-release,
- perl,
- po-debconf,
- psmisc,
- zlib1g-dev (>= 1:1.1.3-5)
+Uploaders: Norbert Tretkowski <norbert@tretkowski.de>,
+           Clint Byrum <clint@ubuntu.com>,
+           James Page <jamespage@debian.org>
+Build-Depends: bison,
+               chrpath,
+               cmake,
+               debhelper (>= 8.1.3~),
+               dh-apparmor,
+               dpkg-dev (>= 1.16.1~),
+               gawk,
+               libaio-dev[linux-any],
+               libedit-dev,
+               libncurses5-dev (>= 5.0-6),
+               libwrap0-dev (>= 7.6-8.3),
+               lsb-release,
+               perl,
+               po-debconf,
+               psmisc,
+               zlib1g-dev (>= 1:1.1.3-5)
 Standards-Version: 3.9.5
 Homepage: http://dev.mysql.com/
 Vcs-Git: git://git.debian.org/git/pkg-mysql/mysql-5.6.git
@@ -71,11 +69,10 @@ Description: MySQL embedded database development files
 Package: libmysqlclient-dev
 Architecture: any
 Section: libdevel
-Depends:
- libmysqlclient18 (= ${binary:Version}),
- zlib1g-dev,
- ${misc:Depends},
- ${shlibs:Depends}
+Depends: libmysqlclient18 (= ${binary:Version}),
+         zlib1g-dev,
+         ${misc:Depends},
+         ${shlibs:Depends}
 Description: MySQL database development files
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -123,16 +120,15 @@ Description: MySQL database core client binaries
 
 Package: mysql-client-5.6
 Architecture: any
-Depends:
- debianutils (>=1.6),
- libdbd-mysql-perl (>= 1.2202),
- libdbi-perl,
- libterm-readkey-perl,
- mysql-client-core-5.6,
- mysql-common (>= 5.5),
- ${misc:Depends},
- ${perl:Depends},
- ${shlibs:Depends}
+Depends: debianutils (>=1.6),
+         libdbd-mysql-perl (>= 1.2202),
+         libdbi-perl,
+         libterm-readkey-perl,
+         mysql-client-core-5.6,
+         mysql-common (>= 5.5),
+         ${misc:Depends},
+         ${perl:Depends},
+         ${shlibs:Depends}
 Recommends: mysql-common-5.6
 Provides: virtual-mysql-client
 Breaks: mysql-client-5.5, virtual-mysql-client
@@ -166,20 +162,19 @@ Architecture: any
 Recommends: libhtml-template-perl, mysql-common-5.6
 Suggests: mailx, tinyca
 Pre-Depends: adduser (>= 3.40), debconf, mysql-common (>= 5.5)
-Depends:
- initscripts,
- libdbi-perl,
- lsb-base (>= 3.0-10),
- mysql-client-5.6 (>= ${binary:Version}),
- mysql-server-core-5.6 (= ${binary:Version}),
- passwd,
- perl (>= 5.6),
- psmisc,
- ${misc:Depends},
- ${shlibs:Depends}
+Depends: initscripts,
+         libdbi-perl,
+         lsb-base (>= 3.0-10),
+         mysql-client-5.6 (>= ${binary:Version}),
+         mysql-server-core-5.6 (= ${binary:Version}),
+         passwd,
+         perl (>= 5.6),
+         psmisc,
+         ${misc:Depends},
+         ${shlibs:Depends}
 Provides: virtual-mysql-server
-Breaks: mysql-server-5.5, virtual-mysql-server, mysql-client-5.5
-Replaces: mysql-server-5.5, virtual-mysql-server, mysql-client-5.5
+Breaks: mysql-client-5.5, mysql-server-5.5, virtual-mysql-server
+Replaces: mysql-client-5.5, mysql-server-5.5, virtual-mysql-server
 Description: MySQL database server binaries and system database setup
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
  server. SQL (Structured Query Language) is the most popular database query
@@ -225,12 +220,11 @@ Description: MySQL testsuite
 
 Package: mysql-testsuite-5.6
 Architecture: any
-Depends:
- mysql-client-5.6 (= ${binary:Version}),
- mysql-server-5.6 (= ${binary:Version}),
- python,
- ${misc:Depends},
- ${shlibs:Depends}
+Depends: mysql-client-5.6 (= ${binary:Version}),
+         mysql-server-5.6 (= ${binary:Version}),
+         python,
+         ${misc:Depends},
+         ${shlibs:Depends}
 Provides: virtual-mysql-testsuite
 Breaks: mysql-testsuite-5.5, virtual-mysql-testsuite
 Replaces: mysql-testsuite-5.5, virtual-mysql-testsuite
