@@ -99,7 +99,6 @@ configure-stamp configure-pic-stamp:
 		-DWITH_ZLIB=system \
 		-DWITH_EDITLINE=system \
 		$(USE_STATIC_MYSQLD) \
-		-$(MAKEFLAGS) \
 		-DWITH_SSL=bundled \
 		-DCOMPILATION_COMMENT="($(DISTRIBUTION))" \
 		-DMYSQL_SERVER_SUFFIX="-$(DEBVERSION)" \
@@ -121,6 +120,7 @@ build-stamp:
 	[ -f $(EXPORTED_SOURCE_TARBALL) ] || tar -zcf $(EXPORTED_SOURCE_TARBALL) \
 	--exclude=debian . \
 	--transform="s,^\./,mysql-5.6/,"
+	@echo "MAKEFLAGS: $(value MAKEFLAGS)"
 	cd $(builddir) && $(MAKE)
 	touch $@
 
