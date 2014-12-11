@@ -36,6 +36,9 @@ mysql-5.6 (5.6.22-1~exp1) UNRELEASED; urgency=low
   [ Otto Kekäläinen ]
   * Added parallel build support via DEB_BUILD_OPTIONS
 
+  [ Akhil Mohan ]
+  * Provisioned dep8 test case upstream separated to run as non-root
+
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
 mysql-5.6 (5.6.19-1~exp1) experimental; urgency=low

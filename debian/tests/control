@@ -1,3 +1,7 @@
-Tests: smoke upstream
+Tests: smoke
 Depends: mysql-testsuite-5.6
 Restrictions: allow-stderr needs-root breaks-testbed
+
+Tests: upstream
+Depends: mysql-testsuite-5.6
+Restrictions: allow-stderr breaks-testbed
