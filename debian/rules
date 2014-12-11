@@ -30,16 +30,14 @@ TMP := $(CURDIR)/debian/tmp/
 USE_ASSEMBLER:=--enable-assembler
 NUMJOBS=$(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 
+ifeq (,$(NUMJOBS))
+	NUMJOBS=1
+endif
+
+MAKEFLAGS += -j $(NUMJOBS)
 
 export MYSQL_BUILD_CC=$(DEB_HOST_GNU_TYPE)-gcc
 export MYSQL_BUILD_CXX=$(DEB_HOST_GNU_TYPE)-g++
-
-# Parallel build support as adviced
-# at https://www.debian.org/doc/debian-policy/ch-source.html#s-debianrules-options
-ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
-    NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
-    MAKEFLAGS += -j $(NUMJOBS)
-endif
 
 ifneq (,$(filter $(ARCH), i386 kfreebsd-i386 hurd-i386))
 	TAOCRYPT_OPT="-DTAOCRYPT_DISABLE_X86ASM"
@@ -107,7 +105,6 @@ build-stamp:
 	[ -f $(EXPORTED_SOURCE_TARBALL) ] || tar -zcf $(EXPORTED_SOURCE_TARBALL) \
 	--exclude=debian . \
 	--transform="s,^\./,mysql-5.6/,"
-	@echo "MAKEFLAGS: $(value MAKEFLAGS)"
 	cd $(builddir) && $(MAKE)
 	touch $@
 
