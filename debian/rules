@@ -152,8 +152,6 @@ auto_install-stamp:
 	nm -n $(BUILDDIR)/sql/mysqld |gzip -9 > $(TMP)/usr/share/doc/mysql-server-5.6/mysqld.sym.gz
 	# This seems to be the only safe place to fix permissions issues
         # not handled by dh_fixperms.
-	mkdir -p $(TMP)/etc/mysql/conf.d/
-	touch $(TMP)/etc/mysql/conf.d/.keepme
 	install -m 0755 debian/additions/echo_stderr $(TMP)/usr/share/mysql/
 	mkdir -p $(TMP)/etc/mysql
 	install -m 0755 debian/additions/debian-start $(TMP)/etc/mysql/
