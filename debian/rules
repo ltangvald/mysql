@@ -27,7 +27,6 @@ DISTRIBUTION := $(shell lsb_release -i -s)
 EXPORTED_SOURCE_TARBALL := debian/mysql-source-5.6.tar.gz
 TESTSUITE_FAIL_CMD:=true
 TMP := $(CURDIR)/debian/tmp/
-USE_ASSEMBLER:=--enable-assembler
 NUMJOBS=$(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 
 ifeq (,$(NUMJOBS))
@@ -38,10 +37,6 @@ MAKEFLAGS += -j $(NUMJOBS)
 
 export MYSQL_BUILD_CC=$(DEB_HOST_GNU_TYPE)-gcc
 export MYSQL_BUILD_CXX=$(DEB_HOST_GNU_TYPE)-g++
-
-ifneq (,$(filter $(ARCH), i386 kfreebsd-i386 hurd-i386))
-	TAOCRYPT_OPT="-DTAOCRYPT_DISABLE_X86ASM"
-endif
 
 # The full upstream test suite takes a very long time to run, so we run
 # only the main test suite unless fulltest is specified.
@@ -73,9 +68,9 @@ configure-stamp configure-pic-stamp:
 	( test -d $(builddir) || mkdir $(builddir) ) && cd $(builddir) && \
 	sh -c  'PATH=$${MYSQL_BUILD_PATH:-"/bin:/usr/bin"} \
 		CC=$${MYSQL_BUILD_CC:-gcc} \
-		CFLAGS=$${MYSQL_BUILD_CFLAGS:-"-O2 -DBIG_JOINS=1 ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing ${TAOCRYPT_OPT}"} \
+		CFLAGS=$${MYSQL_BUILD_CFLAGS:-"-O2 -DBIG_JOINS=1 ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing"} \
 		CXX=$${MYSQL_BUILD_CXX:-g++} \
-		CXXFLAGS=$${MYSQL_BUILD_CXXFLAGS:-"-O3 -DBIG_JOINS=1 -felide-constructors -fno-exceptions -fpermissive -fno-rtti ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing ${TAOCRYPT_OPT}"} \
+		CXXFLAGS=$${MYSQL_BUILD_CXXFLAGS:-"-O3 -DBIG_JOINS=1 -felide-constructors -fno-exceptions -fpermissive -fno-rtti ${FORCE_FPIC_CFLAGS} -fno-strict-aliasing"} \
 		cmake -DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_VERBOSE_MAKEFILE=ON \
 		$(FORCE_FPIC) \
