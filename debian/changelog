@@ -38,6 +38,7 @@ mysql-5.6 (5.6.22-1~exp1) UNRELEASED; urgency=low
 
   [ Akhil Mohan ]
   * Provisioned dep8 test case upstream separated to run as non-root
+  * Standards version moved up to 3.9.5 in d/control
 
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
