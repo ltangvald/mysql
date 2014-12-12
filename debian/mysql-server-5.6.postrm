@@ -10,6 +10,7 @@ fi
 if [ -n "$DEBIAN_SCRIPT_DEBUG" ]; then set -v -x; DEBIAN_SCRIPT_TRACE=1; fi
 ${DEBIAN_SCRIPT_TRACE:+ echo "#42#DEBUG# RUNNING $0 $*" 1>&2 }
 
+mysql_cfgdir=/etc/mysql
 MYADMIN="/usr/bin/mysqladmin --defaults-file=/etc/mysql/debian.cnf"
 
 # Try to stop the server in a sane way. If it does not success let the admin
@@ -42,6 +43,14 @@ case "$1" in
   *)
     echo "postrm called with unknown argument '$1'" 1>&2
     exit 1
+  ;;
+esac
+
+# New packaging paradigm for my.cnf as of Dec-2014 for sharing mysql
+# variants in Ubuntu.
+case "$1" in
+  remove|disappear)
+    /usr/share/mysql-common/configure-symlinks remove mysql "$mysql_cfgdir/mysql.cnf"
   ;;
 esac
 

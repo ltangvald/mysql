@@ -71,6 +71,10 @@ case "$1" in
     mysql_cfgdir=/etc/mysql
     mysql_upgradedir=/var/lib/mysql-upgrade
 
+    # New packaging paradigm for my.cnf as of Dec-2014 for sharing mysql
+    # variants in Ubuntu.
+    /usr/share/mysql-common/configure-symlinks install mysql "$mysql_cfgdir/mysql.cnf"
+
     # Ensure the existence and right permissions for the database and
     # log files.
     if [ ! -d "$mysql_statedir"       -a ! -L "$mysql_statedir"       ]; then mkdir "$mysql_statedir"; fi
