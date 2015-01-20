@@ -95,15 +95,23 @@ configure-stamp configure-pic-stamp:
 
 override_dh_auto_build: build-stamp build-pic-stamp
 
-build-stamp:
+# $(EXPORTED_SOURCE_TARBALL) must be built before the builds commence, since
+# the builds change some of the files picked up by this tar invocation, and
+# this can race against tar with an error like "tar:
+# ./builddir-pic/strings/CMakeFiles/strings.dir: file changed as we read it".
+# So define the rule for building it here, and have the build rules depend on
+# it.
+$(EXPORTED_SOURCE_TARBALL):
+	tar -zcf $(EXPORTED_SOURCE_TARBALL) \
+	    --exclude=debian . \
+	    --transform="s,^\./,mysql-5.6/,"
+
+build-stamp: $(EXPORTED_SOURCE_TARBALL)
 	@echo "RULES.$@"
-	[ -f $(EXPORTED_SOURCE_TARBALL) ] || tar -zcf $(EXPORTED_SOURCE_TARBALL) \
-	--exclude=debian . \
-	--transform="s,^\./,mysql-5.6/,"
 	cd $(builddir) && $(MAKE)
 	touch $@
 
-build-pic-stamp:
+build-pic-stamp: $(EXPORTED_SOURCE_TARBALL)
 	@echo "RULES.$@"
 	cd $(builddir) && $(MAKE) -C scripts
 	cd $(builddir) && $(MAKE) -C libmysqld
