@@ -109,7 +109,7 @@ Package: mysql-client-core-5.6
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Provides: virtual-mysql-client-core
-Breaks: mysql-client-5.5, mysql-client-core-5.5, virtual-mysql-client-core
+Conflicts: mysql-client-5.5, mysql-client-core-5.5, virtual-mysql-client-core
 Replaces: mysql-client-5.5, mysql-client-core-5.5, virtual-mysql-client-core
 Description: MySQL database core client binaries
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
@@ -132,9 +132,8 @@ Depends: debianutils (>=1.6),
          ${shlibs:Depends}
 Recommends: mysql-common-5.6
 Provides: virtual-mysql-client
-Breaks: mysql-client-5.5,
-        mysql-server-core-5.6 (<< 5.6.22-1~),
-        virtual-mysql-client
+Conflicts: mysql-client-5.5, virtual-mysql-client
+Breaks: mysql-server-core-5.6 (<< 5.6.22-1~)
 Replaces: mysql-client-5.5, virtual-mysql-client
 Description: MySQL database client binaries
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
@@ -149,9 +148,8 @@ Package: mysql-server-core-5.6
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Provides: virtual-mysql-server-core
-Breaks: mysql-client-5.6 (<< 5.6.22-1~),
-        mysql-server-core-5.5,
-        virtual-mysql-server-core
+Breaks: mysql-client-5.6 (<< 5.6.22-1~)
+Conflicts: mysql-server-core-5.5, virtual-mysql-server-core
 Replaces: mysql-client-5.6 (<< 5.6.22-1~),
           mysql-server-core-5.5,
           virtual-mysql-server-core
@@ -180,7 +178,7 @@ Depends: initscripts,
          ${misc:Depends},
          ${shlibs:Depends}
 Provides: virtual-mysql-server
-Breaks: mysql-client-5.5, mysql-server-5.5, virtual-mysql-server
+Conflicts: mysql-client-5.5, mysql-server-5.5, virtual-mysql-server
 Replaces: mysql-client-5.5, mysql-server-5.5, virtual-mysql-server
 Description: MySQL database server binaries and system database setup
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
@@ -233,7 +231,7 @@ Depends: mysql-client-5.6 (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Provides: virtual-mysql-testsuite
-Breaks: mysql-testsuite-5.5, virtual-mysql-testsuite
+Conflicts: mysql-testsuite-5.5, virtual-mysql-testsuite
 Replaces: mysql-testsuite-5.5, virtual-mysql-testsuite
 Description: MySQL 5.6 testsuite
  MySQL is a fast, stable, and true multi-user, multi-threaded SQL database
