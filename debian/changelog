@@ -1,4 +1,7 @@
-mysql-5.6 (5.6.22-1~exp1) UNRELEASED; urgency=low
+mysql-5.6 (5.6.23-1~exp1) UNRELEASED; urgency=medium
+
+  [ Robie Basak ]
+  * New upstream release.
 
   [ Norvald H. Ryeng ]
   * Remove unused build options.
@@ -7,11 +10,10 @@ mysql-5.6 (5.6.22-1~exp1) UNRELEASED; urgency=low
   * Lintian fixes.
 
   [ Bjoern Boschman ]
-  * New upstream release.
   * Removed hardening-wrapper from build-deps.
   * Added python dep for mysql-testsuite-5.6.
   * Added dpkg-dev dep.
-  * Cleanup a bit more. 
+  * Cleanup a bit more.
 
   [ Robie Basak ]
   * Add dep8 smoke test.
@@ -20,7 +22,7 @@ mysql-5.6 (5.6.22-1~exp1) UNRELEASED; urgency=low
     provided by src:mysql-5.5.
   * Add mysql-server, mysql-client and mysql-testsuite to be switched
     over from src:mysql-5.5.
-  * Import mysql-commom from src:mysql-5.5 for 5.5 -> 5.6 switchover.
+  * Import mysql-common from src:mysql-5.5 for 5.5 -> 5.6 switchover.
   * Cherry-pick relevant parts of Ubuntu delta from mysql-5.5:
     - d/mysql-server-5.5.postrm: restoring postrm debhelper token to get
       proper behaviors from dh_installinit and dh_apparmor.
@@ -36,10 +38,64 @@ mysql-5.6 (5.6.22-1~exp1) UNRELEASED; urgency=low
   [ Otto Kekäläinen ]
   * Added parallel build support via DEB_BUILD_OPTIONS
 
+  [ Otto Kekäläinen ]
+  * Remove makeflags from cmake command and output MAKEFLAGS for debugging
+    purposes just before make is run
+
   [ Akhil Mohan ]
   * Provisioned dep8 test case upstream separated to run as non-root
+
+  [ Norvald H. Ryeng ]
+  * Simplify and stabilize tests
+  * Remove USE_STATIC_MYSQLD
+  * Add test plan to README.Maintainer
+  * Add --force rationale to test plan
+
+  [ Akhil Mohan ]
+  * Make builds parallel Use MAKEFLAGS for parallel builds
+
+  [ Otto Kekäläinen ]
+  * Move mysql_plugin to server package as it controls the server plugins
+  * Wrap-and-sort
+  * Remove legacy 5.0->5.1 transition code that refers a internal-use-only
+    -directory that does not even exist anymore.
+  * Removed all unnecessary .dirs as most of the directories are generated
+    automatically
+  * Don't emit extra output at init invocation Many users have complained that
+    they're database is corrupt because they tried to start the database and it
+    refuses to do so, and at the same time emitting a message with the word
+    "corrupt". this is just plain wrong and confusing, so I'm removing it.
+
+  [ Akhil Mohan ]
+  * added systemd service profile and script
+
+  [ Norvald H. Ryeng ]
+  * Remove special build options for taocrypt
+
+  [ Robie Basak ]
+  * Drop unused variable definition
+  * Create /etc/mysql manually in debian/rules
+  * Replace conf.d/.keepme with an empty directory
+
+  [ Akhil Mohan ]
   * Standards version moved up to 3.9.6 in d/control
   * Added Systemd service profile and script
+
+  [ Robie Basak ]
+  * wrap-and-sort for systemd change
+  * Drop unnecessary binary target
+  * Fix race between builds and source tar generation
+  * Move innochecksum to server package
+  * Replace unversioned Breaks with Conflicts
+  * Switch to new /etc/mysql/my.cnf management scheme
+
+  [ Akhil Mohan ]
+  * Refactor supplied my.cnf
+
+  [ Robie Basak ]
+  * Request my.cnf symlink from server package
+  * Drop mysql-common-5.6
+  * Conflict and Replace 5.5 server packages
 
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
