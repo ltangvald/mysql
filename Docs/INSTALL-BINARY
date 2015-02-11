@@ -46,6 +46,19 @@
    old versions of your data files, have also been removed. You
    should also check the existence of configuration files such
    as /etc/my.cnf or the /etc/mysql directory have been deleted.
+   Warning
+
+   MySQL has a dependency on the libaio library. The
+   mysql_install_db and subsequent mysqld_safe steps will fail
+   if this library is not installed locally. If necessary,
+   install it using the appropriate package manager. For
+   example, on Yum-based systems:
+shell> yum search libaio  # search for info
+shell> yum install libaio # install library
+
+   Or, on APT-based systems:
+shell> apt-cache search libaio # search for info
+shell> apt-get install libaio1 # install library
 
    If you run into problems and need to file a bug report,
    please use the instructions in Section 1.7, "How to Report
@@ -1049,8 +1062,9 @@ C:\> MySQLInstallerConsole help install
           + [feature]: The feature block is a semicolon
             separated list of features, or '*' to select all
             features.
-C:\> MySQLInstallerConsole install server;5.6.20:*:port=3307;serverid=
+C:\> MySQLInstallerConsole install server;5.6.22:*:port=3307;serverid=
 2:type=user;username=foo;password=bar;role=DBManager
+C:\> MySQLInstallerConsole install server;5.6.22;x64 -silent
 
 
      * list
