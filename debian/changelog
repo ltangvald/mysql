@@ -103,6 +103,8 @@ mysql-5.6 (5.6.23-1~exp1) UNRELEASED; urgency=medium
 
   [ Robie Basak ]
   * Fix dep8 smoke test dependency
+  * Amend AppArmor profile to permit reads of everything in /etc/mysql/, now
+    that we have a number of included directories in there
 
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 

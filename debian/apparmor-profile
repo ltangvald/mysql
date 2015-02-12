@@ -19,10 +19,7 @@
   /etc/hosts.allow r,
   /etc/hosts.deny r,
 
-  /etc/mysql/*.pem r,
-  /etc/mysql/conf.d/ r,
-  /etc/mysql/conf.d/* r,
-  /etc/mysql/*.cnf r,
+  /etc/mysql/** r,
   /usr/lib/mysql/plugin/ r,
   /usr/lib/mysql/plugin/*.so* mr,
   /usr/sbin/mysqld mr,
