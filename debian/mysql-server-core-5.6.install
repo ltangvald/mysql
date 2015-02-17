@@ -34,6 +34,7 @@ usr/share/mysql/japanese
 usr/share/mysql/japanese
 usr/share/mysql/korean
 usr/share/mysql/korean
+usr/share/mysql/my-default.cnf
 usr/share/mysql/mysql_security_commands.sql
 usr/share/mysql/mysql_system_tables.sql
 usr/share/mysql/mysql_system_tables_data.sql
