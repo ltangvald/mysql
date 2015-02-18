@@ -106,6 +106,9 @@ mysql-5.6 (5.6.23-1~exp1) UNRELEASED; urgency=medium
   * Amend AppArmor profile to permit reads of everything in /etc/mysql/, now
     that we have a number of included directories in there
   * Ship my-default.cnf with mysql-server-core-5.6 (LP: #1422391).
+  * Add mysql-server-core-5.6 Breaks/Replaces older mariadb-client-10.0
+    since innochecksum has moved into the server package across all
+    variants (LP: #1421520).
 
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
