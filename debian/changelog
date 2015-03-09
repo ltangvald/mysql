@@ -110,6 +110,9 @@ mysql-5.6 (5.6.23-1~exp1) UNRELEASED; urgency=medium
     since innochecksum has moved into the server package across all
     variants (LP: #1421520).
 
+  [ Martin Pitt ]
+  * Call dh "--with systemd" to enable systemd unit.
+
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
 mysql-5.6 (5.6.19-1~exp1) experimental; urgency=low
