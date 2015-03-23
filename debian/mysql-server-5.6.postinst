@@ -71,6 +71,25 @@ case "$1" in
     mysql_cfgdir=/etc/mysql
     mysql_upgradedir=/var/lib/mysql-upgrade
 
+    # mysqld gets called via $MYSQL_BOOTSTRAP during postinst configure, so any
+    # updates to the AppArmor profile must be loaded first (before the
+    # dh_apparmor snippet added by debhelper does it properly at the end of
+    # this script). Otherwise, mysqld cannot for example load
+    # /etc/mysql/mysqld.conf.d/ on upgrade from 5.5 to 5.6, which was added in
+    # 5.6 packaging but not present in the AppArmor profile shipped with 5.5
+    # packaging.
+    #
+    # This a workaround. Status is tracked at https://launchpad.net/bugs/1435368
+    if aa-status --enabled 2>/dev/null; then
+	# It is common for this to fail because
+	# /etc/apparmor.d/local/usr.sbin.mysqld doesn't exist (eg. on first
+	# install). But if this happens, then the workaround is not required,
+	# so it doesn't matter. If instead it causes a security issue, then
+	# that doesn't really matter here as dh_apparmor should handle that
+	# correctly later on.
+        apparmor_parser -r -T -W /etc/apparmor.d/usr.sbin.mysqld 2>/dev/null || true
+    fi
+
     # New packaging paradigm for my.cnf as of Dec-2014 for sharing mysql
     # variants in Ubuntu.
     /usr/share/mysql-common/configure-symlinks install mysql "$mysql_cfgdir/mysql.cnf"

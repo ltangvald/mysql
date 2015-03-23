@@ -113,6 +113,16 @@ mysql-5.6 (5.6.23-1~exp1) UNRELEASED; urgency=medium
   [ Martin Pitt ]
   * Call dh "--with systemd" to enable systemd unit.
 
+  [ Robie Basak ]
+  * AppArmor-related fixes (LP: #1421303):
+    - d/rules: call dh_apparmor from override_dh_install so that it is run
+      before dh_installinit. This causes the AppArmor profile to be loaded
+      correctly before mysqld is started.
+    - d/mysql-server-5.6.postinst: manually load the AppArmor profile earlier
+      in the postinst as a workaround, since the postinst needs to start mysqld
+      for bootstrapping purposes before the dh_apparmor snippet has run
+      (workaround for bug tracked in LP #1435368).
+
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
 mysql-5.6 (5.6.19-1~exp1) experimental; urgency=low
