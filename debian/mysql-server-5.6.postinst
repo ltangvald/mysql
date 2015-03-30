@@ -107,8 +107,6 @@ case "$1" in
     chown -R 0:0 $mysql_datadir
     chown -R mysql $mysql_statedir
     chmod 700 $mysql_statedir $mysql_statedir/mysql
-    if [ ! -d "$mysql_rundir" ]; then mkdir "$mysql_rundir"; fi
-    chown -R mysql $mysql_rundir
     touch $mysql_logdir/error.log
     chown -R mysql:adm $mysql_logdir
     chmod 0750 $mysql_logdir

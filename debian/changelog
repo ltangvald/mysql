@@ -123,6 +123,12 @@ mysql-5.6 (5.6.23-1~exp1) UNRELEASED; urgency=medium
       for bootstrapping purposes before the dh_apparmor snippet has run
       (workaround for bug tracked in LP #1435368).
 
+  [ Oleg Strikov ]
+  * d/mysql-server-5.6.{mysql.service, postinst, postrm}:
+    Fix to create /var/run/mysql using facilities provided by systemd.
+    Initialization scripts get executed as user (not root) and don't
+    have enough permissions to create the folder (LP: #1435823).
+
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Sep 2014 10:57:11 +0200
 
 mysql-5.6 (5.6.19-1~exp1) experimental; urgency=low

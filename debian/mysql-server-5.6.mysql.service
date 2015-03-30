@@ -18,3 +18,5 @@ ExecStart=/usr/bin/mysqld_safe
 ExecStartPost=/usr/share/mysql/mysql-systemd-start post
 TimeoutSec=600
 Restart=on-failure
+RuntimeDirectory=mysqld
+RuntimeDirectoryMode=755
