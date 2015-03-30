@@ -7,7 +7,6 @@ After=syslog.target
 
 [Install]
 WantedBy=multi-user.target
-Alias=mysql.service
 
 [Service]
 User=mysql
