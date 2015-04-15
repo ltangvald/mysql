@@ -16,6 +16,8 @@ mysql-5.6 (5.6.24-1~exp1) UNRELEASED; urgency=medium
   * Added python dep for mysql-testsuite-5.6.
   * Added dpkg-dev dep.
   * Cleanup a bit more.
+  * Removed libmysqld-pic as is it built by default
+  * Merged BUILDDIR and BUILDDIR_PIC 
 
   [ Robie Basak ]
   * Add dep8 smoke test.
