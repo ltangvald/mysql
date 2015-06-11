@@ -38,8 +38,10 @@ def add_info(report):
     attach_mac_events(report, '/usr/sbin/mysqld')
     attach_file(report,'/etc/apparmor.d/usr.sbin.mysqld')
     _add_my_conf_files(report, '/etc/mysql/my.cnf')
-    for f in os.listdir('/etc/mysql/conf.d'):
-        _add_my_conf_files(report, os.path.join('/etc/mysql/conf.d', f))
+    _add_my_conf_files(report, '/etc/mysql/mysql.cnf')
+    for d in ['/etc/mysql/conf.d', '/etc/mysql/mysql.conf.d']:
+        for f in os.listdir(d):
+            _add_my_conf_files(report, os.path.join(d, f))
     try:
         report['MySQLVarLibDirListing'] = str(os.listdir('/var/lib/mysql'))
     except OSError:
