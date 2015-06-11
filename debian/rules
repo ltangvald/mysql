@@ -113,6 +113,7 @@ build-stamp: $(EXPORTED_SOURCE_TARBALL)
 
 build-pic-stamp: $(EXPORTED_SOURCE_TARBALL)
 	@echo "RULES.$@"
+	cd $(builddir) && $(MAKE) -C sql
 	cd $(builddir) && $(MAKE) -C scripts
 	cd $(builddir) && $(MAKE) -C libmysqld
 	touch $@
