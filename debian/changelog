@@ -108,6 +108,7 @@ mysql-5.6 (5.6.25-2) UNRELEASED; urgency=medium
   [ Robie Basak ]
   * Fix FTBFS by building the sql directory first so the
     required files are generated. Thanks to Marc Deslauriers.
+  * Rename and install apport hook correctly.
 
  -- Bjoern Boschman <bjoern@boschman.de>  Wed, 10 Jun 2015 15:06:44 +0200
 
