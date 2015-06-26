@@ -1,4 +1,4 @@
-mysql-5.6 (5.6.25-2) UNRELEASED; urgency=medium
+mysql-5.6 (5.6.25-2) unstable; urgency=medium
 
   [ Norvald H. Ryeng ]
   * Remove unused build options.
@@ -111,7 +111,7 @@ mysql-5.6 (5.6.25-2) UNRELEASED; urgency=medium
   * Rename and install apport hook correctly.
   * Apport hook: attach new configuration files and directories.
 
- -- Bjoern Boschman <bjoern@boschman.de>  Wed, 10 Jun 2015 15:06:44 +0200
+ -- Bjoern Boschman <bjoern@boschman.de>  Fri, 26 Jun 2015 14:47:59 +0100
 
 mysql-5.6 (5.6.19-1~exp1) experimental; urgency=low
 
