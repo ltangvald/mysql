@@ -93,6 +93,7 @@ Replaces: mariadb-server-5.5,
           mysql-common-5.6,
           mysql-server-5.5,
           percona-xtradb-cluster-common-5.5
+Breaks: mariadb-common (<< 10.0.20-3~),
 Multi-Arch: foreign
 Description: MySQL database common files, e.g. /etc/mysql/my.cnf
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
