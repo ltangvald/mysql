@@ -13,6 +13,7 @@ mysql-5.6 (5.6.25-3) UNRELEASED; urgency=medium
   * mysql-common.preinst:
     - Revert mariadb-common my.cnf symlink setup fallback actions.
     - Recover from a case of incorrect my.cnf.migrated created by 5.6.25-2.
+  * mysql-common.postrm: Delete my.cnf.{migrated,old} on purge.
 
  -- Robie Basak <robie.basak@ubuntu.com>  Mon, 29 Jun 2015 10:24:02 +0100
 
