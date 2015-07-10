@@ -12,6 +12,7 @@ mysql-5.6 (5.6.25-3) UNRELEASED; urgency=medium
     dpkg-maintscript-helper rm_conffile my.cnf has been run.
   * mysql-common.preinst:
     - Revert mariadb-common my.cnf symlink setup fallback actions.
+    - Recover from a case of incorrect my.cnf.migrated created by 5.6.25-2.
 
  -- Robie Basak <robie.basak@ubuntu.com>  Mon, 29 Jun 2015 10:24:02 +0100
 
