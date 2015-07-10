@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-if [ "$1" = "configure" ]; then
-    # Low priority fallback for client use when no server is installed.
-    update-alternatives --install /etc/mysql/my.cnf my.cnf /etc/mysql/my.cnf.fallback 100
-fi
-
 #DEBHELPER#
 
 # This code needs to go after the debhelper snippets so that it runs after
@@ -17,6 +12,11 @@ fi
 # any package (just like /etc/mysql/my.cnf.dpkg-bak would have been) but we
 # rename it since it will be in active use, the user may not expect a .dpkg-bak
 # file to be in use and we do not want to surprise the user.
+
+if [ "$1" = "configure" ]; then
+    # Low priority fallback for client use when no server is installed.
+    update-alternatives --install /etc/mysql/my.cnf my.cnf /etc/mysql/my.cnf.fallback 100
+fi
 
 if [ "$1" = "configure" -a -f /etc/mysql/my.cnf.dpkg-bak ] && dpkg --compare-versions "$2" le "5.6.19-1~exp1ubuntu2~"; then
     echo "Moving /etc/mysql/my.cnf.dpkg-bak to /etc/mysql/my.cnf.migrated"
