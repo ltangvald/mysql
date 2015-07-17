@@ -1,9 +1,12 @@
 #!/bin/sh
 set -e
 
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ]; then
+  update-alternatives --remove my.cnf /etc/mysql/my.cnf.fallback
+fi
+
 if [ "$1" = "purge" ]; then
   update-alternatives --remove my.cnf /etc/mysql/my.cnf.migrated
-  update-alternatives --remove my.cnf /etc/mysql/my.cnf.fallback
   rm -f /etc/mysql/my.cnf.migrated  # created by mysql-common from our obsolete conffile my.cnf
   rm -f /etc/mysql/my.cnf.old       # created by mariadb-common from our obsolete conffile my.cnf
   rmdir /etc/mysql 2>/dev/null || true
