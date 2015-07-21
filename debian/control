@@ -32,7 +32,7 @@ Package: libmysqlclient18
 Section: libs
 Architecture: any
 Depends: mysql-common (>= 5.5), ${misc:Depends}, ${shlibs:Depends}
-Pre-Depends: multiarch-support, ${misc:Pre-Depends}
+Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: MySQL database client library
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
