@@ -17,7 +17,7 @@ mysql-5.6 (5.6.25-3) unstable; urgency=medium
     - Recover from a case of incorrect my.cnf.migrated created by 5.6.25-2.
   * mysql-common.postrm: Delete my.cnf.{migrated,old} on purge.
   * mysql-common: Add Breaks against mariadb-common (<< 10.0.20-3~) that used
-    a fallback scheme for setting up the my.cnf symlink.
+    a fallback scheme for setting up the my.cnf symlink.  (Closes: #792080)
   * libmysqlclient18: Drop explicit dependency on multiarch-support, this is
     already managed by ${misc:Pre-Depends).
   * Use canonical Vcs-* URLs.
