@@ -1,4 +1,6 @@
-mysql-5.6 (5.6.25-3) UNRELEASED; urgency=medium
+mysql-5.6 (5.6.25-3) unstable; urgency=medium
+
+  * Team upload.
 
   [ Robie Basak ]
   * Conflict/Replace mysql-client-5.5 (<< 5.6) to fix conflict on
@@ -21,7 +23,7 @@ mysql-5.6 (5.6.25-3) UNRELEASED; urgency=medium
   * Use canonical Vcs-* URLs.
   * Move innochecksum manpage to mysql-server-core-5.6, too.
 
- -- Robie Basak <robie.basak@ubuntu.com>  Mon, 29 Jun 2015 10:24:02 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 22 Jul 2015 18:51:03 +0200
 
 mysql-5.6 (5.6.25-2) unstable; urgency=medium
 
