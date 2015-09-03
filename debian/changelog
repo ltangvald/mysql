@@ -2,6 +2,7 @@ mysql-5.6 (5.6.25-4) UNRELEASED; urgency=medium
 
   * Update debian/copyright (Closes: #793099). Thanks to Lars Tangvald.
   * Add myself to Uploaders.
+  * wrap-and-sort.
 
  -- Robie Basak <robie.basak@ubuntu.com>  Thu, 03 Sep 2015 12:01:29 +0100
 
