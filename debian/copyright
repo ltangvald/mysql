@@ -124,6 +124,35 @@ Comments:
  The above text is subject to this copyright notice:
  © 2010, Oracle and/or its affiliates.
 
+Files: debian/*
+Copyright:
+ 1997-1998, Scott Hanson <shanson@debian.org>
+ 1997, Christian Schwarz <schwarz@debian.org>
+ 1999-2007, 2009, Christian Hammers <ch@debian.org>
+ 2000-2001, Christopher C. Chimelis <chris@debian.org>
+ 2001, Matthew Wilcox <willy@debian.org>
+ 2005-2007, sean finney <seanius@debian.org>
+ 2006, Adam Conrad <adconrad@0c3.net>
+ 2007-2011, Norbert Tretkowski <norbert@tretkowski.de>
+ 2007-2008, Monty Taylor <mordred@inaugust.com>
+ 2008, Devin Carraway <devin@debian.org>
+ 2008, Steffen Joeris <white@debian.org>
+ 2009, Canonical Ltd
+ 2010, Xavier Oswald <xoswald@debian.org>
+ 2011, Clint Byrum <clint@ubuntu.com>
+ 2011, Ondřej Surý <ondrej@debian.org>
+ 2012, Nicholas Bamber <nicholas@periapt.co.uk>
+ 2013-2014, Otto Kekäläinen <otto@seravo.fi>
+License: GPL-2+
+
+Files: debian/additions/mysqlreport*
+Copyright: 2006-2008, Daniel Nichter <public@codenode.com>
+License: GPL-2+
+
+Files: debian/additions/innotop/*
+Copyright: 2006, Baron Schwartz <baron at xaprb dot com>
+License: Artistic or GPL-2
+
 Files: cmd-line-utils/libedit/config.h
  dbug/example1.c
  dbug/example2.c
@@ -134,6 +163,8 @@ Files: cmd-line-utils/libedit/config.h
  dbug/remove_function_from_trace.pl
  dbug/tests.c
  dbug/tests-t.pl
+ dbug/monty.doc
+ dbug/user.r
  extra/yassl/src/dummy.cpp
  include/probes_mysql_nodtrace.h
  libmysqld/resource.h
@@ -142,7 +173,10 @@ Files: cmd-line-utils/libedit/config.h
  sql-bench/graph-compare-results.sh
  storage/ndb/bin/*
  storage/ndb/demos/*
+ support-files/build-tags
  support-files/binary-configure.sh
+ support-files/magic
+ support-files/my-default.cnf.sh
  support-files/my-huge.cnf.sh
  support-files/my-innodb-heavy-4G.cnf.sh
  support-files/my-large.cnf.sh
@@ -151,6 +185,17 @@ Files: cmd-line-utils/libedit/config.h
  support-files/mysqld_multi.server.sh
  support-files/mysql-log-rotate.sh
  support-files/mysql.server-sys5.sh
+ win/create_def_file.js
+ man/*
+ .gitignore
+ BUILD-CMAKE
+ COPYING
+ Doxyfile-perfschema
+ INSTALL-SOURCE
+ INSTALL-WIN-SOURCE
+ VERSION
+ plugin/innodb_memcached/daemon_memcached/*
+ plugin/innodb_memcached/README-innodb_memcached
 Copyright: UNKNOWN
 Comment: These files fall under the blanket license specified in the file
  COPYING and README
@@ -240,14 +285,16 @@ Files: BUILD/*
  sql-common/*
  storage/*
  strings/*
+ support-files/compiler_warnings.supp
  support-files/config.huge.ini.sh
  support-files/config.medium.ini.sh
  support-files/config.small.ini.sh
- support-files/MacOSX/Description.plist.sh
- support-files/MacOSX/Info.plist.sh
- support-files/MacOSX/StartupParameters.plist.sh
+ support-files/MacOSX/*
+ support-files/RHEL4-SElinux/*
  support-files/MySQL-shared-compat.spec.sh
  support-files/mysql.spec.sh
+ support-files/mysql.5.6.25.spec
+ support-files/mysql.m4
  support-files/ndb-config-2-node.ini.sh
  tests/*
  unittest/*
@@ -267,7 +314,7 @@ License: GPL-2+
 
 Files: cmd-line-utils/libedit/*
 Copyright: 1989-1990,1992-1993 The Regents of the University of California.
-License: BSD (3 clause)
+License: BSD-3-clause
 
 Files: cmd-line-utils/libedit/filecomplete.c
  cmd-line-utils/libedit/filecomplete.h
@@ -276,7 +323,7 @@ Files: cmd-line-utils/libedit/filecomplete.c
  cmd-line-utils/libedit/readline.c
  cmd-line-utils/libedit/readline/*
 Copyright: 1997-2001 The NetBSD Foundation Inc
-License: BSD (2 clause)
+License: BSD-2-clause
  This code is derived from software contributed to The NetBSD Foundation
  by Jaromir Dolecek.
  .
@@ -517,7 +564,7 @@ License: public-domain
 Files: cmd-line-utils/libedit/np/vis.c
 Copyright: 1989-1993 The Regents of the University of California.
  1999-2005 The NetBSD Foundation Inc
-License: BSD (3 clause)
+License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions
  are met:
@@ -544,16 +591,16 @@ License: BSD (3 clause)
 
 Files: scripts/dheadgen.pl
 Copyright: 2008-2009 Sun Microsystems Inc
-License: BSD (3 clause)
+License: BSD-3-clause
 
 Files: storage/ndb/test/src/getarg.c
 Copyright: 1997-2000 - Kungliga Tekniska Högskolan
-License: BSD (3 clause)
+License: BSD-3-clause
 
 Files: storage/ndb/test/include/getarg.h
 Copyright: 2003 MySQL AB
  1997-1999 Kungliga Tekniska Högskolan
-License: BSD (3 clause) GPL-2
+License: BSD-3-clause and GPL-2
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; version 2 of the License.
@@ -687,6 +734,103 @@ License: BSD-like
  3. Altered versions must be plainly marked as such, and must not
     be misrepresented as being the original software.
 
+Files: libevent/*
+Copyright: 2000, 2006 Niels Provos
+License: BSD-3-clause
+
+Files: libevent/CMakeLists.txt
+Copyright: 2011, 2012 Oracle and/or its affiliates.
+License: GPL-2
+
+Files: libevent/compat/sys/queue.h
+ libevent/compat/sys/_time.h
+Copyright: 1982, 1993 The Regents of the University of California
+License: BSD-3-clause
+
+Files: libevent/event.3
+Copyright: 2000 Artur Grabowski
+License: BSD-3-clause
+
+Files: libevent/evport.c
+Copyright: 2007 Sun Microsystems
+License: GPL-2
+
+Files: libevent/log.c
+Copyright: 2005 Nick Mathewson
+ 2000 Dug Song
+ 1993 The Regents of the University of California
+License: BSD-3-clause
+
+Files: libevent/min_heap.h
+Copyright: 2006 Maxim Yegorushkin
+License: BSD-3-clause
+
+Files: libevent/strlcpy.c
+Copyright: 1998 Todd C. Miller
+License: BSD-3-clause
+
+Files: libevent/WIN32-Code/win32.c
+Copyright: 2000, 2002 Niels Provos
+ 2003 Michael A. Davis
+License: BSD-3-clause
+
+Files: mysys_ssl/*
+ packaging/*
+ plugin/password_validation/*
+Copyright: 2002, 2015 Oracle and/or its affiliates.
+License: GPL-2
+
+Files: packaging/*
+ CMakeLists.txt
+ README
+ config.h.cmake
+ configure.cmake
+ dbug/CMakeLists.txt
+ support-files/CMakeLists.txt
+ plugin/innodb_memcached/CMakeLists.txt
+ plugin/innodb_memcached/daemon_memcached/CMakeLists.txt
+ plugin/innodb_memcached/innodb_memcache/*
+ plugin/innodb_memcached/daemon_memcached/daemon/memcached_mysql.cc
+ plugin/innodb_memcached/daemon_memcached/daemon/memcached_mysql.h
+ plugin/innodb_memcached/daemon_memcached/utilities/util.c
+Copyright: 2010, 2015 Oracle and/or its affiliates.
+License: GPL-2
+
+Files: plugin/innodb_memcached/daemon_memcached/daemon/memcached_mysql.h
+Copyright: 2008 Sun Microsystems, Inc.
+License: BSD-3-clause
+
+Files: plugin/innodb_memcached/daemon_memcached/include/memcached/genhash.h
+Copyright: 2006 Dustin Sallings
+License: BSD-3-clause
+
+Files: plugin/innodb_memcached/daemon_memcached/daemon/memcached.c
+Copyright: 2015 Oracle and/or its affiliates
+ 2003 Danga Interactive, Inc.
+License: BSD-3-clause
+
+Files: plugin/innodb_memcached/daemon_memcached/daemon/daemon.c
+ plugin/innodb_memcached/daemon_memcached/win32/sysexits.h
+Copyright: 1987, 1993 The Regents of the University of California
+License: BSD-3-clause
+
+Files: plugin/innodb_memcached/daemon_memcached/scripts/damemtop
+Copyright: 2009 Dormando
+License: BSD-3-clause
+
+Files: plugin/innodb_memcached/daemon_memcached/win32/win32.c
+Copyright: 1983, 1993 The Regents of the University of California
+ 1993 Digital Equipment Corporation
+License: BSD-3-clause
+
+Files: plugin/semisync/CMakeLists.txt
+Copyright: 2006, 2010 Oracle and/or its affiliates.
+License: GPL-2
+
+Files: support-files/dtrace/*
+Copyright: 2009, 2014 Oracle and/or its affiliates.
+License: GPL-2
+
 License: GPL-2
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -747,7 +891,7 @@ License: LGPL
  License version 2 can be found in the file
  `/usr/share/common-licenses/LGPL-2`
 
-License: BSD (3 clause)
+License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions
  are met:
@@ -771,3 +915,10 @@ License: BSD (3 clause)
  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  SUCH DAMAGE.
+
+License: Artistic
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the Artistic License, which comes with Perl.
+ .
+ On Debian systems, the complete text of the Artistic License can be
+ found in `/usr/share/common-licenses/Artistic'.
