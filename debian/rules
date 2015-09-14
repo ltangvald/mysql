@@ -174,6 +174,10 @@ auto_install-stamp:
 	chmod 0755 $(TMP)/usr/share/mysql-test/std_data/checkDBI_DBD-mysql.pl
 	# chmod 0644 $(TMP)/usr/share/mysql/*.ini
 	chmod 0644 $(TMP)/usr/bin/mysqlaccess.conf
+	chmod 0644 $(TMP)/usr/share/mysql-test/suite/innodb_stress/include/innodb_stress.inc
+	chmod 0644 $(TMP)/usr/share/mysql-test/suite/innodb_stress/t/load_generator.py
+	chmod 0644 $(TMP)/usr/share/mysql-test/suite/innodb_stress/t/*.test
+	chmod 0644 $(TMP)/usr/share/mysql-test/suite/innodb_stress/t/*.opt
 	touch $@
 
 # Use the --fail-missing to check for stuff that we should be installing
