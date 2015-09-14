@@ -3,7 +3,6 @@
 [Unit]
 Description=MySQL Community Server
 After=network.target
-After=syslog.target
 
 [Install]
 WantedBy=multi-user.target
