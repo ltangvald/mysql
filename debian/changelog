@@ -1,3 +1,16 @@
+mysql-5.6 (5.6.25-5) UNRELEASED; urgency=medium
+
+  [ Lars Tangvald ]
+  * Cleaned up some redundancies in debian/copyright
+  * Lintian fixes:
+    - package-contains-timestamped-gzip warnings
+    - executable-not-elf-or-script warnings for innodb_stress tests
+    - description-is-pkg-name
+    - systemd-service-file-refers-to-obsolete-target
+    - manpage-has-errors-from-man
+
+ -- Robie Basak <robie@justgohome.co.uk>  Mon, 21 Sep 2015 10:22:12 +0100
+
 mysql-5.6 (5.6.25-4) unstable; urgency=medium
 
   * Update debian/copyright (Closes: #793099). Thanks to Lars Tangvald.
