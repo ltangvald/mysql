@@ -1,4 +1,4 @@
-mysql-5.6 (5.6.25-5) UNRELEASED; urgency=medium
+mysql-5.6 (5.6.26-1) UNRELEASED; urgency=medium
 
   [ Lars Tangvald ]
   * Cleaned up some redundancies in debian/copyright
@@ -12,6 +12,9 @@ mysql-5.6 (5.6.25-5) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * Add debian/patches/mips64el.patch to fix FTBFS on mips64el (Closes:
     #798126).
+
+  [ Bjoern Boschman ]
+  * New upstream release
 
  -- Robie Basak <robie@justgohome.co.uk>  Mon, 21 Sep 2015 10:22:12 +0100
 
