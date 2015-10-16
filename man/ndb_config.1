@@ -2,12 +2,12 @@
 .\"     Title: \fBndb_config\fR
 .\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 07/14/2015
+.\"      Date: 09/18/2015
 .\"    Manual: MySQL Database System
 .\"    Source: MySQL 5.6
 .\"  Language: English
 .\"
-.TH "\FBNDB_CONFIG\FR" "1" "07/14/2015" "MySQL 5\&.6" "MySQL Database System"
+.TH "\FBNDB_CONFIG\FR" "1" "09/18/2015" "MySQL 5\&.6" "MySQL Database System"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -69,7 +69,7 @@ Options Common to MySQL Cluster Programs(1)\&.
 .nr an-no-space-flag 1
 .nr an-break-flag 1
 .br
-.B Table\ \&18.83.\ \& This table describes command-line options for the ndb_config program
+.B Table\ \&18.84.\ \& This table describes command-line options for the ndb_config program
 .TS
 allbox tab(:);
 lB lB lB.
@@ -183,7 +183,7 @@ All MySQL 5.6 based releases
 T}
 T{
 .PP
---config-file=path
+--config-file=file_name
 T}:T{
 Set the path to config.ini file
 T}:T{
@@ -378,8 +378,8 @@ to print a version information string, and then exit\&.
 .\}
 .\" ndb_config: ndb-connectstring option
 .\" ndb-connectstring option: ndb_config
-\fB\-\-ndb\-connectstring=\fR\fB\fIconnect_string\fR\fR,
-\fB\-c \fR\fB\fIconnect_string\fR\fR
+\fB\-\-ndb\-connectstring=\fR\fB\fIconnection_string\fR\fR,
+\fB\-c \fR\fB\fIconnection_string\fR\fR
 .TS
 allbox tab(:);
 l l s s
@@ -434,7 +434,7 @@ l l l s
 T{
 \fBCommand\-Line Format\fR
 T}:T{
-\-\-config\-file=path
+\-\-config\-file=file_name
 T}
 T{
 \fBPermitted Values\fR
@@ -1156,7 +1156,7 @@ option\&. A portion of the resulting output is shown in this example:
 .\}
 .nf
 shell> \fBndb_config \-\-configinfo \-\-xml\fR
-<configvariables protocolversion="1" ndbversionstring="5\&.6\&.25\-ndb\-7\&.3\&.10"
+<configvariables protocolversion="1" ndbversionstring="5\&.6\&.26\-ndb\-7\&.3\&.11"
                     ndbversion="458758" ndbversionmajor="7" ndbversionminor="0"
                     ndbversionbuild="6">
   <section name="SYSTEM">
