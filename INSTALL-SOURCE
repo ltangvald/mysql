@@ -113,7 +113,7 @@ Chapter 2 Installing and Upgrading MySQL
        automatically start and stop MySQL, see Section 2.4.3,
        "Installing a MySQL Launch Daemon."
        For information on the MySQL Preference Pane, see Section
-       2.4.5, "Installing and Using the MySQL Preference Pane."
+       2.4.4, "Installing and Using the MySQL Preference Pane."
 
 2.1 General Installation Guidance
 
@@ -334,12 +334,12 @@ Chapter 2 Installing and Upgrading MySQL
    Microsoft Windows examples will assume the name md5.exe.
 
    Linux and Microsoft Windows examples:
-shell> md5sum mysql-standard-5.6.27-linux-i686.tar.gz
-aaab65abbec64d5e907dcd41b8699945  mysql-standard-5.6.27-linux-i686.tar
+shell> md5sum mysql-standard-5.6.28-linux-i686.tar.gz
+aaab65abbec64d5e907dcd41b8699945  mysql-standard-5.6.28-linux-i686.tar
 .gz
 
-shell> md5.exe mysql-installer-community-5.6.27.msi
-aaab65abbec64d5e907dcd41b8699945  mysql-installer-community-5.6.27.msi
+shell> md5.exe mysql-installer-community-5.6.28.msi
+aaab65abbec64d5e907dcd41b8699945  mysql-installer-community-5.6.28.msi
 
    You should verify that the resulting checksum (the string of
    hexadecimal digits) matches the one displayed on the download
@@ -512,8 +512,8 @@ shell> rpm --import mysql_pubkey.asc
 
    Table 2.1 MySQL Package and Signature Files for Source files
        File Type                      File Name
-   Distribution file mysql-standard-5.6.27-linux-i686.tar.gz
-   Signature file    mysql-standard-5.6.27-linux-i686.tar.gz.asc
+   Distribution file mysql-standard-5.6.28-linux-i686.tar.gz
+   Signature file    mysql-standard-5.6.28-linux-i686.tar.gz.asc
 
    Make sure that both files are stored in the same directory
    and then run the following command to verify the signature
@@ -522,7 +522,7 @@ shell> gpg --verify package_name.asc
 
    If the downloaded package is valid, you will see a "Good
    signature" similar to:
-shell> gpg --verify mysql-standard-5.6.27-linux-i686.tar.gz.asc
+shell> gpg --verify mysql-standard-5.6.28-linux-i686.tar.gz.asc
 gpg: Signature made Tue 01 Feb 2011 02:38:30 AM CST using DSA key ID 5
 072E1F5
 gpg: Good signature from "MySQL Release Engineering <mysql-build@oss.o
@@ -531,7 +531,7 @@ racle.com>"
    The Good signature message indicates that the file signature
    is valid, when compared to the signature listed on our site.
    But you might also see warnings, like so:
-shell> gpg --verify mysql-standard-5.6.27-linux-i686.tar.gz.asc
+shell> gpg --verify mysql-standard-5.6.28-linux-i686.tar.gz.asc
 gpg: Signature made Wed 23 Jan 2013 02:25:45 AM PST using DSA key ID 5
 072E1F5
 gpg: checking the trustdb
@@ -615,8 +615,8 @@ Primary key fingerprint: A4A9 4068 76FC BD3C 4567  70C8 8C71 8D3B 5072
    Table 2.2 MySQL Package and Signature Files for MySQL
    Installer for Microsoft Windows
        File Type                    File Name
-   Distribution file mysql-installer-community-5.6.27.msi
-   Signature file    mysql-installer-community-5.6.27.msi.asc
+   Distribution file mysql-installer-community-5.6.28.msi
+   Signature file    mysql-installer-community-5.6.28.msi.asc
 
    Make sure that both files are stored in the same directory
    and then run the following command to verify the signature
@@ -654,8 +654,8 @@ Primary key fingerprint: A4A9 4068 76FC BD3C 4567  70C8 8C71 8D3B 5072
 shell> rpm --checksig package_name.rpm
 
    Example:
-shell> rpm --checksig MySQL-server-5.6.27-0.linux_glibc2.5.i386.rpm
-MySQL-server-5.6.27-0.linux_glibc2.5.i386.rpm: md5 gpg OK
+shell> rpm --checksig MySQL-server-5.6.28-0.linux_glibc2.5.i386.rpm
+MySQL-server-5.6.28-0.linux_glibc2.5.i386.rpm: md5 gpg OK
 
    Note
 
@@ -736,7 +736,7 @@ g-signature.html
 
    MySQL compressed tar file binary distributions have names of
    the form mysql-VERSION-OS.tar.gz, where VERSION is a number
-   (for example, 5.6.27), and OS indicates the type of operating
+   (for example, 5.6.28), and OS indicates the type of operating
    system for which the distribution is intended (for example,
    pc-linux-i686 or winx64).
    Warning
@@ -1132,8 +1132,8 @@ Additional Installation Information
    Archive distributions (but not MSI distributions) of MySQL.
 
      * MySQL Installer: This package has a file name similar to
-       mysql-installer-community-5.6.27.0.msi or
-       mysql-installer-commercial-5.6.27.0.msi, and utilizes
+       mysql-installer-community-5.6.28.0.msi or
+       mysql-installer-commercial-5.6.28.0.msi, and utilizes
        MSIs to automatically install MySQL server and other
        products. It will download and apply updates to itself,
        and for each of the installed products. It also
@@ -1157,8 +1157,8 @@ Additional Installation Information
        Microsoft Windows Using MySQL Installer."
 
      * The Noinstall Archive: This package has a file name
-       similar to mysql-5.6.27-win32.zip or
-       mysql-5.6.27-winx64.zip, and contains all the files found
+       similar to mysql-5.6.28-win32.zip or
+       mysql-5.6.28-winx64.zip, and contains all the files found
        in the Complete install package, with the exception of
        the GUI. It also contains PDB files. This package does
        not include an automated installer, and must be manually
@@ -1751,6 +1751,11 @@ Upgrade   - Upgrades one or more of your installed programs.
 
    MySQLInstallerConsole supports the following options, which
    are specified on the command line:
+   Note
+
+   Configuration block values that contain a colon (":") must be
+   wrapped in double quotes. For example,
+   installdir="C:\MySQL\MySQL Server 5.6".
 
      * configure [product1]:[setting]=[value];
        [product2]:[setting]=[value]; [...]
@@ -1807,6 +1812,9 @@ C:\> MySQLInstallerConsole help install
             can include either a "config" or "user" type key,
             where "config" is the default type if one is not
             defined.
+            Configuration block values that contain a colon
+            (":") must be wrapped in double quotes. For example,
+            installdir="C:\MySQL\MySQL Server 5.6".
             Only one "config" type block can be defined per
             product. A "user" block should be defined for each
             user that should be created during the product's
@@ -1818,9 +1826,18 @@ C:\> MySQLInstallerConsole help install
           + [feature]: The feature block is a semicolon
             separated list of features, or '*' to select all
             features.
-C:\> MySQLInstallerConsole install server;5.6.22:*:port=3307;serverid=
+C:\> MySQLInstallerConsole install server;5.6.25:*:port=3307;serverid=
 2:type=user;username=foo;password=bar;role=DBManager
-C:\> MySQLInstallerConsole install server;5.6.22;x64 -silent
+C:\> MySQLInstallerConsole install server;5.6.25;x64 -silent
+
+       An example that passes in additional configuration
+       blocks, broken up by ^ to fit this screen:
+C:\> MySQLInstallerConsole install server;5.6.25;x64:*:type=config;ope
+nfirewall=true; ^
+          generallog=true;binlog=true;serverid=3306;enable_tcpip=true;
+port=3306;rootpasswd=pass; ^
+          installdir="C:\MySQL\MySQL Server 5.6":type=user;datadir="C:
+\MySQL\data";username=foo;password=bar;role=DBManager
 
 
      * list
@@ -1875,9 +1892,9 @@ C:\> MySQLInstallerConsole status
 
           + -silent : Disable confirmation prompts.
 C:\> MySQLInstallerConsole upgrade *
-C:\> MySQLInstallerConsole upgrade workbench:6.2.2
+C:\> MySQLInstallerConsole upgrade workbench:6.3.5
 C:\> MySQLInstallerConsole upgrade workbench:!
-C:\> MySQLInstallerConsole upgrade workbench:6.2.2 excel:1.3.2
+C:\> MySQLInstallerConsole upgrade workbench:6.3.5 excel:1.3.2
 
 
      * update
@@ -2582,7 +2599,7 @@ InnoDB: foreign key constraint system tables created
    something like this, which indicates that the server is ready
    to service client connections:
 mysqld: ready for connections
-Version: '5.6.27'  socket: ''  port: 3306
+Version: '5.6.28'  socket: ''  port: 3306
 
    The server continues to write to the console any further
    diagnostic output it produces. You can open a new console
@@ -2649,7 +2666,7 @@ shutdown
    The last option is to start mysqld with the --standalone and
    --debug options. In this case, mysqld writes a log file
    C:\mysqld.trace that should contain the reason why mysqld
-   doesn't start. See Section 24.4.3, "The DBUG Package."
+   doesn't start. See Section 24.5.3, "The DBUG Package."
 
    Use mysqld --verbose --help to display all the options that
    mysqld supports.
@@ -3298,32 +3315,32 @@ C:\> C:\mysql\bin\mysqld --remove
 
 2.4 Installing MySQL on OS X
 
-   For a list of supported OS X versions that the MySQL server
-   supports, see
+   For a list of OS X versions that the MySQL server supports,
+   see
    http://www.mysql.com/support/supportedplatforms/database.html
    .
 
    MySQL for OS X is available in a number of different forms:
 
-     * Native Package Installer format, which uses the native OS
-       X installer (DMG) to walk you through the installation of
+     * Native Package Installer, which uses the native OS X
+       installer (DMG) to walk you through the installation of
        MySQL. For more information, see Section 2.4.2,
        "Installing MySQL on OS X Using Native Packages." You can
        use the package installer with OS X. The user you use to
        perform the installation must have administrator
        privileges.
 
-     * Tar package format, which uses a file packaged using the
-       Unix tar and gzip commands. To use this method, you will
-       need to open a Terminal window. You do not need
+     * Compressed TAR archive, which uses a file packaged using
+       the Unix tar and gzip commands. To use this method, you
+       will need to open a Terminal window. You do not need
        administrator privileges using this method, as you can
        install the MySQL server anywhere using this method. For
        more information on using this method, you can use the
        generic instructions for using a tarball, Section 2.2,
        "Installing MySQL on Unix/Linux Using Generic Binaries."
        In addition to the core installation, the Package
-       Installer also includes Section 2.4.4, "Installing the
-       MySQL Startup Item" and Section 2.4.5, "Installing and
+       Installer also includes Section 2.4.3, "Installing a
+       MySQL Launch Daemon" and Section 2.4.4, "Installing and
        Using the MySQL Preference Pane," both of which simplify
        the management of your installation.
 
@@ -3334,10 +3351,12 @@ C:\> C:\mysql\bin\mysqld --remove
 
    You should keep the following issues and notes in mind:
 
-     * OS X 10.4 deprecated startup items in favor of launchd
-       daemons, and as of OS X 10.10 (Yosemite), startup items
-       do not function. For these reasons, using launchd daemons
-       is preferred over startup items.
+     * As of MySQL server 5.6.26, the DMG bundles a launchd
+       daemon instead of the deprecated startup item. Startup
+       items do not function as of OS X 10.10 (Yosemite), so
+       using launchd is preferred. The available MySQL
+       preference pane under OS X System Preferences was also
+       updated to use launchd.
 
      * You may need (or want) to create a specific mysql user to
        own the MySQL directory and data. You can do this through
@@ -3345,30 +3364,6 @@ C:\> C:\mysql\bin\mysqld --remove
        exist. For use in single user mode, an entry for _mysql
        (note the underscore prefix) should already exist within
        the system /etc/passwd file.
-
-     * If you get an "insecure startup item disabled" error when
-       MySQL launches, use the following procedure. Adjust the
-       pathnames appropriately for your system.
-
-         1. Modify the mysql.script using this command (enter it
-            on a single line):
-shell> sudo /Applications/TextEdit.app/Contents/MacOS/TextEdit
-  /usr/local/mysql/support-files/mysql.server
-
-
-         2. Locate the option file that defines the basedir
-            value and modify it to contain these lines:
-basedir=/usr/local/mysql
-datadir=/usr/local/mysql/data
-
-            In the /Library/StartupItems/MySQLCOM/ directory,
-            make the following group ID changes from staff to
-            wheel:
-shell> sudo chgrp wheel MySQLCOM StartupParameters.plist
-
-
-         3. Start the server from System Preferences or
-            Terminal.app.
 
      * Because the MySQL package installer installs the MySQL
        contents into a version and platform specific directory,
@@ -3417,20 +3412,20 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
 
    Before proceeding with the installation, be sure to stop all
    running MySQL server instances by using either the MySQL
-   Manager Application (on OS X Server) or mysqladmin shutdown
-   on the command line.
+   Manager Application (on OS X Server), the preference pane, or
+   mysqladmin shutdown on the command line.
 
    When installing from the package version, you can also
-   install the MySQL Preference Pane, which will enable you to
+   install the MySQL preference pane, which will enable you to
    control the startup and execution of your MySQL server from
-   System Preferences. For more information, see Section 2.4.5,
+   System Preferences. For more information, see Section 2.4.4,
    "Installing and Using the MySQL Preference Pane."
 
    When installing using the package installer, the files are
    installed into a directory within /usr/local matching the
    name of the installation version and platform. For example,
-   the installer file mysql-5.6-osx10.8-x86_64.dmg installs
-   MySQL into /usr/local/mysql-5.6-osx10.8-x86_64/ . The
+   the installer file mysql-5.6.28-osx10.9-x86_64.dmg installs
+   MySQL into /usr/local/mysql-5.6.28-osx10.9-x86_64/ . The
    following table shows the layout of the installation
    directory.
 
@@ -3464,8 +3459,8 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
     2. Double-click the MySQL installer package. It will be
        named according to the version of MySQL you have
        downloaded. For example, if you have downloaded MySQL
-       server 5.6.27, double-click
-       mysql-5.6.27-osx-10.8-x86_64.pkg.
+       server 5.6.28, double-click
+       mysql-5.6.28-osx-10.9-x86_64.pkg.
 
     3. You will be presented with the opening installer dialog.
        Click Continue to begin installation.
@@ -3480,16 +3475,11 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
     5. From the Installation Type page you can either click
        Install to execute the installation wizard using all
        defaults, click Customize to alter which components to
-       install (MySQL server, Startup Item, Preference Pane --
-       all enabled by default), or click Change Installation
+       install (MySQL server, Preference Pane, Launchd Support
+       -- all enabled by default), or click Change Installation
        Location to change the type of installation for either
        all users, only the user executing the Installer, or
        define a custom location.
-       Note
-       OS X 10.4 deprecated startup items in favor of launchd
-       daemons, and as of OS X 10.10 (Yosemite), startup items
-       do not function. For these reasons, launchd daemons are
-       preferred over startup items.
        Figure 2.43 MySQL Package Installer: Installation Type
        MySQL Package Installer: Installation Type
        Figure 2.44 MySQL Package Installer: Destination Select
@@ -3508,149 +3498,102 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
        Figure 2.46 MySQL Package Installer: Summary
        MySQL Package Installer: Summary
 
-   For convenience, you may also want to install a launch daemon
-   and preference pane. See Section 2.4.3, "Installing a MySQL
-   Launch Daemon," and Section 2.4.5, "Installing and Using the
-   MySQL Preference Pane."
+   MySQL server is now installed, but it is not loaded (started)
+   by default. Use either launchctl from the command dline, or
+   start MySQL by clicking "Start" using the MySQL preference
+   pane. For additional information, see Section 2.4.3,
+   "Installing a MySQL Launch Daemon," and Section 2.4.4,
+   "Installing and Using the MySQL Preference Pane."
 
 2.4.3 Installing a MySQL Launch Daemon
 
    OS X uses launch daemons to automatically start, stop, and
-   manage processes and applications such as MySQL. Using launch
-   daemons is recommended over startup items on OS X.
+   manage processes and applications such as MySQL.
    Note
 
-   OS X 10.4 deprecated startup items in favor of launchd
-   daemons, and as of OS X 10.10 (Yosemite), startup items do
-   not function. For these reasons, using launchd daemons is
-   preferred over startup items.
+   Before MySQL 5.6.26, the OS X builds installed startup items
+   instead of launchd daemons. However, startup items do not
+   function as of OS X 10.10 (Yosemite). The OS X builds now
+   install launchd daemons.
 
-   Here is an example launchd file that starts MySQL:
+   By default, the installation package (DMG) on OS X installs a
+   launchd file named
+   /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist that
+   contains a plist definition similar to:
 
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-  <dict>
-    <key>KeepAlive</key>
-    <true/>
-    <key>Label</key>
-    <string>com.mysql.mysqld</string>
+<dict>
+    <key>Label</key>             <string>com.oracle.oss.mysql.mysqld</
+string>
+    <key>ProcessType</key>       <string>Interactive</string>
+    <key>Disabled</key>          <false/>
+    <key>RunAtLoad</key>         <true/>
+    <key>KeepAlive</key>         <true/>
+    <key>SessionCreate</key>     <true/>
+    <key>LaunchOnlyOnce</key>    <false/>
+    <key>UserName</key>          <string>_mysql</string>
+    <key>GroupName</key>         <string>_mysql</string>
+    <key>ExitTimeOut</key>       <integer>600</integer>
+    <key>Program</key>           <string>/usr/local/mysql/bin/mysqld</
+string>
     <key>ProgramArguments</key>
-    <array>
-    <string>/usr/local/mysql/bin/mysqld_safe</string>
-    <string>--user=mysql</string>
-    </array>
-  </dict>
+        <array>
+            <string>/usr/local/mysql/bin/mysqld</string>
+            <string>--user=_mysql</string>
+            <string>--basedir=/usr/local/mysql</string>
+            <string>--datadir=/usr/local/mysql/data</string>
+            <string>--plugin-dir=/usr/local/mysql/lib/plugin</string>
+            <string>--log-error=/usr/local/mysql/data/mysqld.local.err
+</string>
+            <string>--pid-file=/usr/local/mysql/data/mysqld.local.pid<
+/string>
+            <string>--port=3306</string>
+        </array>
+    <key>WorkingDirectory</key>  <string>/usr/local/mysql</string>
+</dict>
 </plist>
 
 
-   Adjust the ProgramArguments array according to your system,
-   as for example your path to mysqld_safe might be different.
-   After making the proper adjustments, do the following:
+   Note
 
-     * Save the XML as a file named
-       /Library/LaunchDaemons/com.mysql.mysql.plist
+   Some users report that adding a plist DOCTYPE declaration
+   causes the launchd operation to fail, despite it passing the
+   lint check. We suspect it's a copy-n-paste error. The md5
+   checksum of a file containing the above snippet is
+   60d7963a0bb2994b69b8b9c123db09df.
 
-     * Adjust the file permissions using the Apple recommended
-       owner "root", owning group "wheel", and file permissions
-       "644"
-shell> sudo chown root:wheel /Library/LaunchDaemons/com.mysql.mysql.pl
-ist
-shell> sudo chmod 644 /Library/LaunchDaemons/com.mysql.mysql.plist
+   To enable the launchd service, you can either:
 
+     * Click Start MySQL Server from the MySQL preference pane.
+       Figure 2.47 MySQL Preference Pane: Location
+       MySQL Preference Pane: Location
+       Figure 2.48 MySQL Preference Pane: Usage
+       MySQL Preference Pane: Usage
 
-     * Enable this new MySQL service
-shell> sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql.p
-list
-
-   The MySQL daemon will automatically start because we used the
-   KeepAlive option, and it will automatically start when the
-   host is rebooted because we loaded the launch daemon.
-
-   Additional launchd related commands include:
-// Stop and uninstall (unload) the MySQL launch daemon
-shell> sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysql
-.plist
-
-// Stop the service but keep it installed (MySQL will start after rebo
-ot)
-shell> sudo launchctl stop com.mysql.mysql
-
-// Start the service but don't install the launch daemon
-shell> sudo launchctl start com.mysql.mysql
+     * Or, manually load the launchd file.
+shell> cd /Library/LaunchDaemons
+shell> sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
 
    Note
 
-   The "load" and "unload" commands either install or uninstall
-   the daemon, whereas the "start" and "stop" commands only
-   start or stop the daemon. Loading will also start the daemon
-   if the launchd file is configured with KeepAlive or RunAtLoad
-   enabled, and unloading also stops the daemon.
+   When upgrading MySQL server, the launchd installation process
+   will remove the old startup items that were installed with
+   MySQL server 5.6.25 and below.
 
-2.4.4 Installing the MySQL Startup Item
-
-   The MySQL Installation Package includes a startup item that
-   can be used to automatically start and stop MySQL.
-   Important
-
-   Startup items are deprecated in favor of launchd daemons. For
-   additional information, see Section 2.4.3, "Installing a
-   MySQL Launch Daemon."
-
-   To install the MySQL Startup Item:
-
-    1. Download and open the MySQL package installer, which is
-       provided on a disk image (.dmg) that includes the main
-       MySQL installation package.
-       Note
-       Previously, the OS X packages included separate
-       MySQLStartupItem.pkg and MySQL.prefPane files. They have
-       since been merged into the main package file.
-       Figure 2.47 MySQL Package Installer: DMG Contents
-       MySQL Package Installer: DMG Contents
-
-    2. Go through the process of installing the MySQL server as
-       described in the documentation at Section 2.4.2,
-       "Installing MySQL on OS X Using Native Packages."
-
-    3. Click Customize at the Installation Type step. The
-       "Startup Item" option is listed there and enabled by
-       default.
-       Figure 2.48 MySQL Installer on OS X: Customize
-       MySQL Installer on OS X: Customize
-
-    4. Complete the MySQL server installation process.
-
-   The Startup Item for MySQL is installed into
-   /Library/StartupItems/MySQLCOM. The Startup Item installation
-   adds a variable MYSQLCOM=-YES- to the system configuration
-   file /etc/hostconfig. If you want to disable the automatic
-   startup of MySQL, change this variable to MYSQLCOM=-NO-.
-   Note
-
-   Deselecting Automatically Start MySQL Server on Startup from
-   the MySQL Preference Pane sets the MYSQLCOM variable to -NO-.
-
-   After the installation, you can start and stop the MySQL
-   server from the MySQL Preference Pane (preferred), or by
-   running the following commands in a terminal window. You must
-   have administrator privileges to perform these tasks, and you
-   may be prompted for your password.
-
-   If you have installed the Startup Item, use this command to
-   start the server:
-shell> sudo /Library/StartupItems/MySQLCOM/MySQLCOM start
-
-   If you have installed the Startup Item, use this command to
-   stop the server:
-shell> sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop
-
-2.4.5 Installing and Using the MySQL Preference Pane
+2.4.4 Installing and Using the MySQL Preference Pane
 
    The MySQL Installation Package includes a MySQL preference
-   Pane that enables you to start, stop, and control automated
+   pane that enables you to start, stop, and control automated
    startup during boot of your MySQL installation.
+
+   This preference pane is installed by default, and is listed
+   under your system's System Preferences window.
+
+   Figure 2.49 MySQL Preference Pane: Location
+   MySQL Preference Pane: Location
 
    To install the MySQL Preference Pane:
 
@@ -3658,10 +3601,10 @@ shell> sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop
        provided on a disk image (.dmg) that includes the main
        MySQL installation package.
        Note
-       Previously, the OS X packages included separate
-       MySQLStartupItem.pkg and MySQL.prefPane files. They have
-       since been merged into the main package file.
-       Figure 2.49 MySQL Package Installer: DMG Contents
+       Before MySQL 5.6.26, OS X packages included the
+       deprecated startup items instead of launchd daemons, and
+       the preference pane managed that intstead of launchd.
+       Figure 2.50 MySQL Package Installer: DMG Contents
        MySQL Package Installer: DMG Contents
 
     2. Go through the process of installing the MySQL server, as
@@ -3671,26 +3614,29 @@ shell> sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop
     3. Click Customize at the Installation Type step. The
        "Preference Pane" option is listed there and enabled by
        default.
-       Figure 2.50 MySQL Installer on OS X: Customize
+       Figure 2.51 MySQL Installer on OS X: Customize
        MySQL Installer on OS X: Customize
 
     4. Complete the MySQL server installation process.
 
    Note
 
-   The MySQL Preference Pane only starts and stops MySQL
+   The MySQL preference pane only starts and stops MySQL
    installation installed from the MySQL package installation
    that have been installed in the default location.
 
-   Once the MySQL Preference Pane has been installed, you can
+   Once the MySQL preference pane has been installed, you can
    control your MySQL server instance using the preference pane.
    To use the preference pane, open the System Preferences...
    from the Apple menu. Select the MySQL preference pane by
    clicking the MySQL logo within the bottom section of the
    preference panes list.
 
-   Figure 2.51 MySQL Preference Pane: Location
+   Figure 2.52 MySQL Preference Pane: Location
    MySQL Preference Pane: Location
+
+   Figure 2.53 MySQL Preference Pane: Usage
+   MySQL Preference Pane: Usage
 
    The MySQL Preference Pane shows the current status of the
    MySQL server, showing stopped (in red) if the server is not
@@ -3802,7 +3748,7 @@ shell> sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop
    (http://dev.mysql.com/downloads/repo/yum/) for the
    above-mentioned platforms provides RPM packages for
    installing the MySQL server, client, MySQL Workbench, MySQL
-   Utilities, Connector/ODBC, and Connector/Python (not all the
+   Utilities, Connector/ODBC, and Connector/Python (not all
    packages are available for all the platforms; see Section
    2.5.1, "" for details).
 
@@ -4258,7 +4204,7 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
 
    The recommended way to install MySQL on RPM-based Linux
    distributions that use glibc is by using the RPM packages
-   provided by MySQL. There are two sources for obtaining the
+   provided by Oracle. There are two sources for obtaining the
    Community versions of the RPM packages:
 
      * From the MySQL software repositories, for the following
@@ -4275,11 +4221,11 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
 
      * From the MySQL Downloads page
        (http://dev.mysql.com/downloads/) in the MySQL Developer
-       Zone (http://dev.mysql.com/), on which we provide various
-       RPM packages that work for different platforms.
+       Zone (http://dev.mysql.com/), which provides RPM packages
+       that work for different platforms.
 
-   The discussions in this section only apply to the RPM
-   packages directly downloaded from the MySQL Developer Zone.
+   The discussion in this section applies only to the RPM
+   packages downloaded from the MySQL Developer Zone.
    Installations created with these packages result in files
    under the system directories shown in the following table.
 
@@ -4300,17 +4246,17 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
    Note
 
    RPM distributions of MySQL are also provided by other
-   vendors. Be aware that they may differ from those built by us
-   in features, capabilities, and conventions (including
+   vendors. Be aware that they may differ from those built by
+   Oracle in features, capabilities, and conventions (including
    communication setup), and that the instructions in this
    manual do not necessarily apply to installing them. The
    vendor's instructions should be consulted instead. Because of
-   these differences, RPM packages built by us check whether
+   these differences, RPM packages built by Oracle check whether
    such RPMs built by other vendors are installed. If so, the
    RPM does not install and produces a message explaining this.
 
    Conflicts can arise when an RPM from another vendor is
-   already installed, such as when a vendor's convention about
+   already installed, such as when a vendor's conventions about
    which files belong with the server and which belong with the
    client library differ from the breakdown used for Oracle
    packages. In such cases, attempts to install an Oracle RPM
@@ -4318,32 +4264,33 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
    be installed conflict with files from an installed package
    (denoted mysql-libs in the following paragraphs).
 
-   We provide a MySQL-shared-compat package with each MySQL
-   release. This package is meant to replace mysql-libs and
-   provides a replacement-compatible client library for older
-   MySQL series. MySQL-shared-compat is set up to make
-   mysql-libs obsolete, but rpm explicitly refuses to replace
-   obsoleted packages when invoked with -i (unlike -U), which is
-   why installation with rpm -i produces a conflict.
+   Each MySQL release provides a MySQL-shared-compat package
+   that is meant to replace mysql-libs and provides a
+   replacement-compatible client library for older MySQL series.
+   MySQL-shared-compat is set up to make mysql-libs obsolete,
+   but rpm explicitly refuses to replace obsoleted packages when
+   invoked with -i (unlike -U), which is why installation with
+   rpm -i produces a conflict.
 
    MySQL-shared-compat can safely be installed alongside
    mysql-libs because libraries are installed to different
-   locations. Therefore, it is possible to install shared-compat
-   first, then manually remove mysql-libs before continuing with
-   the installation. After mysql-libs is removed, the dynamic
-   linker stops looking for the client library in the location
-   where mysql-libs puts it, and the library provided by the
-   MySQL-shared-compat package takes over.
+   locations. Therefore, it is possible to install
+   MySQL-shared-compat first, then manually remove mysql-libs
+   before continuing with the installation. After mysql-libs is
+   removed, the dynamic linker stops looking for the client
+   library in the location where mysql-libs puts it, and the
+   library provided by the MySQL-shared-compat package takes
+   over.
 
    Another alternative is to install packages using yum. In a
    directory containing all RPM packages for a MySQL release,
    yum install MySQL*rpm installs them in the correct order and
    removes mysql-libs in one step without conflicts.
 
-   In most cases, you need to install only the MySQL-server and
-   MySQL-client packages to get a functional MySQL installation.
-   The other packages are not required for a standard
-   installation.
+   In most cases, you need install only the MySQL-server and
+   MySQL-client packages to get a functional standard MySQL
+   installation. The other packages are not required for a
+   standard installation.
 
    As of MySQL 5.6.8, new RPM install operations (not upgrades)
    invoke mysql_install_db with the --random-passwords option
@@ -4353,16 +4300,16 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
    "password expired" flag for those accounts, and not create
    anonymous-user MySQL accounts. It will be necessary after
    installation to start the server, connect as root using the
-   password written to the $HOME/.mysql_secret file, and assign
-   a new root password. Until this is done, root cannot do
-   anything else. This must be done for each root account you
-   intend to use. To change the password, you can use the SET
-   PASSWORD statement (for example, with the mysql client). You
-   can also use mysqladmin or mysql_secure_installation. For
-   additional details, see Section 4.4.3, "mysql_install_db ---
-   Initialize MySQL Data Directory." (Install operations using
-   RPMs for Unbreakable Linux Network are unaffected because
-   they do not use mysql_install_db.)
+   initial random password, and assign a new root password.
+   Until this is done, root cannot do anything else. This must
+   be done for each root account you intend to use. To change
+   the password, you can use the SET PASSWORD statement (for
+   example, with the mysql client). You can also use mysqladmin
+   or mysql_secure_installation. For additional details, see
+   Section 4.4.3, "mysql_install_db --- Initialize MySQL Data
+   Directory." (Install operations using RPMs for Unbreakable
+   Linux Network are unaffected because they do not use
+   mysql_install_db.)
    Important
 
    RPMs for MySQL Cluster.  Standard MySQL server RPMs built by
@@ -4376,9 +4323,9 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
 
    For upgrades, if your installation was originally produced by
    installing multiple RPM packages, it is best to upgrade all
-   the packages, not just some. For example, if you previously
-   installed the server and client RPMs, do not upgrade just the
-   server RPM.
+   the installed packages, not just some. For example, if you
+   previously installed the server and client RPMs, do not
+   upgrade just the server RPM.
 
    If the data directory exists at RPM installation time, the
    installation process does not modify existing data. This has
@@ -4392,13 +4339,13 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
    which includes the shared libraries for older releases for
    backward compatibility.
 
-   The RPM packages shown in the following list are available.
-   The names shown here use a suffix of
-   .linux_glibc2.5.i386.rpm, but particular packages can have
-   different suffixes, described later. If you plan to install
-   multiple RPM packages, you may wish to download the RPM
-   Bundle tar file instead, which contains multiple RPM packages
-   to that you need not download them separately.
+   The following list shows the available RPM packages. The
+   names shown here use a suffix of .linux_glibc2.5.i386.rpm,
+   but particular packages can have different suffixes,
+   described later. If you plan to install multiple RPM
+   packages, you may wish to download the RPM Bundle tar file
+   instead, which contains multiple RPM packages so that you
+   need not download them separately.
 
      * MySQL-server-VERSION.linux_glibc2.5.i386.rpm
        The MySQL server. You need this unless you only want to
@@ -4409,10 +4356,9 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
        want to install this package.
 
      * MySQL-devel-VERSION.linux_glibc2.5.i386.rpm
-       The libraries and include files that are needed if to
-       compile other MySQL clients, such as the Perl modules.
-       Install this RPM if you intend to compile C API
-       applications.
+       The libraries and include files needed to compile other
+       MySQL clients, such as the Perl MySQL module. Install
+       this RPM if you intend to compile C API applications.
 
      * MySQL-shared-VERSION.linux_glibc2.5.i386.rpm
        This package contains the shared libraries
@@ -4451,8 +4397,8 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
        packages. It can also be used to rebuild the RPMs on
        other architectures (for example, Alpha or SPARC).
 
-   The suffix of RPM package names (following the VERSION value)
-   has the following syntax:
+   In RPM package names, the suffix (following the VERSION
+   value) has the following syntax:
 .PLATFORM.CPU.rpm
 
    The PLATFORM and CPU values indicate the type of system for
@@ -4464,7 +4410,7 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
    independent or intended for a specific platform, as shown in
    the following table.
 
-   Table 2.7 MySQL Linux Installation Packages
+   Table 2.7 MySQL Linux RPM Package Platforms
    PLATFORM Value Intended Use
    linux_glibc25 Platform independent, should run on any Linux
    distribution that supports glibc 2.5
@@ -4476,17 +4422,17 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
    currently.
 
    The CPU value indicates the processor type or family for
-   which the package is built.
+   which the package is built, as shown in the following table.
 
-   Table 2.8 MySQL Installation Packages for Linux CPU
-   Identifiers
+   Table 2.8 MySQL Linux RPM Package CPU Identifiers
       CPU Value      Intended Processor Type or Family
    i386, i586, i686 Pentium processor or better, 32 bit
    x86_64           64-bit x86 processor
    ia64             Itanium (IA-64) processor
 
    To see all files in an RPM package (for example, a
-   MySQL-server RPM), run a command like this:
+   MySQL-server RPM), run a command like this (modify the
+   platform and CPU identifiers appropriately for your system):
 shell> rpm -qpl MySQL-server-VERSION.linux_glibc2.5.i386.rpm
 
    To perform a standard minimal installation, install the
@@ -4510,48 +4456,48 @@ shell> rpm -i MySQL-client-VERSION.linux_glibc2.5.i386.rpm
    /etc/init.d/ to start the server automatically at boot time.
    (This means that if you have performed a previous
    installation and have made changes to its startup script, you
-   may want to make a copy of the script so that you do not lose
-   it when you install a newer RPM.) See Section 2.10.5,
-   "Starting and Stopping MySQL Automatically," for more
+   may want to make a copy of the script so that you can
+   reinstall it after you install a newer RPM.) See Section
+   2.10.5, "Starting and Stopping MySQL Automatically," for more
    information on how MySQL can be started automatically on
    system startup.
 
-   In MySQL 5.6, during a new installation, the server boot
-   scripts are installed, but the MySQL server is not started at
-   the end of the installation, since the status of the server
-   during an unattended installation is not known.
+   In MySQL 5.6, for a new installation using RPM packages, the
+   server boot scripts are installed, but the MySQL server is
+   not started at the end of the installation, since the status
+   of the server during an unattended installation is not known.
 
-   In MySQL 5.6, during an upgrade installation using the RPM
-   packages, if the MySQL server is running when the upgrade
-   occurs, the MySQL server is stopped, the upgrade occurs, and
-   the MySQL server is restarted. If the MySQL server is not
-   already running when the RPM upgrade occurs, the MySQL server
-   is not started at the end of the installation.
+   In MySQL 5.6, for an upgrade installation using RPM packages,
+   if the MySQL server is running when the upgrade occurs, the
+   MySQL server is stopped, the upgrade occurs, and the MySQL
+   server is restarted. If the MySQL server is not already
+   running when the RPM upgrade occurs, the MySQL server is not
+   started at the end of the installation.
    Note
 
-   If you are upgrading from a community version to a commercial
-   version of MySQL (which actually requires you to first
-   uninstall the community version and then install the
-   commercial version), you must restart the server manually
-   after the upgrade.
+   Upgrading from a community version to a commercial version of
+   MySQL requires that you first uninstall the community version
+   and then install the commercial version. In this case, you
+   must restart the server manually after the upgrade.
 
    If something goes wrong, you can find more information in the
    binary installation section. See Section 2.2, "Installing
    MySQL on Unix/Linux Using Generic Binaries."
    Note
 
-   The accounts that are listed in the MySQL grant tables
-   initially have no passwords. After starting the server, you
-   should set up passwords for them using the instructions in
-   Section 2.10, "Postinstallation Setup and Testing."
+   The accounts created in the MySQL grant tables for an RPM
+   installation initially have no passwords. After starting the
+   server, you should assign passwords to them using the
+   instructions in Section 2.10, "Postinstallation Setup and
+   Testing."
 
-   During RPM installation, a user named mysql and a group named
-   mysql are created on the system. This is done using the
-   useradd, groupadd, and usermod commands. Those commands
-   require appropriate administrative privileges, which is
-   required for locally managed users and groups (as listed in
-   the /etc/passwd and /etc/group files) by the RPM installation
-   process being run by root.
+   An RPM installation creates a user named mysql and a group
+   named mysql on the system using the useradd, groupadd, and
+   usermod commands. Those commands require appropriate
+   administrative privileges, which is required for locally
+   managed users and groups (as listed in the /etc/passwd and
+   /etc/group files) by the RPM installation process being run
+   by root.
 
    If you log in as the mysql user, you may find that MySQL
    displays "Invalid (old?) table or database name" errors that
@@ -4590,9 +4536,8 @@ shell> rpm -i MySQL-client-VERSION.linux_glibc2.5.i386.rpm
    is possible to install using yum:
 shell> yum install MySQL-server-NEWVERSION.linux_glibc2.5.i386.rpm
 
-   For upgrades to MySQL 5.6.11 or later, the upgrade is
-   performed by removing the old installation and installing the
-   new one. To do this, use the following procedure:
+   For upgrades to MySQL 5.6.11 or later, perform the upgrade by
+   removing the old installation and installing the new one:
 
     1. Remove the existing 5.6.X installation. OLDVERSION is the
        version to remove.
@@ -4853,7 +4798,6 @@ Installed:
 Dependency Installed:
   perl-DBD-MySQL.x86_64 0:4.017-1.fc13
 
-
 Complete!
 
        MySQL and the MySQL server should now be installed. A
@@ -4928,7 +4872,6 @@ Get: 1 http://gb.archive.ubuntu.com jaunty-updates/main mysql-common 5
 Get: 2 http://gb.archive.ubuntu.com jaunty-updates/main libmysqlclient
 15off 5.1.30really5.0.75-0ubuntu10.5 [1843kB]
 Fetched 1907kB in 9s (205kB/s)
-
 Preconfiguring packages ...
 Selecting previously deselected package mysql-common.
 (Reading database ... 121260 files and directories currently installed
@@ -5150,16 +5093,16 @@ Error in accept: Protocol error
    To use this package, download the corresponding
    mysql-VERSION-solaris10-PLATFORM.pkg.gz file, then uncompress
    it. For example:
-shell> gunzip mysql-5.6.27-solaris10-x86_64.pkg.gz
+shell> gunzip mysql-5.6.28-solaris10-x86_64.pkg.gz
 
    To install a new package, use pkgadd and follow the onscreen
    prompts. You must have root privileges to perform this
    operation:
-shell> pkgadd -d mysql-5.6.27-solaris10-x86_64.pkg
+shell> pkgadd -d mysql-5.6.28-solaris10-x86_64.pkg
 
 The following packages are available:
   1  mysql     MySQL Community Server (GPL)
-               (i86pc) 5.6.27
+               (i86pc) 5.6.28
 
 Select package(s) you wish to process (or 'all' to process
 all packages). (default: all) [?,??,q]:
@@ -5198,7 +5141,7 @@ shell> ln /etc/init.d/mysql /etc/rc0.d/K02mysql
    support files. The typical upgrade sequence is therefore:
 shell> mysqladmin shutdown
 shell> pkgrm mysql
-shell> pkgadd -d mysql-5.6.27-solaris10-x86_64.pkg
+shell> pkgadd -d mysql-5.6.28-solaris10-x86_64.pkg
 shell> mysqld_safe &
 shell> mysql_upgrade
 
@@ -5367,7 +5310,7 @@ Source Installation Methods
        files, Zip archives, or RPM packages. Distribution files
        have names of the form mysql-VERSION.tar.gz,
        mysql-VERSION.zip, or mysql-VERSION.rpm, where VERSION is
-       a number like 5.6.27. File names for source distributions
+       a number like 5.6.28. File names for source distributions
        can be distinguished from those for precompiled binary
        distributions in that source distribution names are
        generic and include no platform name, whereas binary
@@ -6166,6 +6109,8 @@ shell> ccmake .
    with this option. If this option was not used to build it,
    the management server's default port is 1186. [none]
    WITH_NDB_TEST Include NDB API test programs. OFF
+   WITH_NDBCLUSTER Build the NDB storage engine; alias for
+   WITH_NDBCLUSTER_STORAGE_ENGINE ON
    WITH_NDBCLUSTER_STORAGE_ENGINE Build the NDB storage engine
    ON
    WITH_NDBMTD Build multi-threaded data node. ON
@@ -6706,11 +6651,11 @@ CMake Options for Compiling MySQL Cluster
    with the MySQL Cluster sources; they are not currently
    supported when using sources from the MySQL 5.6 Server tree.
 
-     * -DMEMCACHED_HOME=path
+     * -DMEMCACHED_HOME=dir_name
        Perform the build using the memcached (version 1.6 or
        later) installed in the system directory indicated by
-       path. Files from this installation that are used in the
-       build include the memcached binary, header files, and
+       dir_name. Files from this installation that are used in
+       the build include the memcached binary, header files, and
        libraries, as well as the memcached_utilities library and
        the header file engine_testapp.h.
        You must leave this option unset when building
@@ -7410,7 +7355,7 @@ Can't start server: Bind on unix socket...
 
      * If you cannot get mysqld to start, try to make a trace
        file to find the problem by using the --debug option. See
-       Section 24.4.3, "The DBUG Package."
+       Section 24.5.3, "The DBUG Package."
 
 2.10.3 Testing the Server
 
@@ -7446,10 +7391,10 @@ Enter password: (enter root password here)
    on your platform and version of MySQL, but should be similar
    to that shown here:
 shell> bin/mysqladmin version
-mysqladmin  Ver 14.12 Distrib 5.6.27, for pc-linux-gnu on i686
+mysqladmin  Ver 14.12 Distrib 5.6.28, for pc-linux-gnu on i686
 ...
 
-Server version          5.6.27
+Server version          5.6.28
 Protocol version        10
 Connection              Localhost via UNIX socket
 UNIX socket             /var/lib/mysql/mysql.sock
@@ -7853,7 +7798,7 @@ mysql> DROP DATABASE test;
        2.4.3, "Installing a MySQL Launch Daemon." A MySQL
        Preference Pane also provides control for starting and
        stopping MySQL through the System Preferences. See
-       Section 2.4.5, "Installing and Using the MySQL Preference
+       Section 2.4.4, "Installing and Using the MySQL Preference
        Pane."
 
      * On Solaris/OpenSolaris, use the service management
@@ -8505,7 +8450,9 @@ CREATE TABLE t1 (a INT)
        MySQL 5.6.4 differs from storage required for tables
        created in 5.6.4 and later. This is due to a change in
        5.6.4 that permits these temporal types to have a
-       fractional part. After upgrading from MySQL 5.5 to MySQL
+       fractional part. This change can affect the output of
+       statements that depend on the row format, such as
+       CHECKSUM TABLE. After upgrading from MySQL 5.5 to MySQL
        5.6.4 or later, it is recommended that you also upgrade
        from MySQL 5.5 to MySQL 5.6 TIME, DATETIME, and TIMESTAMP
        types. ALTER TABLE currently allows the creation of

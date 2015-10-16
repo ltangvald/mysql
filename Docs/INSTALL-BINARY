@@ -17,7 +17,7 @@
 
    MySQL compressed tar file binary distributions have names of
    the form mysql-VERSION-OS.tar.gz, where VERSION is a number
-   (for example, 5.6.27), and OS indicates the type of operating
+   (for example, 5.6.28), and OS indicates the type of operating
    system for which the distribution is intended (for example,
    pc-linux-i686 or winx64).
    Warning
@@ -412,8 +412,8 @@ Additional Installation Information
    Archive distributions (but not MSI distributions) of MySQL.
 
      * MySQL Installer: This package has a file name similar to
-       mysql-installer-community-5.6.27.0.msi or
-       mysql-installer-commercial-5.6.27.0.msi, and utilizes
+       mysql-installer-community-5.6.28.0.msi or
+       mysql-installer-commercial-5.6.28.0.msi, and utilizes
        MSIs to automatically install MySQL server and other
        products. It will download and apply updates to itself,
        and for each of the installed products. It also
@@ -437,8 +437,8 @@ Additional Installation Information
        Microsoft Windows Using MySQL Installer."
 
      * The Noinstall Archive: This package has a file name
-       similar to mysql-5.6.27-win32.zip or
-       mysql-5.6.27-winx64.zip, and contains all the files found
+       similar to mysql-5.6.28-win32.zip or
+       mysql-5.6.28-winx64.zip, and contains all the files found
        in the Complete install package, with the exception of
        the GUI. It also contains PDB files. This package does
        not include an automated installer, and must be manually
@@ -1031,6 +1031,11 @@ Upgrade   - Upgrades one or more of your installed programs.
 
    MySQLInstallerConsole supports the following options, which
    are specified on the command line:
+   Note
+
+   Configuration block values that contain a colon (":") must be
+   wrapped in double quotes. For example,
+   installdir="C:\MySQL\MySQL Server 5.6".
 
      * configure [product1]:[setting]=[value];
        [product2]:[setting]=[value]; [...]
@@ -1087,6 +1092,9 @@ C:\> MySQLInstallerConsole help install
             can include either a "config" or "user" type key,
             where "config" is the default type if one is not
             defined.
+            Configuration block values that contain a colon
+            (":") must be wrapped in double quotes. For example,
+            installdir="C:\MySQL\MySQL Server 5.6".
             Only one "config" type block can be defined per
             product. A "user" block should be defined for each
             user that should be created during the product's
@@ -1098,9 +1106,18 @@ C:\> MySQLInstallerConsole help install
           + [feature]: The feature block is a semicolon
             separated list of features, or '*' to select all
             features.
-C:\> MySQLInstallerConsole install server;5.6.22:*:port=3307;serverid=
+C:\> MySQLInstallerConsole install server;5.6.25:*:port=3307;serverid=
 2:type=user;username=foo;password=bar;role=DBManager
-C:\> MySQLInstallerConsole install server;5.6.22;x64 -silent
+C:\> MySQLInstallerConsole install server;5.6.25;x64 -silent
+
+       An example that passes in additional configuration
+       blocks, broken up by ^ to fit this screen:
+C:\> MySQLInstallerConsole install server;5.6.25;x64:*:type=config;ope
+nfirewall=true; ^
+          generallog=true;binlog=true;serverid=3306;enable_tcpip=true;
+port=3306;rootpasswd=pass; ^
+          installdir="C:\MySQL\MySQL Server 5.6":type=user;datadir="C:
+\MySQL\data";username=foo;password=bar;role=DBManager
 
 
      * list
@@ -1155,9 +1172,9 @@ C:\> MySQLInstallerConsole status
 
           + -silent : Disable confirmation prompts.
 C:\> MySQLInstallerConsole upgrade *
-C:\> MySQLInstallerConsole upgrade workbench:6.2.2
+C:\> MySQLInstallerConsole upgrade workbench:6.3.5
 C:\> MySQLInstallerConsole upgrade workbench:!
-C:\> MySQLInstallerConsole upgrade workbench:6.2.2 excel:1.3.2
+C:\> MySQLInstallerConsole upgrade workbench:6.3.5 excel:1.3.2
 
 
      * update
@@ -1862,7 +1879,7 @@ InnoDB: foreign key constraint system tables created
    something like this, which indicates that the server is ready
    to service client connections:
 mysqld: ready for connections
-Version: '5.6.27'  socket: ''  port: 3306
+Version: '5.6.28'  socket: ''  port: 3306
 
    The server continues to write to the console any further
    diagnostic output it produces. You can open a new console
@@ -1929,7 +1946,7 @@ shutdown
    The last option is to start mysqld with the --standalone and
    --debug options. In this case, mysqld writes a log file
    C:\mysqld.trace that should contain the reason why mysqld
-   doesn't start. See Section 24.4.3, "The DBUG Package."
+   doesn't start. See Section 24.5.3, "The DBUG Package."
 
    Use mysqld --verbose --help to display all the options that
    mysqld supports.
