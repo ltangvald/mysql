@@ -1,4 +1,4 @@
-mysql-5.6 (5.6.26-1) UNRELEASED; urgency=medium
+mysql-5.6 (5.6.27-1) UNRELEASED; urgency=medium
 
   [ Lars Tangvald ]
   * Cleaned up some redundancies in debian/copyright
