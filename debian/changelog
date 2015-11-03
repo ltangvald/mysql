@@ -1,4 +1,4 @@
-mysql-5.6 (5.6.27-1) UNRELEASED; urgency=medium
+mysql-5.6 (5.6.27-1) unstable; urgency=medium
 
   [ Lars Tangvald ]
   * Cleaned up some redundancies in debian/copyright
@@ -17,7 +17,7 @@ mysql-5.6 (5.6.27-1) UNRELEASED; urgency=medium
   * New upstream release (Closes: #802563)
   * Removed CFLAGS and CXXFLAGS as suggested by Lars Tangvald
 
- -- Robie Basak <robie@justgohome.co.uk>  Mon, 21 Sep 2015 10:22:12 +0100
+ -- Bjoern Boschman <bjoern@boschman.de>  Tue, 03 Nov 2015 10:46:57 +0100
 
 mysql-5.6 (5.6.25-4) unstable; urgency=medium
 
