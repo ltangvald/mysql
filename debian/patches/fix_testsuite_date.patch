@@ -1,0 +1,31 @@
+Description: fix test suite failure caused by arbitrary date in the future
+ no longer being in the future.
+Author: Marc Deslauriers <marc.deslauriers@canonical.com>
+Forwarded: no
+
+Index: mysql-5.5-5.5.46/mysql-test/t/events_1.test
+===================================================================
+--- mysql-5.5-5.5.46.orig/mysql-test/t/events_1.test	2015-10-21 13:26:39.556707402 -0400
++++ mysql-5.5-5.5.46/mysql-test/t/events_1.test	2015-10-21 13:26:39.552707356 -0400
+@@ -125,7 +125,7 @@
+ 
+ create table t_event3 (a int, b float);
+ drop event if exists event3;
+-create event event3 on schedule every 50 + 10 minute starts date_add("20100101", interval 5 minute) ends date_add("20151010", interval 5 day) comment "portokala_comment" DO insert into t_event3 values (unix_timestamp(), rand());
++create event event3 on schedule every 50 + 10 minute starts date_add("20100101", interval 5 minute) ends date_add("20251010", interval 5 day) comment "portokala_comment" DO insert into t_event3 values (unix_timestamp(), rand());
+ let $wait_condition=SELECT count(*)=0 from t_event3;
+ --source include/wait_condition.inc
+ select count(*) from t_event3;
+Index: mysql-5.5-5.5.46/mysql-test/r/events_1.result
+===================================================================
+--- mysql-5.5-5.5.46.orig/mysql-test/r/events_1.result	2015-09-18 10:32:54.000000000 -0400
++++ mysql-5.5-5.5.46/mysql-test/r/events_1.result	2015-10-21 15:17:27.193404864 -0400
+@@ -114,7 +114,7 @@
+ drop event if exists event3;
+ Warnings:
+ Note	1305	Event event3 does not exist
+-create event event3 on schedule every 50 + 10 minute starts date_add("20100101", interval 5 minute) ends date_add("20151010", interval 5 day) comment "portokala_comment" DO insert into t_event3 values (unix_timestamp(), rand());
++create event event3 on schedule every 50 + 10 minute starts date_add("20100101", interval 5 minute) ends date_add("20251010", interval 5 day) comment "portokala_comment" DO insert into t_event3 values (unix_timestamp(), rand());
+ select count(*) from t_event3;
+ count(*)
+ 0
