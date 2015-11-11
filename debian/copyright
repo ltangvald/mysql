@@ -293,7 +293,7 @@ Files: BUILD/*
  support-files/RHEL4-SElinux/*
  support-files/MySQL-shared-compat.spec.sh
  support-files/mysql.spec.sh
- support-files/mysql.5.6.25.spec
+ support-files/mysql.5.6.27.spec
  support-files/mysql.m4
  support-files/ndb-config-2-node.ini.sh
  tests/*
