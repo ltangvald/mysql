@@ -50,7 +50,7 @@ esac
 # variants in Ubuntu.
 case "$1" in
   remove|disappear)
-    /usr/share/mysql-common/configure-symlinks remove mysql "$mysql_cfgdir/mysql.cnf"
+    [ -x /usr/share/mysql-common/configure-symlinks ] && /usr/share/mysql-common/configure-symlinks remove mysql "$mysql_cfgdir/mysql.cnf"
   ;;
 esac
 
