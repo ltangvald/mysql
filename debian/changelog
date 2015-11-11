@@ -17,7 +17,7 @@ mysql-5.6 (5.6.27-1) unstable; urgency=medium
   * New upstream release (Closes: #802563)
   * Removed CFLAGS and CXXFLAGS as suggested by Lars Tangvald
 
- -- Bjoern Boschman <bjoern@boschman.de>  Tue, 03 Nov 2015 10:46:57 +0100
+ -- YunQiang Su <syq@debian.org>  Tue, 03 Nov 2015 03:06:58 +0800
 
 mysql-5.6 (5.6.25-4) unstable; urgency=medium
 
