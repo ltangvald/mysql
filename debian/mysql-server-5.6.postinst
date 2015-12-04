@@ -189,18 +189,6 @@ case "$1" in
         "  Repl_slave_priv='Y', Repl_client_priv='Y', Create_view_priv='Y', "\
         "  Show_view_priv='Y', Create_routine_priv='Y', Alter_routine_priv='Y', "\
         "  Create_user_priv='Y', Event_priv='Y', Trigger_priv='Y'; "`;
-    # Engines supported by etch should be installed per default. The query sequence is supposed
-    # to be aborted if the CREATE TABLE fails due to an already existent table in which case the
-    # admin might already have chosen to remove one or more plugins. Newlines are necessary.
-    install_plugins=`echo -e \
-        "USE mysql;\n" \
-        "CREATE TABLE IF NOT EXISTS plugin (name char(64) COLLATE utf8_bin NOT NULL DEFAULT '', " \
-        "  dl char(128) COLLATE utf8_bin NOT NULL DEFAULT '', " \
-        "  PRIMARY KEY (name)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='MySQL plugins';\n" \
-        "INSERT INTO plugin VALUES ('innodb',    'ha_innodb.so');\n" \
-        "INSERT INTO plugin VALUES ('federated', 'ha_federated.so');\n" \
-        "INSERT INTO plugin VALUES ('blackhole', 'ha_blackhole.so');\n" \
-        "INSERT INTO plugin VALUES ('archive',   'ha_archive.so');" `
 
     db_get mysql-server/root_password && rootpw="$RET"
     if ! set_mysql_rootpw; then
@@ -208,9 +196,6 @@ case "$1" in
     fi
 
     echo "$replace_query"                                    | $MYSQL_BOOTSTRAP 2>&1 | $ERR_LOGGER
-    set +e
-    echo "$install_plugins"                                  | $MYSQL_BOOTSTRAP 2>&1 | $ERR_LOGGER
-    set -e
   ;;
 
   abort-upgrade|abort-remove|abort-configure)
