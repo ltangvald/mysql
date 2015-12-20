@@ -1,7 +1,12 @@
 mysql-5.6 (5.6.27-3) UNRELEASED; urgency=medium
 
-  * Do not remove .pc in dh_auto_clean as this is wrong. Revert previous
-    commit eb6e6d4 that added this. Thanks to Samuel Thibault.
+  * Fix GNU/Hurd build regression (Closes: #793358). Thanks to Samuel
+    Thibault.
+    - Do not remove .pc in dh_auto_clean as this is wrong. Revert
+      previous commit eb6e6d4 that added this.
+    - Do not remove cmake/os/GNU.cmake in dh_auto_clean as this is also
+      wrong as it gets introduced by a quilt patch. Revert previous commit
+      7ef4a27 that added this.
 
  -- Robie Basak <robie@justgohome.co.uk>  Sun, 20 Dec 2015 14:20:39 +0000
 
