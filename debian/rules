@@ -50,7 +50,7 @@ override_dh_auto_clean:
 	dh_testdir 
 	dh_testroot
 	[ ! -d mysql-test/var ] || rm -rf mysql-test/var
-	rm -rf $(BUILDDIR) $(BUILDDIR_PIC) .pc
+	rm -rf $(BUILDDIR) $(BUILDDIR_PIC)
 	debconf-updatepo
 	rm -f $(EXPORTED_SOURCE_TARBALL)
 	rm -f cmake/os/GNU.cmake
