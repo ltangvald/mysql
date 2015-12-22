@@ -109,8 +109,8 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
    When installing using the package installer, the files are
    installed into a directory within /usr/local matching the
    name of the installation version and platform. For example,
-   the installer file mysql-5.7.10-osx10.9-x86_64.dmg installs
-   MySQL into /usr/local/mysql-5.7.10-osx10.9-x86_64/ . The
+   the installer file mysql-5.7.11-osx10.9-x86_64.dmg installs
+   MySQL into /usr/local/mysql-5.7.11-osx10.9-x86_64/ . The
    following table shows the layout of the installation
    directory.
 
@@ -138,18 +138,18 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
        provided on a disk image (.dmg) that includes the main
        MySQL installation package file. Double-click the disk
        image to open it.
-       Figure 2.41 MySQL Package Installer: DMG Contents
+       Figure 2.40 MySQL Package Installer: DMG Contents
        MySQL Package Installer: DMG Contents
 
     2. Double-click the MySQL installer package. It will be
        named according to the version of MySQL you have
        downloaded. For example, if you have downloaded MySQL
-       server 5.7.10, double-click
-       mysql-5.7.10-osx-10.9-x86_64.pkg.
+       server 5.7.11, double-click
+       mysql-5.7.11-osx-10.9-x86_64.pkg.
 
     3. You will be presented with the opening installer dialog.
        Click Continue to begin installation.
-       Figure 2.42 MySQL Package Installer: Introduction
+       Figure 2.41 MySQL Package Installer: Introduction
        MySQL Package Installer: Introduction
 
     4. If you have downloaded the community version of MySQL,
@@ -165,13 +165,13 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
        Location to change the type of installation for either
        all users, only the user executing the Installer, or
        define a custom location.
-       Figure 2.43 MySQL Package Installer: Installation Type
+       Figure 2.42 MySQL Package Installer: Installation Type
        MySQL Package Installer: Installation Type
-       Figure 2.44 MySQL Package Installer: Destination Select
+       Figure 2.43 MySQL Package Installer: Destination Select
        (Change Installation Location)
        MySQL Package Installer: Destination Select (Change
        Installation Location)
-       Figure 2.45 MySQL Package Installer: Customize
+       Figure 2.44 MySQL Package Installer: Customize
        MySQL Package Installer: Customize
 
     6. Click Install to begin the installation process.
@@ -180,11 +180,11 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
        you will be shown an Install Succeeded message with a
        short summary. Now, Close the wizard and begin using the
        MySQL server.
-       Figure 2.46 MySQL Package Installer: Summary
+       Figure 2.45 MySQL Package Installer: Summary
        MySQL Package Installer: Summary
 
    MySQL server is now installed, but it is not loaded (started)
-   by default. Use either launchctl from the command dline, or
+   by default. Use either launchctl from the command line, or
    start MySQL by clicking "Start" using the MySQL preference
    pane. For additional information, see Section 2.4.3,
    "Installing a MySQL Launch Daemon," and Section 2.4.4,
@@ -253,9 +253,9 @@ string>
    To enable the launchd service, you can either:
 
      * Click Start MySQL Server from the MySQL preference pane.
-       Figure 2.47 MySQL Preference Pane: Location
+       Figure 2.46 MySQL Preference Pane: Location
        MySQL Preference Pane: Location
-       Figure 2.48 MySQL Preference Pane: Usage
+       Figure 2.47 MySQL Preference Pane: Usage
        MySQL Preference Pane: Usage
 
      * Or, manually load the launchd file.
@@ -277,7 +277,7 @@ shell> sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
    This preference pane is installed by default, and is listed
    under your system's System Preferences window.
 
-   Figure 2.49 MySQL Preference Pane: Location
+   Figure 2.48 MySQL Preference Pane: Location
    MySQL Preference Pane: Location
 
    To install the MySQL Preference Pane:
@@ -289,7 +289,7 @@ shell> sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
        Before MySQL 5.7.8, OS X packages included the deprecated
        startup items instead of launchd daemons, and the
        preference pane managed that intstead of launchd.
-       Figure 2.50 MySQL Package Installer: DMG Contents
+       Figure 2.49 MySQL Package Installer: DMG Contents
        MySQL Package Installer: DMG Contents
 
     2. Go through the process of installing the MySQL server, as
@@ -299,7 +299,7 @@ shell> sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
     3. Click Customize at the Installation Type step. The
        "Preference Pane" option is listed there and enabled by
        default.
-       Figure 2.51 MySQL Installer on OS X: Customize
+       Figure 2.50 MySQL Installer on OS X: Customize
        MySQL Installer on OS X: Customize
 
     4. Complete the MySQL server installation process.
@@ -317,10 +317,10 @@ shell> sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
    clicking the MySQL logo within the bottom section of the
    preference panes list.
 
-   Figure 2.52 MySQL Preference Pane: Location
+   Figure 2.51 MySQL Preference Pane: Location
    MySQL Preference Pane: Location
 
-   Figure 2.53 MySQL Preference Pane: Usage
+   Figure 2.52 MySQL Preference Pane: Usage
    MySQL Preference Pane: Usage
 
    The MySQL Preference Pane shows the current status of the
