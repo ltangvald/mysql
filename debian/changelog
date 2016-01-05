@@ -16,6 +16,7 @@ mysql-5.6 (5.6.28-1) UNRELEASED; urgency=medium
 
   [ Lars Tangvald ]
   * Removed legacy plugin install code (LP: #1468185).
+  * Made infinite loop in systemd script time out (LP: #1478849).
 
  -- Robie Basak <robie@justgohome.co.uk>  Sun, 20 Dec 2015 14:20:39 +0000
 
