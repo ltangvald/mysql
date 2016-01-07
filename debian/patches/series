@@ -7,4 +7,3 @@ kfreebsd_tests.patch
 spelling.patch
 fix-mysqlhotcopy-test-failure.patch
 mips64el.patch
-fix_testsuite_date.patch
