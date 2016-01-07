@@ -1,5 +1,6 @@
-mysql-5.6 (5.6.27-3) UNRELEASED; urgency=medium
+mysql-5.6 (5.6.28-1) UNRELEASED; urgency=medium
 
+  * New upstream release.
   * Fix GNU/Hurd build regression (Closes: #793358). Thanks to Samuel
     Thibault.
     - Do not remove .pc in dh_auto_clean as this is wrong. Revert
