@@ -9,9 +9,9 @@ Chapter 2 Installing and Upgrading MySQL
    you should consider before upgrading.
 
    If you are interested in migrating to MySQL from another
-   database system, you may wish to read Section A.8, "MySQL 5.6
-   FAQ: Migration," which contains answers to some common
-   questions concerning migration issues.
+   database system, see Section A.8, "MySQL 5.6 FAQ: Migration,"
+   which contains answers to some common questions concerning
+   migration issues.
 
    Installation of MySQL generally follows the steps outlined
    here:
@@ -21,19 +21,19 @@ Chapter 2 Installing and Upgrading MySQL
        Please note that not all platforms are equally suitable
        for running MySQL, and that not all platforms on which
        MySQL is known to run are officially supported by Oracle
-       Corporation:
+       Corporation.
 
     2. Choose which distribution to install.
        Several versions of MySQL are available, and most are
        available in several distribution formats. You can choose
        from pre-packaged distributions containing binary
        (precompiled) programs or source code. When in doubt, use
-       a binary distribution. We also provide public access to
-       our current source tree for those who want to see our
-       most recent developments and help us test new code. To
-       determine which version and type of distribution you
-       should use, see Section 2.1.1, "Which MySQL Version and
-       Distribution to Install."
+       a binary distribution. Oracle also provides access to the
+       MySQL source code for those who want to see recent
+       developments and test new code. To determine which
+       version and type of distribution you should use, see
+       Section 2.1.1, "Which MySQL Version and Distribution to
+       Install."
 
     3. Download the distribution that you want to install.
        For instructions, see Section 2.1.2, "How to Get MySQL."
@@ -334,12 +334,12 @@ Chapter 2 Installing and Upgrading MySQL
    Microsoft Windows examples will assume the name md5.exe.
 
    Linux and Microsoft Windows examples:
-shell> md5sum mysql-standard-5.6.28-linux-i686.tar.gz
-aaab65abbec64d5e907dcd41b8699945  mysql-standard-5.6.28-linux-i686.tar
+shell> md5sum mysql-standard-5.6.29-linux-i686.tar.gz
+aaab65abbec64d5e907dcd41b8699945  mysql-standard-5.6.29-linux-i686.tar
 .gz
 
-shell> md5.exe mysql-installer-community-5.6.28.msi
-aaab65abbec64d5e907dcd41b8699945  mysql-installer-community-5.6.28.msi
+shell> md5.exe mysql-installer-community-5.6.29.msi
+aaab65abbec64d5e907dcd41b8699945  mysql-installer-community-5.6.29.msi
 
    You should verify that the resulting checksum (the string of
    hexadecimal digits) matches the one displayed on the download
@@ -512,8 +512,8 @@ shell> rpm --import mysql_pubkey.asc
 
    Table 2.1 MySQL Package and Signature Files for Source files
        File Type                      File Name
-   Distribution file mysql-standard-5.6.28-linux-i686.tar.gz
-   Signature file    mysql-standard-5.6.28-linux-i686.tar.gz.asc
+   Distribution file mysql-standard-5.6.29-linux-i686.tar.gz
+   Signature file    mysql-standard-5.6.29-linux-i686.tar.gz.asc
 
    Make sure that both files are stored in the same directory
    and then run the following command to verify the signature
@@ -522,7 +522,7 @@ shell> gpg --verify package_name.asc
 
    If the downloaded package is valid, you will see a "Good
    signature" similar to:
-shell> gpg --verify mysql-standard-5.6.28-linux-i686.tar.gz.asc
+shell> gpg --verify mysql-standard-5.6.29-linux-i686.tar.gz.asc
 gpg: Signature made Tue 01 Feb 2011 02:38:30 AM CST using DSA key ID 5
 072E1F5
 gpg: Good signature from "MySQL Release Engineering <mysql-build@oss.o
@@ -531,7 +531,7 @@ racle.com>"
    The Good signature message indicates that the file signature
    is valid, when compared to the signature listed on our site.
    But you might also see warnings, like so:
-shell> gpg --verify mysql-standard-5.6.28-linux-i686.tar.gz.asc
+shell> gpg --verify mysql-standard-5.6.29-linux-i686.tar.gz.asc
 gpg: Signature made Wed 23 Jan 2013 02:25:45 AM PST using DSA key ID 5
 072E1F5
 gpg: checking the trustdb
@@ -615,8 +615,8 @@ Primary key fingerprint: A4A9 4068 76FC BD3C 4567  70C8 8C71 8D3B 5072
    Table 2.2 MySQL Package and Signature Files for MySQL
    Installer for Microsoft Windows
        File Type                    File Name
-   Distribution file mysql-installer-community-5.6.28.msi
-   Signature file    mysql-installer-community-5.6.28.msi.asc
+   Distribution file mysql-installer-community-5.6.29.msi
+   Signature file    mysql-installer-community-5.6.29.msi.asc
 
    Make sure that both files are stored in the same directory
    and then run the following command to verify the signature
@@ -654,8 +654,8 @@ Primary key fingerprint: A4A9 4068 76FC BD3C 4567  70C8 8C71 8D3B 5072
 shell> rpm --checksig package_name.rpm
 
    Example:
-shell> rpm --checksig MySQL-server-5.6.28-0.linux_glibc2.5.i386.rpm
-MySQL-server-5.6.28-0.linux_glibc2.5.i386.rpm: md5 gpg OK
+shell> rpm --checksig MySQL-server-5.6.29-0.linux_glibc2.5.i386.rpm
+MySQL-server-5.6.29-0.linux_glibc2.5.i386.rpm: md5 gpg OK
 
    Note
 
@@ -736,7 +736,7 @@ g-signature.html
 
    MySQL compressed tar file binary distributions have names of
    the form mysql-VERSION-OS.tar.gz, where VERSION is a number
-   (for example, 5.6.28), and OS indicates the type of operating
+   (for example, 5.6.29), and OS indicates the type of operating
    system for which the distribution is intended (for example,
    pc-linux-i686 or winx64).
    Warning
@@ -800,7 +800,7 @@ shell> apt-get install libaio1 # install library
    To install and use a MySQL binary distribution, the command
    sequence looks like this:
 shell> groupadd mysql
-shell> useradd -r -g mysql mysql
+shell> useradd -r -g mysql -s /bin/false mysql
 shell> cd /usr/local
 shell> tar zxvf /path/to/mysql-VERSION-OS.tar.gz
 shell> ln -s full-path-to-mysql-VERSION-OS mysql
@@ -847,7 +847,7 @@ Create a mysql User and Group
    may differ slightly on different versions of Unix, or they
    may have different names such as adduser and addgroup.
 shell> groupadd mysql
-shell> useradd -r -g mysql mysql
+shell> useradd -r -g mysql -s /bin/false mysql
 
    Note
 
@@ -985,7 +985,7 @@ Additional Installation Information
    executed using a user with Administrator privileges.
 
    For a list of limitations on the use of MySQL on the Windows
-   platform, see Section D.10.6, "Windows Platform Limitations."
+   platform, see Section C.10.6, "Windows Platform Limitations."
 
    In addition to the MySQL Server package, you may need or want
    additional components to use MySQL with your application or
@@ -1132,8 +1132,8 @@ Additional Installation Information
    Archive distributions (but not MSI distributions) of MySQL.
 
      * MySQL Installer: This package has a file name similar to
-       mysql-installer-community-5.6.28.0.msi or
-       mysql-installer-commercial-5.6.28.0.msi, and utilizes
+       mysql-installer-community-5.6.29.0.msi or
+       mysql-installer-commercial-5.6.29.0.msi, and utilizes
        MSIs to automatically install MySQL server and other
        products. It will download and apply updates to itself,
        and for each of the installed products. It also
@@ -1157,8 +1157,8 @@ Additional Installation Information
        Microsoft Windows Using MySQL Installer."
 
      * The Noinstall Archive: This package has a file name
-       similar to mysql-5.6.28-win32.zip or
-       mysql-5.6.28-winx64.zip, and contains all the files found
+       similar to mysql-5.6.29-win32.zip or
+       mysql-5.6.29-winx64.zip, and contains all the files found
        in the Complete install package, with the exception of
        the GUI. It also contains PDB files. This package does
        not include an automated installer, and must be manually
@@ -1223,14 +1223,14 @@ Installer package types
        MySQL server). The file size is over 300MB, and its name
        has the form mysql-installer-community-VERSION.N.msi
        where VERSION is the MySQL Server version number such as
-       5.6 and N is the package number, which begins at 0.
+       5.7 and N is the package number, which begins at 0.
 
      * Web: Only contains the Installer and configuration files,
        and it downloads the MySQL products you choose to
        install. The size of this file is about 2MB; the name of
        the file has the form
        mysql-installer-community-web-VERSION.N.msi where VERSION
-       is the MySQL Server version number such as 5.6 and N is
+       is the MySQL Server version number such as 5.7 and N is
        the package number, which begins at 0.
 
      * Updates: MySQL Installer can upgrade itself, so an
@@ -2599,7 +2599,7 @@ InnoDB: foreign key constraint system tables created
    something like this, which indicates that the server is ready
    to service client connections:
 mysqld: ready for connections
-Version: '5.6.28'  socket: ''  port: 3306
+Version: '5.6.29'  socket: ''  port: 3306
 
    The server continues to write to the console any further
    diagnostic output it produces. You can open a new console
@@ -3424,8 +3424,8 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
    When installing using the package installer, the files are
    installed into a directory within /usr/local matching the
    name of the installation version and platform. For example,
-   the installer file mysql-5.6.28-osx10.9-x86_64.dmg installs
-   MySQL into /usr/local/mysql-5.6.28-osx10.9-x86_64/ . The
+   the installer file mysql-5.6.29-osx10.9-x86_64.dmg installs
+   MySQL into /usr/local/mysql-5.6.29-osx10.9-x86_64/ . The
    following table shows the layout of the installation
    directory.
 
@@ -3459,8 +3459,8 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
     2. Double-click the MySQL installer package. It will be
        named according to the version of MySQL you have
        downloaded. For example, if you have downloaded MySQL
-       server 5.6.28, double-click
-       mysql-5.6.28-osx-10.9-x86_64.pkg.
+       server 5.6.29, double-click
+       mysql-5.6.29-osx-10.9-x86_64.pkg.
 
     3. You will be presented with the opening installer dialog.
        Click Continue to begin installation.
@@ -3499,7 +3499,7 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
        MySQL Package Installer: Summary
 
    MySQL server is now installed, but it is not loaded (started)
-   by default. Use either launchctl from the command dline, or
+   by default. Use either launchctl from the command line, or
    start MySQL by clicking "Start" using the MySQL preference
    pane. For additional information, see Section 2.4.3,
    "Installing a MySQL Launch Daemon," and Section 2.4.4,
@@ -3742,7 +3742,7 @@ shell> sudo launchctl load -F com.oracle.oss.mysql.mysqld.plist
        corresponding versions of Red Hat Enterprise Linux,
        Oracle Linux, and CentOS)
 
-     * Fedora 21 and 22
+     * Fedora 21, 22, and 23
 
    Currently, the MySQL Yum repository
    (http://dev.mysql.com/downloads/repo/yum/) for the
@@ -3758,17 +3758,18 @@ Before You Start
    re-packaged form, is widely installed on many systems from
    various sources, including different software download sites,
    software repositories, and so on. The following instructions
-   assume that no versions of MySQL (whether distributed by
-   Oracle or other parties) have already been installed on your
-   system; if that is not the case, see Section 2.11.1.1,
+   assume that MySQL is not already installed on your system
+   using a third-party-distributed RPM package; if that is not
+   the case, follow the instructions given in Section 2.11.1.2,
    "Upgrading MySQL with the MySQL Yum Repository" or Section
    2.5.2, "Replacing a Third-Party Distribution of MySQL Using
    the MySQL Yum Repository."
 
 Steps for a Fresh Installation of MySQL
 
-   Follow the steps below to install the latest GA version of
-   MySQL with the MySQL Yum repository:
+   Follow the steps below to install the latest GA release of
+   MySQL (from the MySQL 5.7 series currently) with the MySQL
+   Yum repository:
 
     1. Adding the MySQL Yum Repository
        First, add the MySQL Yum repository to your system's
@@ -3789,25 +3790,29 @@ e.rpm
 
             For an EL6-based system, the command is in the form
             of:
-shell> sudo yum localinstall mysql-community-release-el6-{version-numb
-er}.noarch.rpm
+shell> sudo yum localinstall mysql57-community-release-el6-{version-nu
+mber}.noarch.rpm
 
             For an EL7-based system:
-shell> sudo yum localinstall mysql-community-release-el7-{version-numb
-er}.noarch.rpm
+shell> sudo yum localinstall mysql57-community-release-el7-{version-nu
+mber}.noarch.rpm
 
             For Fedora 21:
-shell> sudo yum localinstall mysql-community-release-fc21-{version-num
-ber}.noarch.rpm
+shell> sudo yum localinstall mysql57-community-release-fc21-{version-n
+umber}.noarch.rpm
 
             For Fedora 22:
-shell> sudo dnf localinstall mysql-community-release-fc22-{version-num
-ber}.noarch.rpm
+shell> sudo dnf localinstall mysql57-community-release-fc22-{version-n
+umber}.noarch.rpm
+
+            For Fedora 23:
+shell> sudo dnf localinstall mysql57-community-release-fc23-{version-n
+umber}.noarch.rpm
 
             For an EL5-based system, use the following command
             instead:
-shell> sudo rpm -Uvh mysql-community-release-el5-{version-number}.noar
-ch.rpm
+shell> sudo rpm -Uvh mysql57-community-release-el5-{version-number}.no
+arch.rpm
 
             The installation command adds the MySQL Yum
             repository to your system's repository list and
@@ -3815,45 +3820,39 @@ ch.rpm
             the software packages. See Section 2.1.3.2,
             "Signature Checking Using GnuPG" for details on
             GnuPG key checking.
-            For platforms other than Fedora 22, you can check
-            that the MySQL Yum repository has been successfully
-            added by the following command:
+            You can check that the MySQL Yum repository has been
+            successfully added by the following command (for
+            dnf-enabled systems, replace yum in the command with
+            dnf):
 shell> yum repolist enabled | grep "mysql.*-community.*"
-
-            Use this command for Fedora 22:
-shell> dnf repolist enabled | grep "mysql.*-community.*"
 
        Note
        Once the MySQL Yum repository is enabled on your system,
        any system-wide update by the yum update command (or dnf
-       upgrade for Fedora 22) will upgrade MySQL packages on
-       your system and also replace any native third-party
-       packages, if Yum finds replacements for them in the MySQL
-       Yum repository; see Section 2.11.1.1, "Upgrading MySQL
-       with the MySQL Yum Repository" and, for a discussion on
-       some possible effects of that on your system, see Section
-       2.11.1.1, "."
+       upgrade for dnf-enabled systems) will upgrade MySQL
+       packages on your system and also replace any native
+       third-party packages, if Yum finds replacements for them
+       in the MySQL Yum repository; see Section 2.11.1.2,
+       "Upgrading MySQL with the MySQL Yum Repository" and, for
+       a discussion on some possible effects of that on your
+       system, see Section 2.11.1.2, "."
 
     2. Selecting a Release Series
-       Note
-       When using the MySQL Yum repository, the latest GA
-       release of MySQL is selected for installation by default.
-       If this is what you want, you can skip to the next step,
-       Section 2.5.1, "."
+       When using the MySQL Yum repository, the latest GA series
+       (currently MySQL 5.7) is selected for installation by
+       default. If this is what you want, you can skip to the
+       next step, Section 2.5.1, "."
        Within the MySQL Yum repository, different release series
        of the MySQL Community Server are hosted in different
        subrepositories. The subrepository for the latest GA
-       series (currently 5.6) is enabled by default, and the
-       subrepositories for all other series (for example, the
-       5.7 series, currently still in developer milestone
-       release (DMR) status) are disabled by default. For
-       platforms other than Fedora 22, use this command to see
-       all the subrepositories in the MySQL Yum repository, and
-       see which of them are enabled or disabled:
+       series (currently MySQL 5.7) is enabled by default, and
+       the subrepositories for all other series (for example,
+       the MySQL 5.6 series) are disabled by default. Use this
+       command to see all the subrepositories in the MySQL Yum
+       repository, and see which of them are enabled or disabled
+       (for dnf-enabled systems, replace yum in the command with
+       dnf):
 shell> yum repolist all | grep mysql
-
-       Use this command for Fedora 22:
-shell> dnf repolist all | grep mysql
 
        To install the latest release from the latest GA series,
        no configuration is needed. To install the latest release
@@ -3863,36 +3862,38 @@ shell> dnf repolist all | grep mysql
        running the installation command. If your platform
        supports yum-config-manager, you can do that by issuing
        these commands, which disable the subrepository for the
-       5.6 series and enable the one for the 5.7 series:
-shell> sudo yum-config-manager --disable mysql56-community
-shell> sudo yum-config-manager --enable mysql57-community-dmr
+       5.7 series and enable the one for the 5.6 series:
+shell> sudo yum-config-manager --disable mysql57-community
+shell> sudo yum-config-manager --enable mysql56-community
 
-       Besides using yum-config-manager, you can also select a
-       release series by editing manually the
+       For dnf-enabled platforms:
+shell> sudo dnf config-manager --disable mysql57-community
+shell> sudo dnf config-manager --enable mysql56-community
+
+       Besides using yum-config-manager or the dnf
+       config-manager command, you can also select a release
+       series by editing manually the
        /etc/yum.repos.d/mysql-community.repo file. This is a
        typical entry for a release series' subrepository in the
        file:
-# Enable to use MySQL 5.6
-[mysql56-community]
-name=MySQL 5.6 Community Server
-baseurl=http://repo.mysql.com/yum/mysql-5.6-community/el/5/$basearch/
+[mysql57-community]
+name=MySQL 5.7 Community Server
+baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/6/$basearch/
 enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+
        Find the entry for the subrepository you want to
        configure, and edit the enabled option. Specify enabled=0
        to disable a subrepository, or enabled=1 to enable a
-       subrepository. For example, to install the latest 5.7
-       DMR, make sure you have enabled=0 for the above
-       subrepository entry for MySQL 5.6, and have enabled=1 for
-       the entry for the 5.7 series:
-# Note: MySQL 5.7 is currently in development. For use at your own ris
-k.
-# Please read with sub pages: https://dev.mysql.com/doc/relnotes/mysql
-/5.7/en/
-[mysql57-community-dmr]
-name=MySQL 5.7 Community Server Development Milestone Release
-baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/6/$basearch/
+       subrepository. For example, to install MySQL 5.6, make
+       sure you have enabled=0 for the above subrepository entry
+       for MySQL 5.7, and have enabled=1 for the entry for the
+       5.6 series:
+# Enable to use MySQL 5.6
+[mysql56-community]
+name=MySQL 5.6 Community Server
+baseurl=http://repo.mysql.com/yum/mysql-5.6-community/el/6/$basearch/
 enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
@@ -3903,14 +3904,14 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
        used by Yum.
        Verify that the correct subrepositories have been enabled
        and disabled by running the following command and
-       checking its output (for Fedora 22, replace yum in the
-       command with dnf):
+       checking its output (for dnf-enabled systems, replace yum
+       in the command with dnf):
 shell> yum repolist enabled | grep mysql
 
 
     3. Installing MySQL
-       Install MySQL by the following command (for Fedora 22,
-       replace yum in the command with dnf):
+       Install MySQL by the following command (for dnf-enabled
+       systems, replace yum in the command with dnf):
 shell> sudo yum install mysql-community-server
 
        This installs the package for MySQL server
@@ -3966,28 +3967,28 @@ Installing Additional MySQL Products and Components with Yum
    Community sub-repository, and the MySQL Workbench in MySQL
    Tools Community. You can use the following command to list
    the packages for all the MySQL components available for your
-   platform from the MySQL Yum repository (for Fedora 22,
-   replace yum in the command with dnf):
+   platform from the MySQL Yum repository (for dnf-enabled
+   systems, replace yum in the command with dnf):
 shell> sudo yum --disablerepo=\* --enablerepo='mysql*-community*' list
  available
 
    Install any packages of your choice with the following
    command, replacing package-name with name of the package (for
-   Fedora 22, replace yum in the command with dnf):
+   dnf-enabled systems, replace yum in the command with dnf):
 shell> sudo yum install package-name
 
    For example, to install MySQL Workbench on Fedora 21:
 shell> sudo yum install mysql-workbench-community
 
-   To install the shared client libraries (for Fedora 22,
-   replace yum in the command with dnf):
+   To install the shared client libraries (for dnf-enabled
+   systems, replace yum in the command with dnf):
 shell> sudo yum install mysql-community-libs
 
 Updating MySQL with Yum
 
    Besides installation, you can also perform updates for MySQL
    products and components using the MySQL Yum repository. See
-   Section 2.11.1.1, "Upgrading MySQL with the MySQL Yum
+   Section 2.11.1.2, "Upgrading MySQL with the MySQL Yum
    Repository" for details.
 
 2.5.2 Replacing a Third-Party Distribution of MySQL Using the MySQL
@@ -3996,10 +3997,10 @@ Yum Repository
    For supported Yum-based platforms (see Section 2.5.1,
    "Installing MySQL on Linux Using the MySQL Yum Repository,"
    for a list), you can replace a third-party distribution of
-   MySQL with the latest GA release from MySQL using the MySQL
-   Yum repository. According to how your third-party
-   distribution of MySQL was installed, there are different
-   steps to follow:
+   MySQL with the latest GA release (from the MySQL 5.7 series
+   currently) from the MySQL Yum repository. According to how
+   your third-party distribution of MySQL was installed, there
+   are different steps to follow:
 
 Replacing a Native Third-Party Distribution of MySQL
 
@@ -4020,18 +4021,20 @@ Replacing a Native Third-Party Distribution of MySQL
        2.5.1, "."
 
     3. Replacing the Native Third-Party Distribution by a Yum
-       Update of a DNF Upgrade
+       Update or a DNF Upgrade
        By design, the MySQL Yum repository will replace your
-       native, third-party MySQL when you perform a yum update
-       command (or dnf upgrade for Fedora 22) on the system, or
-       a yum update mysql-server (or dnf upgrade mysql-server
-       for Fedora 22).
+       native, third-party MySQL with the latest GA release
+       (from the MySQL 5.7 series currently) from the MySQL Yum
+       repository when you perform a yum update command (or dnf
+       upgrade for dnf-enabled systems) on the system, or a yum
+       update mysql-server (or dnf upgrade mysql-server for
+       dnf-enabled systems).
 
    After updating MySQL using the Yum repository, applications
    compiled with older versions of the shared client libraries
    should continue to work. However, if you want to recompile
    applications and dynamically link them with the updated
-   libraries, see Section 2.11.1.1, "," for some special
+   libraries, see Section 2.11.1.2, "," for some special
    considerations.
 
 Replacing a Nonnative Third-Party Distribution of MySQL
@@ -4055,8 +4058,9 @@ Replacing a Nonnative Third-Party Distribution of MySQL
        Yum repositories.
        For example, if you have installed MariaDB using their
        own software repository, get a list of the installed
-       MariaDB packages using the following command (for Fedora
-       22, replace yum in the command with dnf):
+       MariaDB packages using the following command (for
+       dnf-enabled systems, replace yum in the command with
+       dnf):
 shell> yum list installed mariadb\*
        This is a sample output for the command:
 MariaDB-common.i686                      10.0.4-1
@@ -4073,7 +4077,8 @@ MariaDB-server.i686                      10.0.4-1
        As another example, if you have installed Percona using
        their own software repository, get a list of the
        installed Percona packages using the following command
-       (for Fedora 22, replace yum in the command with dnf):
+       (for dnf-enabled systems, replace yum in the command with
+       dnf):
 shell> yum list installed Percona\*
        This is a sample output for the command:
 Percona-Server-client-55.i686     5.5.39-rel36.0.el6          @percona
@@ -4093,15 +4098,19 @@ a-release-0.1-3.noarch
        If you are not sure which third-party MySQL fork you have
        installed, this command should reveal it and list the RPM
        packages installed for it, as well as the third-party
-       repository that supplies the packages (for Fedora 22,
-       replace yum in the command with dnf):
+       repository that supplies the packages (for dnf-enabled
+       systems, replace yum in the command with dnf):
 shell> yum --disablerepo=\* provides mysql\*
        The next step is to stop Yum from receiving packages from
        the nonnative repository. If the yum-config-manager
        utility is supported on your platform, you can, for
-       example, use this command for MariaDB:
+       example, use this command for stopping delivery from
+       MariaDB (on dnf-enabled systems, use the dnf
+       config-manager command instead of yum-config-manager):
 shell> sudo yum-config-manager --disable mariadb
-       And use this command for Percona:
+       And use this command for stopping delivery from Percona
+       (on dnf-enabled systems, use the dnf config-manager
+       command instead of yum-config-manager):
 shell> sudo yum-config-manager --disable percona-release
        You can perform the same task by removing the entry for
        the software repository existing in one of the repository
@@ -4128,12 +4137,12 @@ shell> sudo yum-config-manager --disable percona-release
        be uninstalled before you can use the MySQL Yum
        repository to install MySQL. For the MariaDB packages
        found in Step 2 above, uninstall them with the following
-       command (for Fedora 22, replace yum in the command with
-       dnf):
+       command (for dnf-enabled systems, replace yum in the
+       command with dnf):
 shell> sudo yum remove MariaDB-common MariaDB-compat MariaDB-server
-       For the Percona packages we found in Step 2 above (for a
-       similar command on Fedora 22, replace yum in the command
-       with dnf):
+       For the Percona packages we found in Step 2 above (for
+       dnf-enabled systems, replace yum in the command with
+       dnf):
 shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
 55 \
   Percona-Server-shared-55.i686 percona-release
@@ -4210,8 +4219,8 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
      * From the MySQL software repositories, for the following
        platforms:
 
-          + For EL5, EL6, or EL7-based platforms and Fedora 21
-            or 22, use the MySQL Yum repository (see Section
+          + For EL5, EL6, or EL7-based platforms and Fedora 21,
+            22, or 23, use the MySQL Yum repository (see Section
             2.5.1, "Installing MySQL on Linux Using the MySQL
             Yum Repository" for details).
 
@@ -4395,7 +4404,7 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
      * MySQL-VERSION.src.rpm
        This contains the source code for all of the previous
        packages. It can also be used to rebuild the RPMs on
-       other architectures (for example, Alpha or SPARC).
+       other architectures (for example, SPARC).
 
    In RPM package names, the suffix (following the VERSION
    value) has the following syntax:
@@ -4414,9 +4423,9 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
    PLATFORM Value Intended Use
    linux_glibc25 Platform independent, should run on any Linux
    distribution that supports glibc 2.5
-   rhel5, rhel6 Red Hat Enterprise Linux 5 or 6
+   rhel5 Red Hat Enterprise Linux 5
    el6, el7 Enterprise Linux 6 or 7
-   sles10, sles11 SUSE Linux Enterprise Server 10 or 11
+   sles11, sles12 SUSE Linux Enterprise Server 11 or 12
 
    In MySQL 5.6, only linux_glibc2.5 packages are available
    currently.
@@ -4425,10 +4434,9 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
    which the package is built, as shown in the following table.
 
    Table 2.8 MySQL Linux RPM Package CPU Identifiers
-      CPU Value      Intended Processor Type or Family
-   i386, i586, i686 Pentium processor or better, 32 bit
-   x86_64           64-bit x86 processor
-   ia64             Itanium (IA-64) processor
+   CPU Value   Intended Processor Type or Family
+   i386, i686 Pentium processor or better, 32 bit
+   x86_64     64-bit x86 processor
 
    To see all files in an RPM package (for example, a
    MySQL-server RPM), run a command like this (modify the
@@ -4705,8 +4713,8 @@ Repositories
 
      * Red Hat Linux, Fedora, CentOS
        Note
-       For EL5, EL6, or EL7-based Linux platforms and Fedora 21
-       or 22, you can install MySQL using the MySQL Yum
+       For EL5, EL6, or EL7-based Linux platforms and Fedora 21,
+       22, or 23, you can install MySQL using the MySQL Yum
        repository instead of the platform's native software
        repository. See Section 2.5.1, "Installing MySQL on Linux
        Using the MySQL Yum Repository" for details.
@@ -4975,6 +4983,20 @@ root-shell> emerge --config =dev-db/mysql-5.1.46
        (default) run levels, you can use:
 root-shell> rc-update add mysql default
 
+2.5.8 Installing MySQL on Linux with docker
+
+   The docker deployment framework supports easy installation
+   and configuration of MySQL servers. For instructions, see
+   https://hub.docker.com/r/mysql/mysql-server/. This page also
+   provides extensive documentation about using MySQL under
+   docker.
+
+2.5.9 Installing MySQL on Linux with juju
+
+   The juju deployment framework supports easy installation and
+   configuration of MySQL servers. For instructions, see
+   https://jujucharms.com/mysql/.
+
 2.6 Installing MySQL Using Unbreakable Linux Network (ULN)
 
    Linux supports a number of different solutions for installing
@@ -5044,7 +5066,7 @@ root-shell> rc-update add mysql default
      * If you want to use MySQL with the mysql user and group,
        use the groupadd and useradd commands:
 groupadd mysql
-useradd -g mysql mysql
+useradd -g mysql -s /bin/false mysql
 
 
      * If you install MySQL using a binary tarball distribution
@@ -5093,16 +5115,16 @@ Error in accept: Protocol error
    To use this package, download the corresponding
    mysql-VERSION-solaris10-PLATFORM.pkg.gz file, then uncompress
    it. For example:
-shell> gunzip mysql-5.6.28-solaris10-x86_64.pkg.gz
+shell> gunzip mysql-5.6.29-solaris10-x86_64.pkg.gz
 
    To install a new package, use pkgadd and follow the onscreen
    prompts. You must have root privileges to perform this
    operation:
-shell> pkgadd -d mysql-5.6.28-solaris10-x86_64.pkg
+shell> pkgadd -d mysql-5.6.29-solaris10-x86_64.pkg
 
 The following packages are available:
   1  mysql     MySQL Community Server (GPL)
-               (i86pc) 5.6.28
+               (i86pc) 5.6.29
 
 Select package(s) you wish to process (or 'all' to process
 all packages). (default: all) [?,??,q]:
@@ -5141,7 +5163,7 @@ shell> ln /etc/init.d/mysql /etc/rc0.d/K02mysql
    support files. The typical upgrade sequence is therefore:
 shell> mysqladmin shutdown
 shell> pkgrm mysql
-shell> pkgadd -d mysql-5.6.28-solaris10-x86_64.pkg
+shell> pkgadd -d mysql-5.6.29-solaris10-x86_64.pkg
 shell> mysqld_safe &
 shell> mysql_upgrade
 
@@ -5310,7 +5332,7 @@ Source Installation Methods
        files, Zip archives, or RPM packages. Distribution files
        have names of the form mysql-VERSION.tar.gz,
        mysql-VERSION.zip, or mysql-VERSION.rpm, where VERSION is
-       a number like 5.6.28. File names for source distributions
+       a number like 5.6.29. File names for source distributions
        can be distinguished from those for precompiled binary
        distributions in that source distribution names are
        generic and include no platform name, whereas binary
@@ -5486,7 +5508,7 @@ shell> rpmbuild --rebuild --clean MySQL-VERSION.src.rpm
    this:
 # Preconfiguration setup
 shell> groupadd mysql
-shell> useradd -r -g mysql mysql
+shell> useradd -r -g mysql -s /bin/false mysql
 # Beginning of source-build specific instructions
 shell> tar zxvf mysql-VERSION.tar.gz
 shell> cd mysql-VERSION
@@ -7391,10 +7413,10 @@ Enter password: (enter root password here)
    on your platform and version of MySQL, but should be similar
    to that shown here:
 shell> bin/mysqladmin version
-mysqladmin  Ver 14.12 Distrib 5.6.28, for pc-linux-gnu on i686
+mysqladmin  Ver 14.12 Distrib 5.6.29, for pc-linux-gnu on i686
 ...
 
-Server version          5.6.28
+Server version          5.6.29
 Protocol version        10
 Connection              Localhost via UNIX socket
 UNIX socket             /var/lib/mysql/mysql.sock
@@ -7495,11 +7517,14 @@ shell> bin/mysql -e "SELECT User, Host, plugin FROM mysql.user" mysql
 
 2.10.4 Securing the Initial MySQL Accounts
 
-   Part of the MySQL installation process involves initializing
-   the data directory, including the mysql database containing
-   the grant tables that define the initial MySQL accounts. For
-   details, see Section 2.10, "Postinstallation Setup and
-   Testing."
+   The MySQL installation process involves initializing the data
+   directory, including the mysql database containing the grant
+   tables that define MySQL accounts. For details, see Section
+   2.10, "Postinstallation Setup and Testing."
+
+   This section describes how to assign passwords to the initial
+   accounts created during the MySQL installation procedure, if
+   you have not already done so.
 
    The mysql.user grant table defines the initial MySQL user
    accounts and their access privileges:
@@ -7596,8 +7621,8 @@ mysql> SELECT User, Host, Password FROM mysql.user;
    then for the anonymous accounts. The instructions also cover
    how to remove anonymous accounts, should you prefer not to
    permit anonymous access at all, and describe how to remove
-   permissive access to test databases. Replace newpwd in the
-   examples with the password that you want to use. Replace
+   permissive access to test databases. Replace new_password in
+   the examples with the password that you want to use. Replace
    host_name with the name of the server host. You can determine
    this name from the output of the preceding SELECT statement.
    For the output shown, host_name is myhost.example.com.
@@ -7608,13 +7633,13 @@ mysql> SELECT User, Host, Password FROM mysql.user;
    your root password after setting it, see Section B.5.4.1,
    "How to Reset the Root Password."
 
+   To set up additional accounts, see Section 6.3.2, "Adding
+   User Accounts."
+
    You might want to defer setting the passwords until later, to
    avoid the need to specify them while you perform additional
    setup or testing. However, be sure to set them before using
    your installation for production purposes.
-
-   To set up additional accounts, see Section 6.3.2, "Adding
-   User Accounts."
    Note
 
    On Windows, you can also perform the process described in
@@ -7644,26 +7669,26 @@ Assigning root Account Passwords
 
    For Windows, do this:
 shell> mysql -u root
-mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpwd');
-mysql> SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('newpwd');
-mysql> SET PASSWORD FOR 'root'@'::1' = PASSWORD('newpwd');
-mysql> SET PASSWORD FOR 'root'@'%' = PASSWORD('newpwd');
+mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('new_password');
+mysql> SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('new_password');
+mysql> SET PASSWORD FOR 'root'@'::1' = PASSWORD('new_password');
+mysql> SET PASSWORD FOR 'root'@'%' = PASSWORD('new_password');
 
    The last statement is unnecessary if the mysql.user table has
    no root account with a host value of %.
 
    For Unix, do this:
 shell> mysql -u root
-mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpwd');
-mysql> SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('newpwd');
-mysql> SET PASSWORD FOR 'root'@'::1' = PASSWORD('newpwd');
-mysql> SET PASSWORD FOR 'root'@'host_name' = PASSWORD('newpwd');
+mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('new_password');
+mysql> SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('new_password');
+mysql> SET PASSWORD FOR 'root'@'::1' = PASSWORD('new_password');
+mysql> SET PASSWORD FOR 'root'@'host_name' = PASSWORD('new_password');
 
    You can also use a single statement that assigns a password
    to all root accounts by using UPDATE to modify the mysql.user
    table directly. This method works on any platform:
 shell> mysql -u root
-mysql> UPDATE mysql.user SET Password = PASSWORD('newpwd')
+mysql> UPDATE mysql.user SET Password = PASSWORD('new_password')
     ->     WHERE User = 'root';
 mysql> FLUSH PRIVILEGES;
 
@@ -7673,8 +7698,8 @@ mysql> FLUSH PRIVILEGES;
 
    To assign passwords to the root accounts using mysqladmin,
    execute the following commands:
-shell> mysqladmin -u root password "newpwd"
-shell> mysqladmin -u root -h host_name password "newpwd"
+shell> mysqladmin -u root password "new_password"
+shell> mysqladmin -u root -h host_name password "new_password"
 
    Those commands apply both to Windows and to Unix. The double
    quotation marks around the password are not always necessary,
@@ -7706,19 +7731,19 @@ Assigning Anonymous Account Passwords
    To use SET PASSWORD on Windows, do this:
 shell> mysql -u root -p
 Enter password: (enter root password here)
-mysql> SET PASSWORD FOR ''@'localhost' = PASSWORD('newpwd');
+mysql> SET PASSWORD FOR ''@'localhost' = PASSWORD('new_password');
 
    To use SET PASSWORD on Unix, do this:
 shell> mysql -u root -p
 Enter password: (enter root password here)
-mysql> SET PASSWORD FOR ''@'localhost' = PASSWORD('newpwd');
-mysql> SET PASSWORD FOR ''@'host_name' = PASSWORD('newpwd');
+mysql> SET PASSWORD FOR ''@'localhost' = PASSWORD('new_password');
+mysql> SET PASSWORD FOR ''@'host_name' = PASSWORD('new_password');
 
    To set the anonymous-user account passwords with a single
    UPDATE statement, do this (on any platform):
 shell> mysql -u root -p
 Enter password: (enter root password here)
-mysql> UPDATE mysql.user SET Password = PASSWORD('newpwd')
+mysql> UPDATE mysql.user SET Password = PASSWORD('new_password')
     ->     WHERE User = '';
 mysql> FLUSH PRIVILEGES;
 
@@ -7859,76 +7884,301 @@ mysql> DROP DATABASE test;
 
 2.11.1 Upgrading MySQL
 
-   As a general rule, to upgrade from one release series to
-   another, go to the next series rather than skipping a series.
-   To upgrade from a release series previous to MySQL 5.5,
-   upgrade to each successive release series in turn until you
-   have reached MySQL 5.5, and then proceed with the upgrade to
-   MySQL 5.6. For example, if you currently are running MySQL
-   5.1 and wish to upgrade to a newer series, upgrade to MySQL
-   5.5 first before upgrading to 5.6, and so forth. For
-   information on upgrading to MySQL 5.5, see the MySQL 5.5
-   Reference Manual.
+   This section describes how to upgrade to a new MySQL version.
 
-   To upgrade to MySQL 5.6, use the items in the following
-   checklist as a guide:
+     * Supported Upgrade Methods
 
-     * Before any upgrade, back up your databases, including the
-       mysql database that contains the grant tables. See
-       Section 7.2, "Database Backup Methods."
+     * Supported Upgrade Paths
 
-     * Read all the notes in Section 2.11.1.3, "Upgrading from
-       MySQL 5.5 to 5.6." These notes enable you to identify
-       upgrade issues that apply to your current MySQL
-       installation. Some incompatibilities discussed in that
-       section require your attention before upgrading. Others
-       require some action after upgrading.
+     * Before You Begin
 
-     * Read the Release Notes
-       (http://dev.mysql.com/doc/relnotes/mysql/5.6/en/) as
-       well, which provide information about features that are
-       new in MySQL 5.6 or differ from those found in earlier
-       MySQL releases.
+     * Performing an In-place Upgrade
 
-     * After upgrading to a new version of MySQL, run
-       mysql_upgrade (see Section 4.4.7, "mysql_upgrade ---
-       Check and Upgrade MySQL Tables"). This program checks
-       your tables, and attempts to repair them if necessary. It
-       also updates your grant tables to ensure that they have
-       the current structure so that you can take advantage of
-       any new capabilities. (Some releases of MySQL introduce
-       changes to the structure of the grant tables to add new
-       privileges or features.)
-       mysql_upgrade does not upgrade the contents of the help
-       tables. For upgrade instructions, see Section 5.1.10,
-       "Server-Side Help."
-       mysql_upgrade should not be used when the server is
-       running with --gtid-mode=ON, since it may make changes in
-       nontransactional system tables in the mysql database,
-       many of which are MyISAM and cannot be changed to use a
-       different storage engine. See Section 17.1.3.4, "GTID
-       mode and mysql_upgrade."
+     * Performing a Logical Upgrade
 
-     * If you run MySQL Server on Windows, see Section 2.3.8,
-       "Upgrading MySQL on Windows."
+     * Upgrade Troubleshooting
+
+Supported Upgrade Methods
+
+
+     * In-place Upgrade: Involves shutting down the old MySQL
+       version, replacing the old MySQL binaries or packages
+       with the new ones, restarting MySQL on the existing data
+       directory, and running mysql_upgrade.
+
+     * Logical Upgrade: Involves exporting existing data from
+       the old MySQL version using mysqldump, installing the new
+       MySQL version, loading the dump file into the new MySQL
+       version, and running mysql_upgrade.
+       Note
+       MySQL recommends a mysqldump upgrade when upgrading from
+       a previous release. For example, use this method when
+       upgrading from 5.5 to 5.6.
+
+   For in-place and logical upgrade procedures, see Section
+   2.11.1, "," and Section 2.11.1, "."
+
+   If you run MySQL Server on Windows, see Section 2.3.8,
+   "Upgrading MySQL on Windows."
+
+   If your current MySQL installation was installed on an
+   Enterprise Linux platform or Fedora using the MySQL Yum
+   Repository, see Section 2.11.1.2, "Upgrading MySQL with the
+   MySQL Yum Repository."
+
+   If your current MySQL installation was installed on Ubuntu
+   using the MySQL APT repository, see Section 2.11.1.3,
+   "Upgrading MySQL with the MySQL APT Repository."
+
+Supported Upgrade Paths
+
+   Unless otherwise documented, the following upgrade paths are
+   supported:
+
+     * Upgrading from a release series version to a newer
+       release series version is supported. For example,
+       upgrading from 5.6.26 to 5.6.27 is supported. Skipping
+       release series versions is also supported. For example,
+       upgrading from 5.6.25 to 5.6.27 is supported.
+
+     * Upgrading one release level is supported. For example,
+       upgrading from 5.5 to 5.6 is supported. Upgrading to the
+       latest release series version is recommended before
+       upgrading to the next release level. For example, upgrade
+       to the latest 5.5 release before upgrading to 5.6.
+
+     * Upgrading more than one release level is supported, but
+       only if you upgrade one release level at a time. For
+       example, upgrade from 5.1 to 5.5, and then to 5.6. Follow
+       the upgrade instructions for each release, in succession.
+
+     * Direct upgrades that skip a release level (for example,
+       upgrading directly from MySQL 5.1 to 5.6) are not
+       recommended or supported.
+
+   The following conditions apply to all upgrade paths:
+
+     * Upgrades between General Availability (GA) status
+       releases are supported.
+
+     * Upgrades between milestone releases (or from a milestone
+       release to a GA release) are not supported. For example,
+       upgrading from 5.6.9 to 5.6.10 is not supported, as 5.6.9
+       is not a GA status release.
+
+     * For upgrades between versions of a MySQL release series
+       that has reached GA status, you can move the MySQL format
+       files and data files between different versions on
+       systems with the same architecture. This is not
+       necessarily true for upgrades between milestone releases.
+       Use of milestone releases is at your own risk.
+
+Before You Begin
+
+   Before upgrading, review the following information and
+   perform the recommended steps:
+
+     * Before upgrading, protect your data by creating a backup
+       of your current databases and log files. The backup
+       should include the mysql database, which contains the
+       MySQL system tables. See Section 7.2, "Database Backup
+       Methods."
+
+     * Review the Release Notes
+       (http://dev.mysql.com/doc/relnotes/mysql/5.6/en/) which
+       provide information about features that are new in the
+       MySQL 5.6 or differ from those found in earlier MySQL
+       releases. Some of these changes may result in
+       incompatibilities.
+
+     * Review Section 2.11.1.1, "Changes Affecting Upgrades to
+       MySQL 5.6." This section describes changes that may
+       require action before or after upgrading.
+
+     * Check Section 2.11.3, "Checking Whether Tables or Indexes
+       Must Be Rebuilt," to see whether changes to table formats
+       or to character sets or collations were made between your
+       current version of MySQL and the version to which you are
+       upgrading. If such changes have resulted in an
+       incompatibility between MySQL versions, you will need to
+       upgrade the affected tables using the instructions in
+       Section 2.11.4, "Rebuilding or Repairing Tables or
+       Indexes."
 
      * If you use replication, see Section 17.4.3, "Upgrading a
        Replication Setup," for information on upgrading your
        replication setup.
 
-     * If you use InnoDB, consider setting innodb_fast_shutdown
-       to 0 before shutting down and upgrading your server. When
-       you set innodb_fast_shutdown to 0, InnoDB does a slow
-       shutdown, a full purge and a change buffer merge before
-       shutting down, which ensures that all data files are
-       fully prepared in case the upgrade process modifies the
-       file format.
+     * If you use XA transactions with InnoDB, run XA RECOVER
+       before upgrading to check for uncommitted XA
+       transactions. If results are returned, either commit or
+       rollback the XA transactions by issuing an XA COMMIT or
+       XA ROLLBACK statement.
 
-     * If you upgrade an installation originally produced by
-       installing multiple RPM packages, it is best to upgrade
-       all the packages, not just some. For example, if you
-       previously installed the server and client RPMs, do not
-       upgrade just the server RPM.
+     * If your MySQL installation contains a large amount of
+       data that might take a long time to convert after an
+       in-place upgrade, you might find it useful to create a
+       "dummy" database instance for assessing what conversions
+       might be needed and the work involved to perform them.
+       Make a copy of your MySQL instance that contains a full
+       copy of the mysql database, plus all other databases
+       without data. Run your upgrade procedure on this dummy
+       instance to see what actions might be needed so that you
+       can better evaluate the work involved when performing
+       actual data conversion on your original database
+       instance.
+
+     * Rebuilding and reinstalling the Perl DBD::mysql module
+       whenever you install or upgrade to a new release of MySQL
+       is recommended. The same applies to other MySQL
+       interfaces as well, such as PHP mysql extensions and the
+       Python MySQLdb module.
+
+Performing an In-place Upgrade
+
+   This section describes how to perform an in-place upgrade.
+   Review Before you Begin before proceeding.
+   Note
+
+   If you upgrade an installation originally produced by
+   installing multiple RPM packages, upgrade all the packages,
+   not just some. For example, if you previously installed the
+   server and client RPMs, do not upgrade just the server RPM.
+
+   To perform an in-place upgrade:
+
+    1. Review the changes described in Section 2.11.1.1,
+       "Changes Affecting Upgrades to MySQL 5.6" for steps to be
+       performed before upgrading.
+
+    2. If you use InnoDB, configure MySQL to perform a slow
+       shutdown by setting innodb_fast_shutdown to 0. For
+       example:
+shell> bin/mysql -u root -p password --execute="set global innodb_fast
+_shutdown=0"
+       With a slow shutdown, InnoDB performs a full purge and
+       change buffer merge before shutting down, which ensures
+       that data files are fully prepared in case of file format
+       differences between releases.
+
+    3. Shut down the old MySQL server. For example:
+shell> bin/mysqladmin -u root -p password shutdown
+
+    4. Upgrade the MySQL binaries or packages in place (replace
+       the old binaries with the new ones).
+
+    5. Start the MySQL 5.6 server, using the existing data
+       directory. For example:
+shell> bin/mysqld_safe --user=mysql --datadir=/path/to/existing-datadi
+r
+
+
+    6. Run mysql_upgrade. For example:
+shell> bin/mysql_upgrade -u root -p password
+       mysql_upgrade examines all tables in all databases for
+       incompatibilities with the current version of MySQL.
+       mysql_upgrade also upgrades the system tables so that you
+       can take advantage of new privileges or capabilities.
+       Note
+       mysql_upgrade should not be used when the server is
+       running with --gtid-mode=ON. See Section 17.1.3.4, "GTID
+       mode and mysql_upgrade" for more information.
+       mysql_upgrade does not upgrade the contents of the help
+       tables. For upgrade instructions, see Section 5.1.10,
+       "Server-Side Help."
+
+Performing a Logical Upgrade
+
+   This section describes how to perform a logical upgrade.
+   Review Before you Begin before proceeding.
+
+   To perform a logical upgrade:
+
+    1. Review the changes described in Section 2.11.1.1,
+       "Changes Affecting Upgrades to MySQL 5.6" for steps to be
+       performed before upgrading.
+
+    2. Export your existing data from the previous MySQL
+       version:
+shell> mysqldump --add-drop-table --routines --events --add-drop-table
+    -> --all-databases --force > data-for-upgrade.sql
+
+       Note
+       Use the --routines and --events options with mysqldump
+       (as shown above) if your databases include stored
+       programs. The --all-databases option includes all
+       databases in the dump, including the mysql database that
+       holds the system tables.
+
+    3. Shut down the old MySQL server. For example:
+shell> bin/mysqladmin -u root -p password shutdown
+
+    4. Install MySQL 5.6. For installation instructions, see
+       Chapter 2, "Installing and Upgrading MySQL."
+
+    5. Initialize a new data directory:
+shell> scripts/mysql_install_db --user=mysql --datadir=/path/to/5.6-da
+tadir
+
+
+    6. Start the MySQL 5.6 server, using the new data directory.
+       For example:
+shell> bin/mysqld_safe --user=mysql --datadir=/path/to/5.6-datadir
+
+
+    7. Load the previously created dump file into the new MySQL
+       server. For example:
+shell> bin/mysql -u root -p password --execute="source data-for-upgrad
+e.sql" --force
+
+    8. Run mysql_upgrade. For example:
+shell> bin/mysql_upgrade -u root -p password
+       mysql_upgrade examines all tables in all databases for
+       incompatibilities with the current version of MySQL.
+       mysql_upgrade also upgrades the system tables so that you
+       can take advantage of new privileges or capabilities.
+       Note
+       mysql_upgrade should not be used when the server is
+       running with --gtid-mode=ON. See Section 17.1.3.4, "GTID
+       mode and mysql_upgrade" for more information.
+       mysql_upgrade does not upgrade the contents of the help
+       tables. For upgrade instructions, see Section 5.1.10,
+       "Server-Side Help."
+
+    9. If you use InnoDB, configure MySQL to perform a slow
+       shutdown by setting innodb_fast_shutdown to 0. For
+       example:
+shell> bin/mysql -u root -p password --execute="set global innodb_fast
+_shutdown=0"
+   10. Shut down and restart the MySQL server to ensure a clean
+       shutdown and startup. For example:
+shell> bin/mysqladmin -u root -p password shutdown
+shell> bin/mysqld_safe --user=mysql --datadir=/path/to/5.6-datadir
+
+Upgrade Troubleshooting
+
+
+     * If problems occur, such as that the new mysqld server
+       does not start or that you cannot connect without a
+       password, verify that you do not have an old my.cnf file
+       from your previous installation. You can check this with
+       the --print-defaults option (for example, mysqld
+       --print-defaults). If this command displays anything
+       other than the program name, you have an active my.cnf
+       file that affects server or client operation.
+
+     * If, after an upgrade, you experience problems with
+       compiled client programs, such as Commands out of sync or
+       unexpected core dumps, you probably have used old header
+       or library files when compiling your programs. In this
+       case, check the date for your mysql.h file and
+       libmysqlclient.a library to verify that they are from the
+       new MySQL distribution. If not, recompile your programs
+       with the new headers and libraries. Recompilation might
+       also be necessary for programs compiled against the
+       shared client library if the library major version number
+       has changed (for example from libmysqlclient.so.15 to
+       libmysqlclient.so.16.
 
      * If you have created a user-defined function (UDF) with a
        given name and upgrade MySQL to a version that implements
@@ -7943,301 +8193,50 @@ mysql> DROP DATABASE test;
        server interprets references to different kinds of
        functions.
 
-   For EL5, EL6, or EL7-based Linux platforms and Fedora 21 or
-   22, you can perform an in-place upgrade of MySQL and its
-   components with the MySQL Yum repository. See Section
-   2.11.1.1, "Upgrading MySQL with the MySQL Yum Repository."
+2.11.1.1 Changes Affecting Upgrades to MySQL 5.6
 
-   On Debian 7 or 8 and Ubuntu 12, 14, or 15, you can perform an
-   in-place upgrade of MySQL and its components with the MySQL
-   APT repository. See Section 2.11.1.2, "Upgrading MySQL with
-   the MySQL APT Repository."
+   Before upgrading to MySQL 5.6, review the changes described
+   in this section to identify upgrade issues that apply to your
+   current MySQL installation and applications.
+   Note
 
-   For upgrades between versions of a MySQL release series that
-   has reached General Availability status, you can move the
-   MySQL format files and data files between different versions
-   on systems with the same architecture. For upgrades to a
-   version of a MySQL release series that is in development
-   status, that is not necessarily true. Use of development
-   releases is at your own risk.
+   In addition to the changes outlined in this section, review
+   the Release Notes
+   (http://dev.mysql.com/doc/relnotes/mysql/5.6/en/) and other
+   important information outlined in Section 2.11.1, "."
 
-   If you are cautious about using new versions, you can always
-   rename your old mysqld before installing a newer one. For
-   example, if you are using a version of MySQL 5.5 and want to
-   upgrade to 5.6, rename your current server from mysqld to
-   mysqld-5.5. If your new mysqld then does something
-   unexpected, you can simply shut it down and restart with your
-   old mysqld.
+   Changes marked as either Known issue or Incompatible change
+   are incompatibilities with earlier versions of MySQL, and may
+   require your attention before you upgrade. Our aim is to
+   avoid these changes, but occasionally they are necessary to
+   correct problems that would be worse than an incompatibility
+   between releases. If any upgrade issue applicable to your
+   installation involves an incompatibility that requires
+   special handling, follow the instructions given in the
+   incompatibility description. Sometimes this involves dumping
+   and reloading tables, or use of a statement such as CHECK
+   TABLE or REPAIR TABLE.
 
-   If problems occur, such as that the new mysqld server does
-   not start or that you cannot connect without a password,
-   verify that you do not have an old my.cnf file from your
-   previous installation. You can check this with the
-   --print-defaults option (for example, mysqld
-   --print-defaults). If this command displays anything other
-   than the program name, you have an active my.cnf file that
-   affects server or client operation.
-
-   If, after an upgrade, you experience problems with compiled
-   client programs, such as Commands out of sync or unexpected
-   core dumps, you probably have used old header or library
-   files when compiling your programs. In this case, check the
-   date for your mysql.h file and libmysqlclient.a library to
-   verify that they are from the new MySQL distribution. If not,
-   recompile your programs with the new headers and libraries.
-   Recompilation might also be necessary for programs compiled
-   against the shared client library if the library major
-   version number has changed (for example from
-   libmysqlclient.so.15 to libmysqlclient.so.16.
-
-   If your MySQL installation contains a large amount of data
-   that might take a long time to convert after an in-place
-   upgrade, you might find it useful to create a "dummy"
-   database instance for assessing what conversions might be
-   needed and the work involved to perform them. Make a copy of
-   your MySQL instance that contains a full copy of the mysql
-   database, plus all other databases without data. Run your
-   upgrade procedure on this dummy instance to see what actions
-   might be needed so that you can better evaluate the work
-   involved when performing actual data conversion on your
-   original database instance.
-
-   It is a good idea to rebuild and reinstall the Perl
-   DBD::mysql module whenever you install a new release of
-   MySQL. The same applies to other MySQL interfaces as well,
-   such as PHP mysql extensions and the Python MySQLdb module.
-
-2.11.1.1 Upgrading MySQL with the MySQL Yum Repository
-
-   For supported Yum-based platforms (see Section 2.5.1,
-   "Installing MySQL on Linux Using the MySQL Yum Repository,"
-   for a list), you can perform an in-place upgrade for MySQL
-   (that is, replacing the old version and then running the new
-   version off the old data files) with the MySQL Yum
-   repository.
-   Notes
-
-     * Before performing any update to MySQL, follow carefully
-       the instructions in Section 2.11.1, "Upgrading MySQL."
-       Among other instructions discussed there, it is
-       especially important to back up your database before the
-       update.
-
-     * The following instructions assume you have installed
-       MySQL with the MySQL Yum repository; if that is not the
-       case, follow the instructions in Section 2.5.2,
-       "Replacing a Third-Party Distribution of MySQL Using the
-       MySQL Yum Repository."
-
-
-    1. Selecting a Target Series
-       By default, the MySQL Yum repository updates MySQL to the
-       latest version in the release series you have chosen
-       during installation (see Section 2.5.1, "" for details),
-       which means, for example, a 5.6.x installation will NOT
-       be updated to a 5.7.x release automatically. To update to
-       another release series, you need to first disable the
-       subrepository for the series that has been selected (by
-       default, or by yourself) and enable the subrepository for
-       your target series. To do that, follow the steps
-       explained in Section 2.5.1, "" for editing the
-       subrepository entries in
-       the/etc/yum.repos.d/mysql-community.repo file.
-       As a general rule, to upgrade from one release series to
-       another, go to the next series rather than skipping a
-       series. For example, if you are currently running MySQL
-       5.5 and wish to upgrade to 5.7, upgrade to MySQL 5.6
-       first before upgrading to 5.7.
-       Important
-       For important information about upgrading from MySQL 5.6
-       to 5.7, see Upgrading from MySQL 5.6 to 5.7
-       (http://dev.mysql.com/doc/refman/5.7/en/upgrading-from-pr
-       evious-series.html).
-
-    2. Upgrading MySQL
-       Upgrade MySQL and its components by the following
-       command, for platforms except Fedora 22:
-shell> sudo yum update mysql-server
-       For Fedora 22:
-shell> sudo dnf upgrade mysql-server
-       Alternatively, you can update MySQL by telling Yum to
-       update everything on your system, which might take
-       considerably more time; for platforms except Fedora 22:
-shell> sudo yum update
-       For Fedora 22:
-shell> sudo dnf upgrade
-
-    3. Restarting MySQL
-       The MySQL server always restarts after an update by Yum.
-       Once the server restarts, run mysql_upgrade to check and
-       possibly resolve any incompatibilities between the old
-       data and the upgraded software. mysql_upgrade also
-       performs other functions; see Section 4.4.7,
-       "mysql_upgrade --- Check and Upgrade MySQL Tables" for
-       details.
-
-   You can also update only a specific component. Use the
-   following command to list all the installed packages for the
-   MySQL components (for Fedora 22, replace yum in the command
-   with dnf):
-shell> sudo yum list installed | grep "^mysql"
-
-   After identifying the package name of the component of your
-   choice, for platforms except Fedora 22, update the package
-   with the following command, replacing package-name with the
-   name of the package:
-shell> sudo yum update package-name
-
-   For Fedora 22:
-shell> sudo dnf upgrade package-name
-
-Upgrading the Shared Client Libraries
-
-   After updating MySQL using the Yum repository, applications
-   compiled with older versions of the shared client libraries
-   should continue to work.
-
-   If you recompile applications and dynamically link them with
-   the updated libraries: As typical with new versions of shared
-   libraries where there are differences or additions in symbol
-   versioning between the newer and older libraries (for
-   example, between the newer, standard 5.6 shared client
-   libraries and some older---prior or variant---versions of the
-   shared libraries shipped natively by the Linux distributions'
-   software repositories, or from some other sources), any
-   applications compiled using the updated, newer shared
-   libraries will require those updated libraries on systems
-   where the applications are deployed. And, as expected, if
-   those libraries are not in place, the applications requiring
-   the shared libraries will fail. So, be sure to deploy the
-   packages for the shared libraries from MySQL on those
-   systems. You can do this by adding the MySQL Yum repository
-   to the systems (see Section 2.5.1, "") and install the latest
-   shared libraries using the instructions given in Section
-   2.5.1, "."
-
-2.11.1.2 Upgrading MySQL with the MySQL APT Repository
-
-   On Debian 7 or 8 and Ubuntu 12, 14, or 15, you can perform an
-   in-place upgrade of MySQL and its components with the MySQL
-   APT repository. See Upgrading MySQL with the MySQL APT
-   Repository
-   (http://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/index
-   .html#repo-qg-apt-upgrading) in A Quick Guide to Using the
-   MySQL APT Repository
-   (http://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/).
-
-2.11.1.3 Upgrading from MySQL 5.5 to 5.6
-
+   For dump and reload instructions, see Section 2.11.4,
+   "Rebuilding or Repairing Tables or Indexes." Any procedure
+   that involves REPAIR TABLE with the USE_FRM option must be
+   done before upgrading. Use of this statement with a version
+   of MySQL different from the one used to create the table
+   (that is, using it after upgrading) may damage the table. See
+   Section 13.7.2.5, "REPAIR TABLE Syntax."
    Note
 
    Beginning with MySQL 5.6.6, several MySQL Server parameters
    have defaults that differ from previous releases. See the
-   notes regarding these changes later in this section,
+   notes regarding these changes under Section 2.11.1.1, ","
    particularly regarding overriding them to preserve backward
    compatibility if that is a concern.
-   Note
 
-   It is good practice to back up your data before installing
-   any new version of software. Although MySQL works very hard
-   to ensure a high level of quality, protect your data by
-   making a backup.
+     * Configuration Changes
 
-   To upgrade to 5.6 from any previous version, MySQL recommends
-   that you dump your tables with mysqldump before upgrading and
-   reload the dump file after upgrading. Use the --all-databases
-   option to include all databases in the dump. If your
-   databases include stored programs, use the --routines and
-   --events options as well.
+     * Server Changes
 
-   In general, do the following when upgrading from MySQL 5.5 to
-   5.6:
-
-     * Read all the items in these sections to see whether any
-       of them might affect your applications:
-
-          + Section 2.11.1, "Upgrading MySQL," has general
-            update information.
-
-          + The items in the change lists provided later in this
-            section enable you to identify upgrade issues that
-            apply to your current MySQL installation. Some
-            incompatibilities discussed there require your
-            attention before upgrading. Others should be dealt
-            with after upgrading.
-
-          + The MySQL 5.6 Release Notes
-            (http://dev.mysql.com/doc/relnotes/mysql/5.6/en/)
-            describe significant new features you can use in 5.6
-            or that differ from those found in earlier MySQL
-            releases. Some of these changes may result in
-            incompatibilities.
-       Changes marked as either Known issue or Incompatible
-       change are incompatibilities with earlier versions of
-       MySQL, and may require your attention before you upgrade.
-       Our aim is to avoid these changes, but occasionally they
-       are necessary to correct problems that would be worse
-       than an incompatibility between releases. If any upgrade
-       issue applicable to your installation involves an
-       incompatibility that requires special handling, follow
-       the instructions given in the incompatibility
-       description. Sometimes this involves dumping and
-       reloading tables, or use of a statement such as CHECK
-       TABLE or REPAIR TABLE.
-       For dump and reload instructions, see Section 2.11.4,
-       "Rebuilding or Repairing Tables or Indexes." Any
-       procedure that involves REPAIR TABLE with the USE_FRM
-       option must be done before upgrading. Use of this
-       statement with a version of MySQL different from the one
-       used to create the table (that is, using it after
-       upgrading) may damage the table. See Section 13.7.2.5,
-       "REPAIR TABLE Syntax."
-
-     * Before upgrading to a new version of MySQL, Section
-       2.11.3, "Checking Whether Tables or Indexes Must Be
-       Rebuilt," to see whether changes to table formats or to
-       character sets or collations were made between your
-       current version of MySQL and the version to which you are
-       upgrading. If so and these changes result in an
-       incompatibility between MySQL versions, you will need to
-       upgrade the affected tables using the instructions in
-       Section 2.11.4, "Rebuilding or Repairing Tables or
-       Indexes."
-
-     * After upgrading to a new version of MySQL, run
-       mysql_upgrade (see Section 4.4.7, "mysql_upgrade ---
-       Check and Upgrade MySQL Tables"). This program checks
-       your tables, and attempts to repair them if necessary. It
-       also updates your grant tables to ensure that they have
-       the current structure so that you can take advantage of
-       any new capabilities. (Some releases of MySQL introduce
-       changes to the structure of the grant tables to add new
-       privileges or features.)
-       mysql_upgrade does not upgrade the contents of the help
-       tables. For upgrade instructions, see Section 5.1.10,
-       "Server-Side Help."
-
-     * If you run MySQL Server on Windows, see Section 2.3.8,
-       "Upgrading MySQL on Windows."
-
-     * If you use replication, see Section 17.4.3, "Upgrading a
-       Replication Setup," for information on upgrading your
-       replication setup.
-
-   If your MySQL installation contains a large amount of data
-   that might take a long time to convert after an in-place
-   upgrade, you might find it useful to create a "dummy"
-   database instance for assessing what conversions might be
-   needed and the work involved to perform them. Make a copy of
-   your MySQL instance that contains a full copy of the mysql
-   database, plus all other databases without data. Run your
-   upgrade procedure on this dummy instance to see what actions
-   might be needed so that you can better evaluate the work
-   involved when performing actual data conversion on your
-   original database instance.
-
-   Read all the items in the following sections to see whether
-   any of them might affect your applications:
+     * SQL Changes
 
 Configuration Changes
 
@@ -8683,55 +8682,346 @@ documentation for more details).
             with the same explicit_defaults_for_timestamp value
             used on the slaves, and bring it back up.
 
+2.11.1.2 Upgrading MySQL with the MySQL Yum Repository
+
+   For supported Yum-based platforms (see Section 2.5.1,
+   "Installing MySQL on Linux Using the MySQL Yum Repository,"
+   for a list), you can perform an in-place upgrade for MySQL
+   (that is, replacing the old version and then running the new
+   version off the old data files) with the MySQL Yum
+   repository.
+   Notes
+
+     * Before performing any update to MySQL, follow carefully
+       the instructions in Section 2.11.1, "Upgrading MySQL."
+       Among other instructions discussed there, it is
+       especially important to back up your database before the
+       update.
+
+     * The following instructions assume you have installed
+       MySQL with the MySQL Yum repository or with an RPM
+       package directly downloaded from MySQL Developer Zone's
+       MySQL Download page (http://dev.mysql.com/downloads/); if
+       that is not the case, following the instructions in
+       Section 2.5.2, "Replacing a Third-Party Distribution of
+       MySQL Using the MySQL Yum Repository."
+
+
+    1. Selecting a Target Series
+       By default, the MySQL Yum repository updates MySQL to the
+       latest version in the release series you have chosen
+       during installation (see Section 2.5.1, "" for details),
+       which means, for example, a 5.6.x installation will NOT
+       be updated to a 5.7.x release automatically. To update to
+       another release series, you need to first disable the
+       subrepository for the series that has been selected (by
+       default, or by yourself) and enable the subrepository for
+       your target series. To do that, see the general
+       instructions given in Section 2.5.1, "." For upgrading
+       from MySQL 5.6 to 5.7, perform the reverse of the steps
+       illustrated in Section 2.5.1, "," disabling the
+       subrepository for the MySQL 5.6 series and enabling that
+       for the MySQL 5.7 series.
+       As a general rule, to upgrade from one release series to
+       another, go to the next series rather than skipping a
+       series. For example, if you are currently running MySQL
+       5.5 and wish to upgrade to 5.7, upgrade to MySQL 5.6
+       first before upgrading to 5.7.
+       Important
+       For important information about upgrading from MySQL 5.6
+       to 5.7, see Upgrading from MySQL 5.6 to 5.7
+       (http://dev.mysql.com/doc/refman/5.7/en/upgrading-from-pr
+       evious-series.html).
+
+    2. Upgrading MySQL
+       Upgrade MySQL and its components by the following
+       command, for platforms that are not dnf-enabled:
+shell> sudo yum update mysql-server
+       For platforms that are dnf-enabled:
+shell> sudo dnf upgrade mysql-server
+       Alternatively, you can update MySQL by telling Yum to
+       update everything on your system, which might take
+       considerably more time; for platforms that are not
+       dnf-enabled:
+shell> sudo yum update
+       For platforms that are dnf-enabled:
+shell> sudo dnf upgrade
+
+    3. Restarting MySQL
+       The MySQL server always restarts after an update by Yum.
+       Once the server restarts, run mysql_upgrade to check and
+       possibly resolve any incompatibilities between the old
+       data and the upgraded software. mysql_upgrade also
+       performs other functions; see Section 4.4.7,
+       "mysql_upgrade --- Check and Upgrade MySQL Tables" for
+       details.
+
+   You can also update only a specific component. Use the
+   following command to list all the installed packages for the
+   MySQL components (for dnf-enabled systems, replace yum in the
+   command with dnf):
+shell> sudo yum list installed | grep "^mysql"
+
+   After identifying the package name of the component of your
+   choice, for platforms that are not dnf-enabled, update the
+   package with the following command, replacing package-name
+   with the name of the package:
+shell> sudo yum update package-name
+
+   For dnf-enabled platforms:
+shell> sudo dnf upgrade package-name
+
+Upgrading the Shared Client Libraries
+
+   After updating MySQL using the Yum repository, applications
+   compiled with older versions of the shared client libraries
+   should continue to work.
+
+   If you recompile applications and dynamically link them with
+   the updated libraries: As typical with new versions of shared
+   libraries where there are differences or additions in symbol
+   versioning between the newer and older libraries (for
+   example, between the newer, standard 5.6 shared client
+   libraries and some older---prior or variant---versions of the
+   shared libraries shipped natively by the Linux distributions'
+   software repositories, or from some other sources), any
+   applications compiled using the updated, newer shared
+   libraries will require those updated libraries on systems
+   where the applications are deployed. And, as expected, if
+   those libraries are not in place, the applications requiring
+   the shared libraries will fail. So, be sure to deploy the
+   packages for the shared libraries from MySQL on those
+   systems. You can do this by adding the MySQL Yum repository
+   to the systems (see Section 2.5.1, "") and install the latest
+   shared libraries using the instructions given in Section
+   2.5.1, "."
+
+2.11.1.3 Upgrading MySQL with the MySQL APT Repository
+
+   On Debian 7 or 8 and Ubuntu 12, 14, or 15, you can perform an
+   in-place upgrade of MySQL and its components with the MySQL
+   APT repository. See Upgrading MySQL with the MySQL APT
+   Repository
+   (http://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/index
+   .html#repo-qg-apt-upgrading) in A Quick Guide to Using the
+   MySQL APT Repository
+   (http://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/).
+
 2.11.2 Downgrading MySQL
 
-   This section describes what to do to downgrade to an older
-   MySQL version, in the unlikely case that the previous version
-   worked better than the new one.
+   This section describes how to downgrade to an older MySQL
+   version.
 
-   It is always a good idea to make a backup beforehand, in case
-   a downgrade fails and leaves the instance in an unusable
-   state.
+     * Supported Downgrade Methods
 
-   To downgrade between General Availability (GA) status
-   versions within the same release series, typically you just
-   install the new binaries on top of the old ones and do not
-   make any changes to the databases.
+     * Supported Downgrade Paths
 
-   Downgrades between milestone releases (or from a GA release
-   to a milestone release) within the same release series are
-   not supported and you may encounter issues.
+     * Before You Begin
 
-   The following items form a checklist of things to do whenever
-   you perform a downgrade:
+     * Performing an In-place Downgrade
 
-     * Read the upgrading section for the release series from
-       which you are downgrading to be sure that it does not
-       have any features you really need. See Section 2.11.1,
-       "Upgrading MySQL."
+     * Performing a Logical Downgrade
 
-     * If there is a downgrading section for that version, read
-       that as well.
+     * Downgrade Troubleshooting
 
-     * To see which new features were added between the version
-       to which you are downgrading and your current version,
-       see the Release Notes
-       (http://dev.mysql.com/doc/relnotes/mysql/5.6/en/).
+Supported Downgrade Methods
+
+   Supported downgrade methods include:
+
+     * In-place Downgrade: Involves shutting down the new MySQL
+       version, replacing the new MySQL binaries or packages
+       with the old ones, and restarting the old MySQL version
+       on the new data files. In-place downgrades are supported
+       for downgrades between GA versions within the same
+       release series. For example, in-place downgrades are
+       supported for downgrades from 5.6.27 to 5.6.26.
+
+     * Logical Downgrade: Involves using mysqldump to dump all
+       tables from the new MySQL version, and then loading the
+       dump file into the old MySQL version. Logical downgrades
+       are supported for downgrades between GA versions within
+       the same release series and for downgrades between
+       release levels. For example, logical downgrades are
+       supported for downgrades from 5.6.27 to 5.6.26 and for
+       downgrades from 5.6 to 5.5.
+
+Supported Downgrade Paths
+
+   Unless otherwise documented, the following downgrade paths
+   are supported:
+
+     * Downgrading from a release series version to an older
+       release series version is supported using all downgrade
+       methods. For example, downgrading from 5.6.27 to 5.6.26
+       is supported. Skipping release series versions is also
+       supported. For example, downgrading from 5.6.27 to 5.6.25
+       is supported.
+
+     * Downgrading one release level is supported using the
+       logical downgrade method. For example, downgrading from
+       5.6 to 5.5 is supported.
+
+     * Downgrading more than one release level is supported
+       using the logical downgrade method, but only if you
+       downgrade one release level at a time. For example, you
+       can downgrade from 5.6 to 5.5, and then to 5.1.
+
+   The following conditions apply to all downgrade paths:
+
+     * Downgrades between General Availability (GA) status
+       releases are supported.
+
+     * Downgrades between milestone releases (or from a GA
+       release to a milestone release) are not supported. For
+       example, downgrading from MySQL 5.6.10 to MySQL 5.6.9 is
+       not supported, as 5.6.9 is not a GA status release.
+
+Before You Begin
+
+   Before downgrading, the following steps are recommended:
+
+     * Review the Release Notes
+       (http://dev.mysql.com/doc/relnotes/mysql/5.6/en/) for the
+       MySQL version you are downgrading from to ensure that
+       there are no features or fixes that you really need.
+
+     * Review Section 2.11.2.1, "Changes Affecting Downgrades
+       from MySQL 5.6." This section describes changes that may
+       require action before or after downgrading.
+       Note
+       The downgrade procedures described in the following
+       sections assume you are downgrading with data files
+       created or modified by the newer MySQL version. However,
+       if you did not modify your data after upgrading,
+       downgrading using backups taken before upgrading to the
+       new MySQL version is recommended. Many of the changes
+       described in Section 2.11.2.1, "Changes Affecting
+       Downgrades from MySQL 5.6" that require action before or
+       after downgrading are not applicable when downgrading
+       using backups taken before upgrading to the new MySQL
+       version.
+
+     * Always back up your current databases and log files
+       before downgrading. The backup should include the mysql
+       database, which contains the MySQL system tables. See
+       Section 7.2, "Database Backup Methods."
+
+     * Use of new features, new configuration options, or new
+       configuration option values that are not supported by a
+       previous release may cause downgrade errors or failures.
+       Before downgrading, it is recommended that you reverse
+       changes resulting from the use of new features and remove
+       configuration settings that are not supported by the
+       release you are downgrading to.
 
      * Check Section 2.11.3, "Checking Whether Tables or Indexes
        Must Be Rebuilt," to see whether changes to table formats
        or to character sets or collations were made between your
        current version of MySQL and the version to which you are
-       downgrading. If so and these changes result in an
-       incompatibility between MySQL versions, you will need to
-       downgrade the affected tables using the instructions in
-       Section 2.11.4, "Rebuilding or Repairing Tables or
-       Indexes."
+       downgrading. If such changes have resulted in an
+       incompatibility between MySQL versions, downgrade the
+       affected tables using the instructions in Section 2.11.4,
+       "Rebuilding or Repairing Tables or Indexes."
 
-   In most cases, you can move the MySQL format files and data
-   files between different GA versions on the same architecture
-   as long as you stay within versions for the same release
-   series of MySQL.
+     * If you use XA transactions with InnoDB, run XA RECOVER
+       before downgrading to check for uncommitted XA
+       transactions. If results are returned, either commit or
+       rollback the XA transactions by issuing an XA COMMIT or
+       XA ROLLBACK statement.
+
+Performing an In-place Downgrade
+
+   In-place downgrades are supported for downgrades between GA
+   status releases within the same release series. Review Before
+   you Begin before proceeding.
+
+   To perform an in-place downgrade:
+
+    1. Review the changes described in Section 2.11.2.1,
+       "Changes Affecting Downgrades from MySQL 5.6" for steps
+       to be performed before downgrading.
+
+    2. If you use InnoDB, configure MySQL to perform a slow
+       shutdown by setting innodb_fast_shutdown to 0. For
+       example:
+shell> bin/mysql -u root -p password --execute="set global innodb_fast
+_shutdown=0"
+       With a slow shutdown, InnoDB performs a full purge and
+       change buffer merge before shutting down, which ensures
+       that data files are fully prepared in case of file format
+       differences between releases.
+
+    3. Shut down the newer MySQL server. For example:
+shell> bin/mysqladmin -u root -p password shutdown
+
+    4. After the slow shutdown, remove the InnoDB redo log files
+       (the ib_logfile* files) from the data directory to avoid
+       downgrade issues related to redo log file format changes
+       that may have occurred between releases.
+shell> rm ib_logfile*
+
+    5. Downgrade the MySQL binaries or packages in-place by
+       replacing the newer binaries or packages with the older
+       ones.
+
+    6. Start the older (downgraded) MySQL server, using the
+       existing data directory. For example:
+shell> bin/mysqld_safe --user=mysql --datadir=/path/to/existing-datadi
+r
+
+
+    7. Run mysql_upgrade. For example:
+shell> bin/mysql_upgrade -u root -p password
+
+Performing a Logical Downgrade
+
+   Logical downgrades are supported for downgrades between
+   releases within the same release series and for downgrades to
+   the previous release level. Only downgrades between General
+   Availability (GA) status releases are supported. Review
+   Before you Begin before proceeding.
+
+   To perform a logical downgrade:
+
+    1. Review the changes described in Section 2.11.2.1,
+       "Changes Affecting Downgrades from MySQL 5.6" for steps
+       to be performed before downgrading.
+
+    2. Dump all databases. For example:
+shell> bin/mysqldump --add-drop-table --events -u root -p password --a
+ll-databases --force > all_5_6_databases_dump.sql
+
+    3. Shut down the newer MySQL server. For example:
+shell> bin/mysqladmin -u root -p password shutdown
+
+    4. Initialize an older MySQL instance, with a new data
+       directory. For example:
+shell> scripts/mysql_install_db --user=mysql
+
+    5. Start the older MySQL server, using the new data
+       directory. For example:
+shell> bin/mysqld_safe --user=mysql --datadir=/path/to/new-datadir
+
+
+    6. Load the dump file into the older MySQL server. For
+       example:
+shell> bin/mysql -u root -p password --execute="source all_5_6_databas
+es_dump.sql" --force
+
+    7. Run mysql_upgrade. For example:
+shell> bin/mysql_upgrade -u root -p password
+
+    8. Configure MySQL to perform a slow shutdown by setting
+       innodb_fast_shutdown to 0. For example:
+shell> bin/mysql -u root -p password --execute="set global innodb_fast
+_shutdown=0"
+
+    9. Shut down and restart the MySQL server to ensure a clean
+       shutdown and startup. For example:
+shell> bin/mysqladmin -u root -p password shutdown
+shell> bin/mysqld_safe --user=mysql --datadir=/path/to/new-datadir
+
+Downgrade Troubleshooting
 
    If you downgrade from one release series to another, there
    may be incompatibilities in table storage formats. In this
@@ -8756,31 +9046,11 @@ documentation for more details).
     5. Reload the dump file into the older server. Your tables
        should be accessible.
 
-   If system tables in the mysql database changed, downgrading
-   might introduce some loss of functionality or require some
-   adjustments. Here are some examples:
+2.11.2.1 Changes Affecting Downgrades from MySQL 5.6
 
-     * Trigger creation requires the TRIGGER privilege as of
-       MySQL 5.1. In MySQL 5.0, there is no TRIGGER privilege
-       and SUPER is required instead. If you downgrade from
-       MySQL 5.1 to 5.0, you will need to give the SUPER
-       privilege to those accounts that had the TRIGGER
-       privilege in 5.1.
-
-     * Triggers were added in MySQL 5.0, so if you downgrade
-       from 5.0 to 4.1, you cannot use triggers at all.
-
-     * The mysql.proc.comment column definition changed between
-       MySQL 5.1 and 5.5. After a downgrade from 5.5 to 5.1,
-       this table is seen as corrupt and in need of repair. To
-       workaround this problem, execute mysql_upgrade from the
-       version of MySQL to which you downgraded.
-
-2.11.2.1 Downgrading to MySQL 5.5
-
-   When downgrading to MySQL 5.5 from MySQL 5.6, keep in mind
-   the following issues relating to behavior or features in
-   MySQL 5.6 that differ in MySQL 5.5:
+   Before downgrading from MySQL 5.6, review the changes
+   described in this section. Some changes may require action
+   before or after downgrading.
 
 System Tables
 
@@ -8789,6 +9059,13 @@ System Tables
        column. The mysql.user table in MySQL 5.5 does not. This
        means that an account with an expired password in MySQL
        5.6 will work normally in MySQL 5.5.
+
+     * The mysql.host table was removed in MySQL 5.6.7. When
+       downgrading to a previous release, startup on the
+       downgraded server fails with an error if the mysql.host
+       table is not present. You can recreate the table manually
+       or restore it from a backup taken prior to upgrading to
+       MySQL 5.6.7 or higher.
 
 Data Types
 
@@ -8803,7 +9080,7 @@ Data Types
        tables after downgrading.
        The following query identifies tables and columns that
        may be affected by this problem. Some of them are system
-       tables in the mysql database (such ascolumns_priv and
+       tables in the mysql database (such as columns_priv and
        proxies_priv). This means that mysql is one of the
        databases you must dump and reload, or server startup may
        fail after downgrading.

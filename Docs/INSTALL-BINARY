@@ -17,7 +17,7 @@
 
    MySQL compressed tar file binary distributions have names of
    the form mysql-VERSION-OS.tar.gz, where VERSION is a number
-   (for example, 5.6.28), and OS indicates the type of operating
+   (for example, 5.6.29), and OS indicates the type of operating
    system for which the distribution is intended (for example,
    pc-linux-i686 or winx64).
    Warning
@@ -81,7 +81,7 @@ shell> apt-get install libaio1 # install library
    To install and use a MySQL binary distribution, the command
    sequence looks like this:
 shell> groupadd mysql
-shell> useradd -r -g mysql mysql
+shell> useradd -r -g mysql -s /bin/false mysql
 shell> cd /usr/local
 shell> tar zxvf /path/to/mysql-VERSION-OS.tar.gz
 shell> ln -s full-path-to-mysql-VERSION-OS mysql
@@ -128,7 +128,7 @@ Create a mysql User and Group
    may differ slightly on different versions of Unix, or they
    may have different names such as adduser and addgroup.
 shell> groupadd mysql
-shell> useradd -r -g mysql mysql
+shell> useradd -r -g mysql -s /bin/false mysql
 
    Note
 
@@ -265,7 +265,7 @@ Additional Installation Information
    executed using a user with Administrator privileges.
 
    For a list of limitations on the use of MySQL on the Windows
-   platform, see Section D.10.6, "Windows Platform Limitations."
+   platform, see Section C.10.6, "Windows Platform Limitations."
 
    In addition to the MySQL Server package, you may need or want
    additional components to use MySQL with your application or
@@ -412,8 +412,8 @@ Additional Installation Information
    Archive distributions (but not MSI distributions) of MySQL.
 
      * MySQL Installer: This package has a file name similar to
-       mysql-installer-community-5.6.28.0.msi or
-       mysql-installer-commercial-5.6.28.0.msi, and utilizes
+       mysql-installer-community-5.6.29.0.msi or
+       mysql-installer-commercial-5.6.29.0.msi, and utilizes
        MSIs to automatically install MySQL server and other
        products. It will download and apply updates to itself,
        and for each of the installed products. It also
@@ -437,8 +437,8 @@ Additional Installation Information
        Microsoft Windows Using MySQL Installer."
 
      * The Noinstall Archive: This package has a file name
-       similar to mysql-5.6.28-win32.zip or
-       mysql-5.6.28-winx64.zip, and contains all the files found
+       similar to mysql-5.6.29-win32.zip or
+       mysql-5.6.29-winx64.zip, and contains all the files found
        in the Complete install package, with the exception of
        the GUI. It also contains PDB files. This package does
        not include an automated installer, and must be manually
@@ -503,14 +503,14 @@ Installer package types
        MySQL server). The file size is over 300MB, and its name
        has the form mysql-installer-community-VERSION.N.msi
        where VERSION is the MySQL Server version number such as
-       5.6 and N is the package number, which begins at 0.
+       5.7 and N is the package number, which begins at 0.
 
      * Web: Only contains the Installer and configuration files,
        and it downloads the MySQL products you choose to
        install. The size of this file is about 2MB; the name of
        the file has the form
        mysql-installer-community-web-VERSION.N.msi where VERSION
-       is the MySQL Server version number such as 5.6 and N is
+       is the MySQL Server version number such as 5.7 and N is
        the package number, which begins at 0.
 
      * Updates: MySQL Installer can upgrade itself, so an
@@ -1879,7 +1879,7 @@ InnoDB: foreign key constraint system tables created
    something like this, which indicates that the server is ready
    to service client connections:
 mysqld: ready for connections
-Version: '5.6.28'  socket: ''  port: 3306
+Version: '5.6.29'  socket: ''  port: 3306
 
    The server continues to write to the console any further
    diagnostic output it produces. You can open a new console
