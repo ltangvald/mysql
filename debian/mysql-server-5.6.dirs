@@ -1,2 +1,2 @@
-var/lib/mysql-upgrade
 /etc/mysql/mysql.conf.d
+var/lib/mysql-upgrade
