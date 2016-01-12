@@ -10,6 +10,8 @@ mysql-5.6 (5.6.28-1) UNRELEASED; urgency=medium
       7ef4a27 that added this.
   * Drop d/p/fix_testsuite_date.patch: fixed upstream.
   * wrap-and-sort
+  * d/mysql-server-core-5.6.install: remove duplicate entries. Thanks to Otto
+    for pointing these out.
 
  -- Robie Basak <robie@justgohome.co.uk>  Sun, 20 Dec 2015 14:20:39 +0000
 
