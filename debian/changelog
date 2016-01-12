@@ -1,5 +1,6 @@
 mysql-5.6 (5.6.27-2) unstable; urgency=medium
 
+  [ Robie Basak ]
   * Fix dep8 test failure by bumping back "future" date. Taken from
     Ubuntu. Thanks to Marc Deslauriers.
   * Update debian/watch.
@@ -10,6 +11,8 @@ mysql-5.6 (5.6.27-2) unstable; urgency=medium
   * d/mysql-server-5.6.postrm:
     - Drop duplicate section.
     - Only run configure-symlinks if it exists (LP: #1455818).
+
+  [ Lars Tangvald ]
   * Removed legacy plugin install code (LP: #1468185).
 
  -- Robie Basak <robie@justgohome.co.uk>  Wed, 11 Nov 2015 12:08:33 +0000
