@@ -173,7 +173,8 @@ Architecture: any
 Recommends: libhtml-template-perl
 Suggests: mailx, tinyca
 Pre-Depends: adduser (>= 3.40), debconf, mysql-common (>= 5.5)
-Depends: initscripts,
+Depends: bsdutils,
+         initscripts,
          libdbi-perl,
          lsb-base (>= 3.0-10),
          mysql-client-5.6 (>= ${binary:Version}),
