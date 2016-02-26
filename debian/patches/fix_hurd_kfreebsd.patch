@@ -1,9 +1,18 @@
-Author: Pino Toscano <pino@debian.org>
-Subject: cmake options for GNU/Hurd
-Bug: http://bugs.mysql.com/bug.php?id=64685
-Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=651002
-Last-Update: 2012-03-18
-Reviewed-by: Nicholas Bamber <nicholas@periapt.co.uk>
+Description: Build and test fixes for GNU/Hurd and kFreeBSD
+ Merged patches for hurd and kfreebsd and updated for 5.7
+ Thanks to: 
+ Pino Toscano <pino@debian.org>
+ Nicholas Bamber <nicholas@periapt.co.uk>
+ for original patches.
+ .
+ See hurd.patch and kfreebsd_tests.patch for more information
+Author: Lars Tangvald <lars.tangvald@oracle.com>
+
+---
+Forwarded: no
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2016-02-09
+
 --- /dev/null
 +++ b/cmake/os/GNU.cmake
 @@ -0,0 +1,20 @@
@@ -29,13 +38,15 @@ Reviewed-by: Nicholas Bamber <nicholas@periapt.co.uk>
 +SET(_FILE_OFFSET_BITS 64)
 --- a/mysql-test/lib/My/Platform.pm
 +++ b/mysql-test/lib/My/Platform.pm
-@@ -110,6 +110,9 @@ sub check_socket_path_length {
-   # This may not be true, but we can't test for it on AIX due to Perl bug
-   # See Bug #45771
-   return 0 if ($^O eq 'aix');
-+  # Similarly the path length is hidden.
+@@ -107,6 +107,11 @@ sub check_socket_path_length {
+ 
+   return 0 if IS_WINDOWS;
+ 
 +  # See Debian bug #651002
 +  return 0 if ($^O eq 'gnu');
- 
++  # See Debian bug #670722 - failing on kFreeBSD even after setting short path
++  return 0 if length $path < 40;
++
    require IO::Socket::UNIX;
  
+   my $truncated= undef;
