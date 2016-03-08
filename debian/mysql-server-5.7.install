@@ -15,8 +15,6 @@ usr/bin/mysql_tzinfo_to_sql
 usr/bin/mysqlbinlog
 usr/bin/mysqld_multi
 usr/bin/mysqld_safe
-usr/bin/mysqltest
-usr/bin/mysqltest_embedded
 usr/bin/perror
 usr/bin/replace
 usr/bin/resolve_stack_dump usr/lib/mysql/
