@@ -28,7 +28,7 @@ main.mysql_plugin: Requires writable /usr
 rpl.rpl_gtid_mode : Requires starting server as root ref http://bugs.mysql.com/bug.php?id=70517
 EOF
 
-cd /usr/lib/mysql-testsuite
+cd /usr/lib/mysql-test
 echo "starting mysql-test-tun.pl..."
 ./mysql-test-run.pl --suite=main --vardir=$WORKDIR/var --tmpdir=$WORKDIR/tmp \
     --skip-ndbcluster --parallel=auto --skip-rpl --report-features \
