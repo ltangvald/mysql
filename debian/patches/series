@@ -1,5 +1,4 @@
 fix-man-page-links.patch
 hurd.patch
-scripts__mysqld_safe.sh__signals.patch
 kfreebsd_tests.patch
 mips64el.patch
