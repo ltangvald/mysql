@@ -1,10 +1,108 @@
-mysql-5.6 (5.6.28-2) UNRELEASED; urgency=medium
+mysql-5.7 (5.7.11-1~exp1) UNRELEASED; urgency=medium
 
+  [ Bjoern Boschman ]
+  * Imported Upstream version 5.7.11.
+
+  [ Robie Basak ]
   * Drop d/libmysqlclient18.lintian-overrides as the problem is genuine
     and should not be hidden. This addresses #812812 in part, but does
     not close it.
+  * AppArmor profile refactoring and updates for 5.7.
+  * Rename apport hook from 5.6 to 5.7.
+  * debian/watch file update to 5.7.
+  * d/rules: replace 5.6 with 5.7.
+  * Drop libmysqld-pic.
+  * d/rules: use dh_install --list-missing.
+  * d/rules: some dh_install excludes.
+  * d/rules: drop large set of comments.
+  * d/rules configure: switch to INSTALL_LAYOUT=DEB.
+  * d/rules configure: build WITH_INNODB_MEMCACHED.
+  * d/rules configure: build with supplied boost.
+  * d/rules configure: build with BUILD_CONFIG=mysql_release.
+  * d/rules configure: drop SYSTEM_TYPE=.
+  * d/rules: chmod changes.
+  * mysqld.conf: move to non-deprecated name.
+  * Rename debian/*5.6* to 5.7.
+  * Adjust installation debian/additions/mysql-systemd-start.
+  * Drop d/mysql-client-5.7.examples.
+  * Drop some lintian overrides.
+  * d/control: switch to 5.7.
+  * libmysqlclient soname bump.
+  * Update manpage formatting lintian overrides.
+  * Drop d/p/fix-mysqlhotcopy-test-failure.patch.
+  * Drop d/p/spelling.patch.
+  * Drop d/p/fix_standalone_tests.patch.
+  * Drop d/p/disable_tests.patch.
+  * Drop d/p/scripts__mysqld_safe.sh__signals.patch.
+  * Update Hurd and kFreeBSD patches.
+  * Add d/p/fix-mtr-search-paths.patch.
+  * Non-functional (documentation) 5.6->5.7 substitutions.
+  * Drop comment from .install files.
+  * Apport hook: install under new name.
+  * mysql-testsuite-5.7 installation adjustments for 5.7.
+  * Binary installation tweaks.
+  * d/p/mysql-test-run-paths: adjust test suite for generic binary
+    paths.
+  * Move testsuite binaries to testsuite package.
+  * Build with libmecab-dev.
+  * Manpage changes for 5.7.
+  * dep8 tests: s/5.6/5.7/.
+  * dep8 test: adjust exclude list.
+  * dep8 test: adjust test runner path.
+  * dep8 test: fix typo (non-functional).
+  * d/mysql-server-5.7.dirs: clean syntax.
+  * TODO: d/copyright: misc updates for 5.7.
+  * d/copyright: boost.
+  * Mark scripts executable.
+  * Drop gawk build dependency.
+  * Add new MySQL 5.7 build dependencies.
+  * Drop Perl dependencies.
+  * debconf template package rename.
+  * Removed d/clean.
 
- -- Robie Basak <robie@justgohome.co.uk>  Thu, 28 Jan 2016 10:32:09 +0000
+  [ Lars Tangvald ]
+  * Change service file to use mysqld instead of mysqld_safe.
+  * Add new directories for purge deletion.
+  * Remove dojo javascript.
+
+  [ Robie Basak ]
+  * Use pathfind
+  * d/mysql-server-5.7.postinst:
+    - Add run_init_sql function.
+    - Normalise whitespace.
+    - Deprecate basedir in debian.cnf.
+    - Always forget debconf root_password.
+    - Stop ensuring /var/lib/mysql/mysql.
+    - Normalise ensuring /var/lib/mysql.
+    - Ensure new files and keyring dirs.
+
+  [ Lars Tangvald ]
+  * d/mysql-server-5.7.postinst:
+    - Moved debhelper macro to  before access checking.
+    - Added function for setting the password of a user.
+    - Added comment to specify what test_mysql_access is for.
+    - Add function for checking sysmaint login.
+    - Updated flag file.
+    - Moved database initialization.
+    - Use --initialize for database init.
+    - Remove old sys-maint user init.
+    - Removed some commenting.
+    - Removed BOOTSTRAP reference from comment.
+    - Run mysql_upgrade when installing.
+    - Normalised whitespace.
+    - Use new function to set root pw.
+    - Remove set_mysql_rootpw function.
+    - Remove MYSQL_BOOTSTRAP variable.
+    - Enable auth_socket for passwordless root.
+  * d/mysql-server-5.7.config: only prompt root password on fresh
+    install.
+  * d/mysql-server-5.7.preinst: Updated current version to 5.7.
+
+  [ Robie Basak ]
+  * Drop error_setting_password debconf template.
+  * d/control: add Breaks/Replaces against -5.6 packages.
+
+ -- Robie Basak <robie.basak@canonical.com>  Wed, 16 Mar 2016 13:48:32 +0000
 
 mysql-5.6 (5.6.28-1) unstable; urgency=medium
 
