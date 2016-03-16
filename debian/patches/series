@@ -4,5 +4,4 @@ scripts__mysqld_safe.sh__signals.patch
 disable_tests.patch
 fix_standalone_tests.patch
 kfreebsd_tests.patch
-spelling.patch
 mips64el.patch
