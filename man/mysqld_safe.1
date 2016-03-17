@@ -2,12 +2,12 @@
 .\"     Title: \fBmysqld_safe\fR
 .\"    Author: [FIXME: author] [see http://docbook.sf.net/el/author]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 11/16/2015
+.\"      Date: 02/01/2016
 .\"    Manual: MySQL Database System
-.\"    Source: MySQL 5.6
+.\"    Source: MySQL 5.7
 .\"  Language: English
 .\"
-.TH "\FBMYSQLD_SAFE\FR" "1" "11/16/2015" "MySQL 5\&.6" "MySQL Database System"
+.TH "\FBMYSQLD_SAFE\FR" "1" "02/01/2016" "MySQL 5\&.7" "MySQL Database System"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -43,6 +43,25 @@ is the recommended way to start a
 server on Unix\&.
 \fBmysqld_safe\fR
 adds some safety features such as restarting the server when an error occurs and logging runtime information to an error log file\&. A description of error logging is given later in this section\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBNote\fR
+.ps -1
+.br
+.PP
+As of MySQL 5\&.7\&.6, for MySQL installation using an RPM distribution, server startup and shutdown is managed by systemd on several Linux platforms\&. On these platforms,
+\fBmysqld_safe\fR
+is no longer installed because it is unnecessary\&. For more information, see
+Section\ \&2.5.10, \(lqManaging MySQL Server with systemd\(rq\&.
+.sp .5v
+.RE
 .PP
 \fBmysqld_safe\fR
 tries to start an executable named
@@ -104,8 +123,8 @@ sections, but to be current you should rename such sections to
 [mysqld_safe]\&.
 .PP
 \fBmysqld_safe\fR
-supports the following options\&. It also reads option files and supports the options for processing them described at
-Section\ \&4.2.7, \(lqCommand-Line Options that Affect Option-File Handling\(rq\&.
+accepts options on the command line and in option files, as described in the following table\&. For information about option files used by MySQL programs, see
+Section\ \&4.2.6, \(lqUsing Option Files\(rq\&.
 .sp
 .RS 4
 .ie n \{\
@@ -241,6 +260,94 @@ Section\ \&5.2.2, \(lqThe Error Log\(rq\&.
 .sp -1
 .IP \(bu 2.3
 .\}
+.\" mysqld_safe: mysqld-safe-log-timestamps option
+.\" mysqld-safe-log-timestamps option: mysqld_safe
+\fB\-\-mysqld\-safe\-log\-timestamps\fR
+.sp
+This option controls the format for timestamps in log output produced by
+\fBmysqld_safe\fR\&. The following list describes the permitted values\&. For any other value,
+\fBmysqld_safe\fR
+logs a warning and uses
+UTC
+format\&.
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+UTC,
+utc
+.sp
+ISO 8601 UTC format (same as
+\fB\-\-log_timestamps=UTC\fR
+for the server)\&. This is the default\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+SYSTEM,
+system
+.sp
+ISO 8601 local time format (same as
+\fB\-\-log_timestamps=SYSTEM\fR
+for the server)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+HYPHEN,
+hyphen
+.sp
+YY\-MM\-DD h:mm:ss
+format, as in
+\fBmysqld_safe\fR
+for MySQL 5\&.6\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+LEGACY,
+legacy
+.sp
+YYMMDD hh:mm:ss
+format, as in
+\fBmysqld_safe\fR
+prior to MySQL 5\&.6\&.
+.RE
+.sp
+This option was added in MySQL 5\&.7\&.11\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
 .\" mysqld_safe: malloc-lib option
 .\" mysqld option: malloc-lib
 \fB\-\-malloc\-lib=[\fR\fB\fIlib_name\fR\fR\fB]\fR
@@ -250,7 +357,7 @@ The name of the library to use for memory allocation instead of the system
 malloc()
 library\&. Any library can be used by specifying its path name, but there is a shortcut form to enable use of the
 tcmalloc
-library that is shipped with binary MySQL distributions for Linux in MySQL 5\&.6\&. It is possible that the shortcut form will not work under certain configurations, in which case you should specify a path name instead\&.
+library that is shipped with binary MySQL distributions for Linux in MySQL 5\&.7\&. It is possible that the shortcut form will not work under certain configurations, in which case you should specify a path name instead\&.
 .sp
 The
 \fB\-\-malloc\-lib\fR
@@ -335,6 +442,26 @@ adds a path name to
 LD_PRELOAD, it adds the path to the beginning of any existing value the variable already has\&.
 .RE
 .sp
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBNote\fR
+.ps -1
+.br
+On systems that manage the server using systemd,
+\fBmysqld_safe\fR
+is not available\&. Instead, specify the allocation library by setting
+LD_PRELOAD
+in
+/etc/sysconfig/mysql\&.
+.sp .5v
+.RE
 Linux users can use the
 libtcmalloc_minimal\&.so
 included in binary packages by adding these lines to the
@@ -507,6 +634,12 @@ for this to function properly\&.
 \fB\-\-pid\-file=\fR\fB\fIfile_name\fR\fR
 .sp
 The path name of the process ID file\&.
+.sp
+In MySQL 5\&.7\&.2 and later,
+\fBmysqld_safe\fR
+creates a PID file named
+mysqld_safe\&.pid
+in the MySQL data directory when starting up (Bug #16776528)\&.
 .RE
 .sp
 .RS 4
@@ -603,7 +736,16 @@ When
 syslog
 is used, the
 daemon\&.err
-syslog facility/severity is used for all log messages\&.
+facility/severity is used for all log messages\&.
+.sp
+Using these options to control
+\fBmysqld\fR
+logging is deprecated as of MySQL 5\&.7\&.5\&. Use the server
+log_syslog
+system variable instead\&. To control the facility, use the server
+log_syslog_facility
+system variable\&. See
+Section\ \&5.2.2, \(lqThe Error Log\(rq\&.
 .RE
 .sp
 .RS 4
@@ -631,6 +773,13 @@ mysqld, respectively\&. To specify a suffix for the identifiers, use
 mysqld_safe\-\fItag\fR
 and
 mysqld\-\fItag\fR\&.
+.sp
+Using this option to control
+\fBmysqld\fR
+logging is deprecated as of MySQL 5\&.7\&.5\&. Use the server
+log_syslog_tag
+system variable instead\&. See
+Section\ \&5.2.2, \(lqThe Error Log\(rq\&.
 .RE
 .sp
 .RS 4
@@ -776,13 +925,14 @@ and
 \fB\-\-datadir\fR
 options to indicate the directories in which the server and databases are located on your system\&.
 .PP
-In MySQL 5\&.6\&.5 and later,
 \fBmysqld_safe\fR
 tries to use the
 \fBsleep\fR
 and
 \fBdate\fR
-system utilities to determine how many times it has attempted to start this second, and\(emif these are present and this is greater than 5 times\(emis forced to wait 1 full second before starting again\&. This is intended to prevent excessive CPU usage in the event of repeated failures\&. (Bug #11761530, Bug #54035)
+system utilities to determine how many times per second it has attempted to start\&. If these utilities are present and the attempted starts per second is greater than 5,
+\fBmysqld_safe\fR
+waits 1 full second before starting again\&. This is intended to prevent excessive CPU usage in the event of repeated failures\&. (Bug #11761530, Bug #54035)
 .PP
 When you use
 \fBmysqld_safe\fR
@@ -841,24 +991,39 @@ option is given\&.
 If none of these options is given, the default is
 \fB\-\-skip\-syslog\fR\&.
 .PP
-If
-\fB\-\-log\-error\fR
-and
-\fB\-\-syslog\fR
-are both given, a warning is issued and
-\fB\-\-log\-error\fR
-takes precedence\&.
-.PP
 When
 \fBmysqld_safe\fR
 writes a message, notices go to the logging destination (syslog
 or the error log file) and
 stdout\&. Errors go to the logging destination and
 stderr\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBNote\fR
+.ps -1
+.br
+.PP
+Controlling
+\fBmysqld\fR
+logging from
+\fBmysqld_safe\fR
+is deprecated as of MySQL 5\&.7\&.5\&. Use the server\*(Aqs native
+syslog
+support instead\&. For more information, see
+Section\ \&5.2.2, \(lqThe Error Log\(rq\&.
+.sp .5v
+.RE
 .SH "COPYRIGHT"
 .br
 .PP
-Copyright \(co 1997, 2015, Oracle and/or its affiliates. All rights reserved.
+Copyright \(co 1997, 2016, Oracle and/or its affiliates. All rights reserved.
 .PP
 This documentation is free software; you can redistribute it and/or modify it only under the terms of the GNU General Public License as published by the Free Software Foundation; version 2 of the License.
 .PP

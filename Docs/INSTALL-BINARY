@@ -17,7 +17,7 @@
 
    MySQL compressed tar file binary distributions have names of
    the form mysql-VERSION-OS.tar.gz, where VERSION is a number
-   (for example, 5.6.29), and OS indicates the type of operating
+   (for example, 5.7.12), and OS indicates the type of operating
    system for which the distribution is intended (for example,
    pc-linux-i686 or winx64).
    Warning
@@ -51,7 +51,7 @@ shell> apt-cache search libaio # search for info
 shell> apt-get install libaio1 # install library
 
    If you run into problems and need to file a bug report,
-   please use the instructions in Section 1.6, "How to Report
+   please use the instructions in Section 1.7, "How to Report
    Bugs or Problems."
 
    On Unix, to install a compressed tar file binary
@@ -70,7 +70,6 @@ shell> apt-get install libaio1 # install library
    lib Libraries
    share Miscellaneous support files, including error messages,
    sample configuration files, SQL for database installation
-   sql-bench Benchmarks
 
    Debug versions of the mysqld binary are available as
    mysqld-debug. To compile your own debug version of MySQL from
@@ -86,11 +85,15 @@ shell> cd /usr/local
 shell> tar zxvf /path/to/mysql-VERSION-OS.tar.gz
 shell> ln -s full-path-to-mysql-VERSION-OS mysql
 shell> cd mysql
+shell> mkdir mysql-files
+shell> chmod 750 mysql-files
 shell> chown -R mysql .
 shell> chgrp -R mysql .
-shell> scripts/mysql_install_db --user=mysql
+shell> bin/mysql_install_db --user=mysql    # Before MySQL 5.7.6
+shell> bin/mysqld --initialize --user=mysql # MySQL 5.7.6 and up
+shell> bin/mysql_ssl_rsa_setup              # MySQL 5.7.6 and up
 shell> chown -R root .
-shell> chown -R mysql data
+shell> chown -R mysql data mysql-files
 shell> bin/mysqld_safe --user=mysql &
 # Next command is optional
 shell> cp support-files/mysql.server /etc/init.d/mysql.server
@@ -103,16 +106,20 @@ shell> cp support-files/mysql.server /etc/init.d/mysql.server
    command.
    Note
 
-   The procedure does not assign passwords to MySQL accounts. To
-   do so, use the instructions in Section 2.10.4, "Securing the
-   Initial MySQL Accounts."
+   Before MySQL 5.7.4, the procedure does not assign passwords
+   to MySQL accounts. To do so, use the instructions in Section
+   2.10.4, "Securing the Initial MySQL Accounts."
 
-   As of MySQL 5.6.8, mysql_install_db creates a default option
+   The mysql-files directory provides a convenient location to
+   use as the value of the secure_file_priv system variable that
+   limits import/export operations to a specific directory. See
+   Section 5.1.4, "Server System Variables."
+
+   Before MySQL 5.7.5, mysql_install_db creates a default option
    file named my.cnf in the base installation directory. This
    file is created from a template included in the distribution
    package named my-default.cnf. For more information, see
-   Section 5.1.2.2, "Using a Sample Default Server Configuration
-   File."
+   Section 5.1.2, "Server Configuration Defaults."
 
    A more detailed version of the preceding description for
    installing a binary distribution follows.
@@ -133,10 +140,10 @@ shell> useradd -r -g mysql -s /bin/false mysql
    Note
 
    Because the user is required only for ownership purposes, not
-   login purposes, the useradd command uses the -r option to
-   create a user that does not have login permissions to your
-   server host. Omit this option to permit logins for the user,
-   or if your useradd does not support the option.
+   login purposes, the useradd command uses the -r and -s
+   /bin/false options to create a user that does not have login
+   permissions to your server host. Omit these options if your
+   useradd does not support them.
 
 Obtain and Unpack the Distribution
 
@@ -255,7 +262,7 @@ Additional Installation Information
    Windows service. By using a service, you can monitor and
    control the operation of the server through the standard
    Windows service management tools. For more information, see
-   Section 2.3.5.7, "Starting MySQL as a Windows Service."
+   Section 2.3.5.8, "Starting MySQL as a Windows Service."
 
    Generally, you should install MySQL on Windows using an
    account that has administrator rights. Otherwise, you may
@@ -334,7 +341,7 @@ Additional Installation Information
        If you need tables with a size larger than 4GB, install
        MySQL on an NTFS or newer file system. Do not forget to
        use MAX_ROWS and AVG_ROW_LENGTH when you create tables.
-       See Section 13.1.17, "CREATE TABLE Syntax."
+       See Section 13.1.14, "CREATE TABLE Syntax."
 
      * MySQL and Virus Checking Software
        Virus-scanning software such as Norton/Symantec
@@ -363,8 +370,8 @@ Additional Installation Information
 
 2.3.1 MySQL Installation Layout on Microsoft Windows
 
-   For MySQL 5.6 on Windows, the default installation directory
-   is C:\Program Files\MySQL\MySQL Server 5.6. Some Windows
+   For MySQL 5.7 on Windows, the default installation directory
+   is C:\Program Files\MySQL\MySQL Server 5.7. Some Windows
    users prefer to install in C:\mysql, the directory that
    formerly was used as the default. However, the layout of the
    subdirectories remains the same.
@@ -376,11 +383,11 @@ Additional Installation Information
    Windows
    Directory Contents of Directory Notes
    bin, scripts mysqld server, client and utility programs
-   %ALLUSERSPROFILE%\MySQL\MySQL Server 5.6\ Log files,
+   %ALLUSERSPROFILE%\MySQL\MySQL Server 5.7\ Log files,
    databases (Windows XP, Windows Server 2003) The Windows
    system variable %ALLUSERSPROFILE% defaults to C:\Documents
    and Settings\All Users\Application Data
-   %PROGRAMDATA%\MySQL\MySQL Server 5.6\ Log files, databases
+   %PROGRAMDATA%\MySQL\MySQL Server 5.7\ Log files, databases
    (Vista, Windows 7, Windows Server 2008, and newer) The
    Windows system variable %PROGRAMDATA% defaults to
    C:\ProgramData
@@ -402,7 +409,7 @@ Additional Installation Information
 
 2.3.2 Choosing An Installation Package
 
-   For MySQL 5.6, there are multiple installation package
+   For MySQL 5.7, there are multiple installation package
    formats to choose from when installing MySQL on Windows.
    Note
 
@@ -412,8 +419,8 @@ Additional Installation Information
    Archive distributions (but not MSI distributions) of MySQL.
 
      * MySQL Installer: This package has a file name similar to
-       mysql-installer-community-5.6.29.0.msi or
-       mysql-installer-commercial-5.6.29.0.msi, and utilizes
+       mysql-installer-community-5.7.12.0.msi or
+       mysql-installer-commercial-5.7.12.0.msi, and utilizes
        MSIs to automatically install MySQL server and other
        products. It will download and apply updates to itself,
        and for each of the installed products. It also
@@ -423,8 +430,14 @@ Additional Installation Information
        connectors (such as C, C++, J, NET, and ODBC), MySQL
        Workbench, MySQL Notifier, MySQL for Excel, and the MySQL
        Server with its components.
-       MySQL Installer will run on all Windows platforms that
-       are supported by MySQL (see
+       Note
+       As of MySQL 5.7.8, MySQL Installer no longer includes
+       debugging binaries/information components (including PDB
+       files). These are available in a separate Zip archive
+       named mysql-VERSION-winx64-debug-test.zip for 64-bit and
+       mysql-VERSION-win32-debug-test.zip for 32-bit.
+       MySQL Installer operates on all MySQL supported versions
+       of Windows (see
        http://www.mysql.com/support/supportedplatforms/database.
        html).
        Note
@@ -436,13 +449,24 @@ Additional Installation Information
        Installer, see Section 2.3.3, "Installing MySQL on
        Microsoft Windows Using MySQL Installer."
 
-     * The Noinstall Archive: This package has a file name
-       similar to mysql-5.6.29-win32.zip or
-       mysql-5.6.29-winx64.zip, and contains all the files found
-       in the Complete install package, with the exception of
-       the GUI. It also contains PDB files. This package does
-       not include an automated installer, and must be manually
-       installed and configured.
+     * The Noinstall Archives: These packages contain the files
+       found in the complete installation package, with the
+       exception of the GUI. This format does not include an
+       automated installer, and must be manually installed and
+       configured.
+       Note
+       As of MySQL 5.7.6, noinstall archives are split into two
+       separate Zip files. The main package is named
+       mysql-VERSION-winx64.zip for 64-bit and
+       mysql-VERSION-win32.zip for 32-bit. This contains the
+       components needed to use MySQL on your system. The
+       optional MySQL test suite, MySQL benchmark suite, and
+       debugging binaries/information components (including PDB
+       files) are in a separate Zip file named
+       mysql-VERSION-winx64-debug-test.zip for 64-bit and
+       mysql-VERSION-win32-debug-test.zip for 32-bit.
+       Before MySQL 5.7.6, a single noinstall archive contained
+       both the main and debugging files.
 
    MySQL Installer is recommended for most users.
 
@@ -464,7 +488,7 @@ Additional Installation Information
 
    The supported MySQL products include:
 
-     * MySQL server (http://dev.mysql.com/doc/) (one or multiple
+     * MySQL Server (http://dev.mysql.com/doc/) (one or multiple
        versions on the same system)
 
      * MySQL Workbench
@@ -490,7 +514,9 @@ Additional Installation Information
      * MySQL Documentation
 
      * MySQL Installer is also installed and remains on the
-       system as its own application
+       system as its own application, that is used to install
+       additional MySQL products, and also to update and
+       configure existing MySQL products
 
      * The Enterprise edition installs the Enterprise versions
        of the above products, and also includes MySQL Enterprise
@@ -845,16 +871,17 @@ Adding MySQL Products
 
    MySQL Installer stores a MySQL product catalog. The catalog
    can be updated either manually or automatically, and the
-   catalog change history is also available.
+   catalog change history is also available. The automatic
+   update is enabled by default.
+   Note
+
+   The product catalog update also checks for a newer version of
+   MySQL Installer, and prompts for an update if one is present.
 
    Manual updates
 
    You can update the MySQL product catalog at any time by
    clicking Catalog on the Installer dashboard.
-   Note
-
-   This also checks for a newer MySQL Installer version, and
-   prompts for an update if one is present.
 
    Figure 2.21 MySQL Installer - Open the MySQL Product Catalog
    MySQL Installer - Open the MySQL Product Catalog
@@ -863,10 +890,10 @@ Adding MySQL Products
 
    Automatic updates
 
-   You can configure MySQL Installer to automatically update the
-   MySQL product catalog once per day. To enable this feature
-   and set the update time, click the wrench icon on the
-   Installer dashboard.
+   MySQL Installer can automatically update the MySQL product
+   catalog. By default, this feature is enabled to execute each
+   day at 12:00 AM. To configure this feature, click the wrench
+   icon on the Installer dashboard.
 
    The next window configures the Automatic Catalog Update.
    Enable or disable this feature, and also set the hour.
@@ -974,11 +1001,10 @@ Reconfigure
    Figure 2.30 MySQL Installer - Reconfigure a MySQL Product
    MySQL Installer - Reconfigure a MySQL Product
 
-   In the case of the MySQL server, this opens the familiar
-   configuration wizard.
-
-   Figure 2.31 MySQL Installer - Reconfiguration Wizard
-   MySQL Installer - Reconfiguration Wizard
+   In the case of the MySQL server, this opens a configuration
+   wizard that relates to the selected product. For example, for
+   MySQL Server this includes setting the type, ports, log
+   paths, and so on.
 
 Modify
 
@@ -989,7 +1015,7 @@ Modify
    The modify the features of a product, click Modify on the
    main dashboard.
 
-   Figure 2.32 MySQL Installer - Modify Product Features
+   Figure 2.31 MySQL Installer - Modify Product Features
    MySQL Installer - Modify Product Features
 
    Click Execute to execute the modification request.
@@ -1271,7 +1297,7 @@ C:\> MySQLInstallerConsole update
    The Service Instance menu is the main MySQL Notifier window,
    and enables you to Stop, Start, and Restart the MySQL Server.
 
-   Figure 2.33 MySQL Notifier Service Instance menu
+   Figure 2.32 MySQL Notifier Service Instance menu
    MySQL Notifier Service Instance menu
 
    The Actions menu includes several links to external
@@ -1288,7 +1314,7 @@ C:\> MySQLInstallerConsole update
    The Refresh Status feature is available since MySQL Notifier
    1.1.0.
 
-   Figure 2.34 MySQL Notifier Actions menu
+   Figure 2.33 MySQL Notifier Actions menu
    MySQL Notifier Actions menu
 
    The Actions, Options menu configures MySQL Notifier and
@@ -1323,19 +1349,19 @@ C:\> MySQLInstallerConsole update
        balloon notification from the taskbar when a monitored
        service changes its status.
 
-   Figure 2.35 MySQL Notifier Options menu
+   Figure 2.34 MySQL Notifier Options menu
    MySQL Notifier Options menu
 
    The Actions, Manage Monitored Items menu enables you to
    configure the monitored services and MySQL instances. First,
    with the Services tab open:
 
-   Figure 2.36 MySQL Notifier Manage Services menu
+   Figure 2.35 MySQL Notifier Manage Services menu
    MySQL Notifier Manage Services menu
 
    The Instances tab is similar:
 
-   Figure 2.37 MySQL Notifier Manage Instances menu
+   Figure 2.36 MySQL Notifier Manage Instances menu
    MySQL Notifier Manage Instances menu
 
    Adding a service or instance (after clicking Add in the
@@ -1345,12 +1371,12 @@ C:\> MySQLInstallerConsole update
    instance by clicking service name from the list, then OK to
    accept. Multiple services and instances may be selected.
 
-   Figure 2.38 MySQL Notifier Adding new services
+   Figure 2.37 MySQL Notifier Adding new services
    MySQL Notifier Adding new services
 
    And instances:
 
-   Figure 2.39 MySQL Notifier Adding new instances
+   Figure 2.38 MySQL Notifier Adding new instances
    MySQL Notifier Adding new instances
    Note
 
@@ -1384,7 +1410,7 @@ C:\> MySQLInstallerConsole update
    settings must be properly configured for the communication to
    function properly.
 
-   Figure 2.40 MySQL Notifier Distributed Component Object Model
+   Figure 2.39 MySQL Notifier Distributed Component Object Model
    (DCOM)
    MySQL Notifier Distributed Component Object Model (DCOM)
 
@@ -1654,15 +1680,19 @@ Archive
    The process for installing MySQL from a Zip archive is as
    follows:
 
-    1. Extract the archive to the desired install directory
+    1. Extract the main archive to the desired install directory
+       Optional: also extract the debug-test archive if you plan
+       to execute the MySQL benchmark and test suite
 
     2. Create an option file
 
     3. Choose a MySQL server type
 
-    4. Start the MySQL server
+    4. Initialize MySQL
 
-    5. Secure the default user accounts
+    5. Start the MySQL server
+
+    6. Secure the default user accounts
 
    This process is described in the sections that follow.
 
@@ -1706,8 +1736,8 @@ Archive
 
      * The installation or data directory locations are
        different from the default locations (C:\Program
-       Files\MySQL\MySQL Server 5.6 and C:\Program
-       Files\MySQL\MySQL Server 5.6\data).
+       Files\MySQL\MySQL Server 5.7 and C:\Program
+       Files\MySQL\MySQL Server 5.7\data).
 
      * You need to tune the server settings, such as memory,
        cache, or InnoDB configuration information.
@@ -1731,9 +1761,9 @@ C:\> echo %WINDIR%
    Note
 
    When using the MySQL Installer to install MySQL Server, it
-   will create the my.ini at the default location. And as of
-   MySQL Server 5.5.27, the user running MySQL Installer is
-   granted full permissions to this new my.ini.
+   will create the my.ini at the default location, and the user
+   executing MySQL Installer is granted full permissions to this
+   new my.ini file.
 
    In other words, be sure that the MySQL Server user has
    permission to read the my.ini file.
@@ -1765,8 +1795,13 @@ datadir=E:\\mydata\\data
    The rules for use of backslash in option file values are
    given in Section 4.2.6, "Using Option Files."
 
-   The data directory is located within the AppData directory
-   for the user running MySQL.
+   As of MySQL 5.7.6, the Zip Archive no longer includes a data
+   directory. To initialize a MySQL installation by creating the
+   data directory and populating the tables in the mysql system
+   database, initialize MySQL using either --initialize or
+   --initialize-insecure. For additional information, see
+   Section 2.10.1.1, "Initializing the Data Directory Manually
+   Using mysqld."
 
    If you would like to use a data directory in a different
    location, you should copy the entire contents of the data
@@ -1776,7 +1811,7 @@ datadir=E:\\mydata\\data
 
     1. Move the entire data directory and all of its contents
        from the default location (for example C:\Program
-       Files\MySQL\MySQL Server 5.6\data) to E:\mydata.
+       Files\MySQL\MySQL Server 5.7\data) to E:\mydata.
 
     2. Use a --datadir option to specify the new data directory
        location each time you start the server.
@@ -1784,7 +1819,7 @@ datadir=E:\\mydata\\data
 2.3.5.3 Selecting a MySQL Server Type
 
    The following table shows the available servers for Windows
-   in MySQL 5.6.
+   in MySQL 5.7.
    Binary Description
    mysqld Optimized binary with named-pipe support
    mysqld-debug Like mysqld, but compiled with full debugging
@@ -1798,7 +1833,7 @@ datadir=E:\\mydata\\data
    storage engines. The SHOW ENGINES statement displays which
    engines a given server supports.
 
-   All Windows MySQL 5.6 servers have support for symbolic
+   All Windows MySQL 5.7 servers have support for symbolic
    linking of database directories.
 
    MySQL supports TCP/IP on all Windows platforms. MySQL servers
@@ -1810,7 +1845,22 @@ datadir=E:\\mydata\\data
    platform because named pipes are slower than TCP/IP in many
    Windows configurations.
 
-2.3.5.4 Starting the Server for the First Time
+2.3.5.4 Initializing the Data Directory
+
+   If you installed MySQL using the Noinstall package, you may
+   need to initialize the data directory:
+
+     * Windows distributions prior to MySQL 5.7.7 include a data
+       directory with a set of preinitialized accounts in the
+       mysql database.
+
+     * As of 5.7.7, Windows installation operations performed
+       using the Noinstall package do not include a data
+       directory. To initialize the data directory, use the
+       instructions at Section 2.10.1.1, "Initializing the Data
+       Directory Manually Using mysqld."
+
+2.3.5.5 Starting the Server for the First Time
 
    This section gives a general overview of starting the MySQL
    server. The following sections provide more specific
@@ -1828,7 +1878,7 @@ datadir=E:\\mydata\\data
 
    The examples in these sections assume that MySQL is installed
    under the default location of C:\Program Files\MySQL\MySQL
-   Server 5.6. Adjust the path names shown in the examples if
+   Server 5.7. Adjust the path names shown in the examples if
    you have MySQL installed in a different location.
 
    Clients have two options. They can use TCP/IP, or they can
@@ -1849,9 +1899,15 @@ datadir=E:\\mydata\\data
    see. If something is wrong with your configuration, these
    messages make it easier for you to identify and fix any
    problems.
+   Note
+
+   The database must be initialized before MySQL can be started.
+   For additional information about the initialization process,
+   see Section 2.10.1.1, "Initializing the Data Directory
+   Manually Using mysqld."
 
    To start the server, enter this command:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld" --console
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld" --console
 
    For a server that includes InnoDB support, you should see the
    messages similar to those following as it starts (the path
@@ -1879,7 +1935,7 @@ InnoDB: foreign key constraint system tables created
    something like this, which indicates that the server is ready
    to service client connections:
 mysqld: ready for connections
-Version: '5.6.29'  socket: ''  port: 3306
+Version: '5.7.12'  socket: ''  port: 3306
 
    The server continues to write to the console any further
    diagnostic output it produces. You can open a new console
@@ -1887,17 +1943,17 @@ Version: '5.6.29'  socket: ''  port: 3306
 
    If you omit the --console option, the server writes
    diagnostic output to the error log in the data directory
-   (C:\Program Files\MySQL\MySQL Server 5.6\data by default).
+   (C:\Program Files\MySQL\MySQL Server 5.7\data by default).
    The error log is the file with the .err extension, and may be
    set using the --log-error option.
    Note
 
-   The accounts that are listed in the MySQL grant tables
-   initially have no passwords. After starting the server, you
-   should set up passwords for them using the instructions in
-   Section 2.10.4, "Securing the Initial MySQL Accounts."
+   The initial root account in the MySQL grant tables has no
+   password. After starting the server, you should set up a
+   password for it using the instructions in Section 2.10.4,
+   "Securing the Initial MySQL Accounts."
 
-2.3.5.5 Starting MySQL from the Windows Command Line
+2.3.5.6 Starting MySQL from the Windows Command Line
 
    The MySQL server can be started manually from the command
    line. This can be done on any version of Windows.
@@ -1909,13 +1965,13 @@ Version: '5.6.29'  socket: ''  port: 3306
    To start the mysqld server from the command line, you should
    start a console window (or "DOS window") and enter this
    command:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld"
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld"
 
    The path to mysqld may vary depending on the install location
    of MySQL on your system.
 
    You can stop the MySQL server by executing this command:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqladmin" -u root
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqladmin" -u root
 shutdown
 
    Note
@@ -1936,7 +1992,7 @@ shutdown
    If mysqld doesn't start, check the error log to see whether
    the server wrote any messages there to indicate the cause of
    the problem. By default, the error log is located in the
-   C:\Program Files\MySQL\MySQL Server 5.6\data directory. It is
+   C:\Program Files\MySQL\MySQL Server 5.7\data directory. It is
    the file with a suffix of .err, or may be specified by
    passing in the --log-error option. Alternatively, you can try
    to start the server with the --console option; in this case,
@@ -1951,7 +2007,7 @@ shutdown
    Use mysqld --verbose --help to display all the options that
    mysqld supports.
 
-2.3.5.6 Customizing the PATH for MySQL Tools
+2.3.5.7 Customizing the PATH for MySQL Tools
 
    To make it easier to invoke MySQL programs, you can add the
    path name of the MySQL bin directory to your Windows system
@@ -1973,7 +2029,7 @@ shutdown
        that your cursor is positioned at the very end of the
        text in this space.) Then enter the complete path name of
        your MySQL bin directory (for example, C:\Program
-       Files\MySQL\MySQL Server 5.6\bin)
+       Files\MySQL\MySQL Server 5.7\bin)
        Note
        There must be a semicolon separating this path from any
        values present in this field.
@@ -1996,7 +2052,7 @@ shutdown
    the existing PATH value can leave you with a malfunctioning
    or even unusable system.
 
-2.3.5.7 Starting MySQL as a Windows Service
+2.3.5.8 Starting MySQL as a Windows Service
 
    On Windows, the recommended way to run MySQL is to install it
    as a Windows service, so that MySQL starts and stops
@@ -2023,7 +2079,7 @@ Installing the service
    Before installing MySQL as a Windows service, you should
    first stop the current server if it is running by using the
    following command:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqladmin"
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqladmin"
           -u root shutdown
 
    Note
@@ -2042,7 +2098,7 @@ C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqladmin"
    any login users under Windows.
 
    Install the server as a service using this command:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld" --install
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld" --install
 
    The service-installation command does not start the server.
    Instructions for that are given later in this section.
@@ -2067,7 +2123,7 @@ C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld" --install
        that your cursor is positioned at the very end of the
        text in this space.) Then enter the complete path name of
        your MySQL bin directory (for example, C:\Program
-       Files\MySQL\MySQL Server 5.6\bin), and there should be a
+       Files\MySQL\MySQL Server 5.7\bin), and there should be a
        semicolon separating this path from any values present in
        this field. Dismiss this dialogue, and each dialogue in
        turn, by clicking OK until all of the dialogues that were
@@ -2119,7 +2175,7 @@ C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld" --install
 
      * If the service-installation command specifies no service
        name or the default service name (MySQL) following the
-       --install option, the server uses the a service name of
+       --install option, the server uses the service name of
        MySQL and reads options from the [mysqld] group in the
        standard option files.
 
@@ -2140,7 +2196,7 @@ C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld" --install
        file and ignores the standard option files.
 
    As a more complex example, consider the following command:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld"
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld"
           --install MySQL --defaults-file=C:\my-opts.cnf
 
    Here, the default service name (MySQL) is given after the
@@ -2172,7 +2228,7 @@ Starting the service
    start, check the error log to see whether the server wrote
    any messages there to indicate the cause of the problem. The
    error log is located in the MySQL data directory (for
-   example, C:\Program Files\MySQL\MySQL Server 5.6\data). It is
+   example, C:\Program Files\MySQL\MySQL Server 5.7\data). It is
    the file with a suffix of .err.
 
    When a MySQL server has been installed as a service, and the
@@ -2185,7 +2241,7 @@ Starting the service
    service if you do not wish for the service to be started
    automatically during the boot process. To do this, use the
    --install-manual option rather than the --install option:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld" --install-ma
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld" --install-ma
 nual
 
 Removing the service
@@ -2193,26 +2249,26 @@ Removing the service
    To remove a server that is installed as a service, first stop
    it if it is running by executing NET STOP MySQL. Then use the
    --remove option to remove it:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld" --remove
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld" --remove
 
    If mysqld is not running as a service, you can start it from
-   the command line. For instructions, see Section 2.3.5.5,
+   the command line. For instructions, see Section 2.3.5.6,
    "Starting MySQL from the Windows Command Line."
 
    If you encounter difficulties during installation. see
    Section 2.3.6, "Troubleshooting a Microsoft Windows MySQL
    Server Installation."
 
-2.3.5.8 Testing The MySQL Installation
+2.3.5.9 Testing The MySQL Installation
 
    You can test whether the MySQL server is working by executing
    any of the following commands:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqlshow"
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqlshow" -u root m
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqlshow"
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqlshow" -u root m
 ysql
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqladmin" version
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqladmin" version
 status proc
-C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysql" test
+C:\> "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql" test
 
    If mysqld is slow to respond to TCP/IP connections from
    client programs, there is probably a problem with your DNS.
@@ -2234,7 +2290,7 @@ C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysql" test
    and -p options with the commands shown previously. See
    Section 4.2.2, "Connecting to the MySQL Server."
 
-   For more information about mysqlshow, see Section 4.5.6,
+   For more information about mysqlshow, see Section 4.5.7,
    "mysqlshow --- Display Database, Table, and Column
    Information."
 
@@ -2250,7 +2306,7 @@ C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysql" test
    information relevant to the error that prevents the server
    from starting. The error log is located in the data directory
    specified in your my.ini file. The default data directory
-   location is C:\Program Files\MySQL\MySQL Server 5.6\data, or
+   location is C:\Program Files\MySQL\MySQL Server 5.7\data, or
    C:\ProgramData\Mysql on Windows 7 and Windows Server 2008.
    The C:\ProgramData directory is hidden by default. You need
    to change your folder options to see the directory and
@@ -2263,7 +2319,7 @@ C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysql" test
    starting. Use the NET START MySQL command from the command
    line after installing mysqld as a service to see any error
    messages regarding the starting of the MySQL server as a
-   service. See Section 2.3.5.7, "Starting MySQL as a Windows
+   service. See Section 2.3.5.8, "Starting MySQL as a Windows
    Service."
 
    The following examples show other common error messages you
@@ -2280,7 +2336,7 @@ Table 'mysql.user' doesn't exist
        These messages often occur when the MySQL base or data
        directories are installed in different locations than the
        default locations (C:\Program Files\MySQL\MySQL Server
-       5.6 and C:\Program Files\MySQL\MySQL Server 5.6\data,
+       5.7 and C:\Program Files\MySQL\MySQL Server 5.7\data,
        respectively).
        This situation can occur when MySQL is upgraded and
        installed to a new location, but the configuration file
@@ -2289,7 +2345,7 @@ Table 'mysql.user' doesn't exist
        to delete or rename any old configuration files when
        upgrading MySQL.
        If you have installed MySQL to a directory other than
-       C:\Program Files\MySQL\MySQL Server 5.6, ensure that the
+       C:\Program Files\MySQL\MySQL Server 5.7, ensure that the
        MySQL server is aware of this through the use of a
        configuration (my.ini) file. Put the my.ini file in your
        Windows directory, typically C:\WINDOWS. To determine its
@@ -2315,7 +2371,7 @@ datadir=D:/MySQLdata
        you do use backslashes, double them:
 [mysqld]
 # set basedir to your installation path
-basedir=C:\\Program Files\\MySQL\\MySQL Server 5.6
+basedir=C:\\Program Files\\MySQL\\MySQL Server 5.7
 # set datadir to the location of your data directory
 datadir=D:\\MySQLdata
 
@@ -2370,25 +2426,30 @@ C:\> sc delete mysql
        (http://dev.mysql.com/doc/mysql-for-excel/en/index.html):
        Edits MySQL data with Microsoft Excel.
 
-   On Windows, you need not create the data directory and the
-   grant tables. MySQL Windows distributions include the grant
-   tables with a set of preinitialized accounts in the mysql
-   database under the data directory.
+   If necessary, initialize the data directory and create the
+   MySQL grant tables. Windows distributions prior to MySQL
+   5.7.7 include a data directory with a set of preinitialized
+   accounts in the mysql database. As of 5.7.7, Windows
+   installation operations performed by MySQL Installer
+   initialize the data directory automatically. For installation
+   from a Zip package, you can initialize the data directory as
+   described at Section 2.10.1.1, "Initializing the Data
+   Directory Manually Using mysqld."
 
    Regarding passwords, if you installed MySQL using the MySQL
-   Installer, you may have already assigned passwords to the
-   accounts. (See Section 2.3.3, "Installing MySQL on Microsoft
-   Windows Using MySQL Installer.") Otherwise, use the
-   password-assignment procedure given in Section 2.10.4,
+   Installer, you may have already assigned a passwords to the
+   initial root account. (See Section 2.3.3, "Installing MySQL
+   on Microsoft Windows Using MySQL Installer.") Otherwise, use
+   the password-assignment procedure given in Section 2.10.4,
    "Securing the Initial MySQL Accounts."
 
    Before assigning passwords, you might want to try running
    some client programs to make sure that you can connect to the
    server and that it is operating properly. Make sure that the
-   server is running (see Section 2.3.5.4, "Starting the Server
+   server is running (see Section 2.3.5.5, "Starting the Server
    for the First Time"). You can also set up a MySQL service
    that runs automatically when Windows starts (see Section
-   2.3.5.7, "Starting MySQL as a Windows Service").
+   2.3.5.8, "Starting MySQL as a Windows Service").
 
    These instructions assume that your current location is the
    MySQL installation directory and that it has a bin
@@ -2398,8 +2459,8 @@ C:\> sc delete mysql
    If you installed MySQL using MySQL Installer (see Section
    2.3.3, "Installing MySQL on Microsoft Windows Using MySQL
    Installer"), the default installation directory is C:\Program
-   Files\MySQL\MySQL Server 5.6:
-C:\> cd "C:\Program Files\MySQL\MySQL Server 5.6"
+   Files\MySQL\MySQL Server 5.7:
+C:\> cd "C:\Program Files\MySQL\MySQL Server 5.7"
 
    A common installation location for installation from a Zip
    package is C:\mysql:
@@ -2409,7 +2470,7 @@ C:\> cd C:\mysql
    variable setting. That enables your command interpreter to
    find MySQL programs properly, so that you can run a program
    by typing only its name, not its path name. See Section
-   2.3.5.6, "Customizing the PATH for MySQL Tools."
+   2.3.5.7, "Customizing the PATH for MySQL Tools."
 
    With the server running, issue the following commands to
    verify that you can retrieve information from the server. The
@@ -2423,11 +2484,13 @@ C:\> bin\mysqlshow
 | information_schema |
 | mysql              |
 | performance_schema |
-| test               |
+| sys                |
 +--------------------+
 
    The list of installed databases may vary, but will always
-   include the minimum of mysql and information_schema.
+   include the minimum of mysql and information_schema. Before
+   MySQL 5.7.7, a test database may also be created
+   automatically.
 
    The preceding command (and commands for other MySQL programs
    such as mysql) may not work if the correct MySQL account does
@@ -2447,7 +2510,7 @@ Enter password: (enter root password here)
 | information_schema |
 | mysql              |
 | performance_schema |
-| test               |
+| sys                |
 +--------------------+
 
    If you specify a database name, mysqlshow displays a list of
@@ -2459,9 +2522,11 @@ Database: mysql
 +---------------------------+
 | columns_priv              |
 | db                        |
+| engine_cost               |
 | event                     |
 | func                      |
 | general_log               |
+| gtid_executed             |
 | help_category             |
 | help_keyword              |
 | help_relation             |
@@ -2473,6 +2538,7 @@ Database: mysql
 | proc                      |
 | procs_priv                |
 | proxies_priv              |
+| server_cost               |
 | servers                   |
 | slave_master_info         |
 | slave_relay_log_info      |
@@ -2498,7 +2564,7 @@ C:\> bin\mysql -e "SELECT User, Host, plugin FROM mysql.user" mysql
 
    For more information about mysql and mysqlshow, see Section
    4.5.1, "mysql --- The MySQL Command-Line Tool," and Section
-   4.5.6, "mysqlshow --- Display Database, Table, and Column
+   4.5.7, "mysqlshow --- Display Database, Table, and Column
    Information."
 
 2.3.8 Upgrading MySQL on Windows
@@ -2523,9 +2589,9 @@ C:\> NET STOP MySQL
 
        If you are not running the MySQL server as a service, use
        mysqladmin to stop it. For example, before upgrading from
-       MySQL 5.5 to 5.6, use mysqladmin from MySQL 5.5 as
+       MySQL 5.6 to 5.7, use mysqladmin from MySQL 5.6 as
        follows:
-C:\> "C:\Program Files\MySQL\MySQL Server 5.5\bin\mysqladmin" -u root
+C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqladmin" -u root
 shutdown
 
        Note
@@ -2533,7 +2599,7 @@ shutdown
        mysqladmin with the -p option and enter the password when
        prompted.
 
-    5. Before upgrading to MySQL 5.6 from a version previous to
+    5. Before upgrading to MySQL 5.7 from a version previous to
        4.1.5, or from a version of MySQL installed from a Zip
        archive to a version of MySQL installed with the MySQL
        Installation Wizard, you must first manually remove the
@@ -2578,7 +2644,7 @@ C:\> C:\mysql\bin\mysqld --remove
 
     8. If you were running MySQL as a Windows service and you
        had to remove the service earlier in this procedure,
-       reinstall the service. (See Section 2.3.5.7, "Starting
+       reinstall the service. (See Section 2.3.5.8, "Starting
        MySQL as a Windows Service.")
 
     9. Restart the server. For example, use NET START MySQL if
