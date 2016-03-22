@@ -101,6 +101,8 @@ mysql-5.7 (5.7.11-1~exp1) UNRELEASED; urgency=medium
   [ Robie Basak ]
   * Drop error_setting_password debconf template.
   * d/control: add Breaks/Replaces against -5.6 packages.
+  * d/control: limit libnuma-dev build dependency to arches that have
+    it. Fixes FTBFS on arches that don't have it. Thanks to Adam Conrad.
 
  -- Robie Basak <robie.basak@canonical.com>  Wed, 16 Mar 2016 13:48:32 +0000
 
