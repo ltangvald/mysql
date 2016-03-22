@@ -103,6 +103,8 @@ mysql-5.7 (5.7.11-1~exp1) UNRELEASED; urgency=medium
   * d/control: add Breaks/Replaces against -5.6 packages.
   * d/control: limit libnuma-dev build dependency to arches that have
     it. Fixes FTBFS on arches that don't have it. Thanks to Adam Conrad.
+  * d/rules: use the system libevent, not the bundled copy. Fixes FTBFS
+    on arm64. Thanks to Adam Conrad.
 
  -- Robie Basak <robie.basak@canonical.com>  Wed, 16 Mar 2016 13:48:32 +0000
 
