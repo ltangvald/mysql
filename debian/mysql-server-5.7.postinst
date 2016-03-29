@@ -187,7 +187,7 @@ case "$1" in
         echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$rootpw';" >> "$initfile"
       fi
       echo "CREATE USER IF NOT EXISTS 'debian-sys-maint'@'localhost' IDENTIFIED BY '$pass';" >> "$initfile"
-      echo "GRANT ALL ON *.* TO 'debian-sys-maint'@'localhost';" >> "$initfile"
+      echo "GRANT ALL ON *.* TO 'debian-sys-maint'@'localhost' WITH GRANT OPTION;" >> "$initfile"
       echo "SHUTDOWN;" >> "$initfile"
       # mysqld returns an error instead of a warning if CREATE USER IF NOT
       # EXISTS fails, so ignore errors as a workaround. See:
