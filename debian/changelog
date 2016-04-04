@@ -106,6 +106,10 @@ mysql-5.7 (5.7.11-1~exp1) UNRELEASED; urgency=medium
   * d/rules: use the system libevent, not the bundled copy. Fixes FTBFS
     on arm64. Thanks to Adam Conrad.
 
+  [ Adam Conrad ]
+  * debian/patches/mysql-atomic.patch: Patch from upstream to add
+    support for __atomic builtins and prefer __sync where available.
+
  -- Robie Basak <robie.basak@canonical.com>  Wed, 16 Mar 2016 13:48:32 +0000
 
 mysql-5.6 (5.6.28-1) unstable; urgency=medium
