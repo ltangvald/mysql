@@ -123,6 +123,10 @@ mysql-5.7 (5.7.11-1~exp1) UNRELEASED; urgency=medium
     it is one that includes the indication that there is nothing to do
     (LP: #1566406).
 
+  [ Lars Tangvald ]
+  * d/p/mysql-export-scramble.patch: export my_make_scrambled_password
+    since some reverse dependencies still need it.
+
  -- Robie Basak <robie.basak@canonical.com>  Wed, 16 Mar 2016 13:48:32 +0000
 
 mysql-5.6 (5.6.28-1) unstable; urgency=medium
