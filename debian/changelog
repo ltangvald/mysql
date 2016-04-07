@@ -118,6 +118,11 @@ mysql-5.7 (5.7.11-1~exp1) UNRELEASED; urgency=medium
   * Allow empty port config values (LP: #1563274).
   * d/p/allowemptyport.patch: update corresponding test.
 
+  [ Robie Basak ]
+  * d/mysql-server-5.7.postinst: ignore mysql_upgrade's exit status when
+    it is one that includes the indication that there is nothing to do
+    (LP: #1566406).
+
  -- Robie Basak <robie.basak@canonical.com>  Wed, 16 Mar 2016 13:48:32 +0000
 
 mysql-5.6 (5.6.28-1) unstable; urgency=medium
