@@ -126,6 +126,7 @@ mysql-5.7 (5.7.11-1~exp1) UNRELEASED; urgency=medium
   [ Lars Tangvald ]
   * d/p/mysql-export-scramble.patch: export my_make_scrambled_password
     since some reverse dependencies still need it.
+  * Ignore dotfiles in postinst (LP: #1567695).
 
  -- Robie Basak <robie.basak@canonical.com>  Wed, 16 Mar 2016 13:48:32 +0000
 
