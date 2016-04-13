@@ -132,6 +132,10 @@ mysql-5.7 (5.7.11-1~exp1) UNRELEASED; urgency=medium
 
   [ Robie Basak ]
   * d/mysql-server-5.7.postinst: quote "$rootpw" correctly.
+  * d/control: add libnuma-dev and libaio-dev to libmysqld-dev
+    dependencies, since these are required according to "mysql_config --
+    libmysqld-libs". This fixes FTBFS of packages that use libmysqld-
+    dev.
 
  -- Robie Basak <robie.basak@canonical.com>  Wed, 16 Mar 2016 13:48:32 +0000
 
