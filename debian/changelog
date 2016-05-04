@@ -1,9 +1,7 @@
-mysql-5.7 (5.7.11-1~exp1) UNRELEASED; urgency=medium
-
-  [ Bjoern Boschman ]
-  * Imported Upstream version 5.7.11.
+mysql-5.7 (5.7.12-1~exp1) UNRELEASED; urgency=medium
 
   [ Robie Basak ]
+  * Import upstream version 5.7.12.
   * Drop d/libmysqlclient18.lintian-overrides as the problem is genuine
     and should not be hidden. This addresses #812812 in part, but does
     not close it.
