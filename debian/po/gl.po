@@ -1,5 +1,5 @@
-# Galician translation of mysql-dfsg-5.6's debconf templates
-# This file is distributed under the same license as the mysql-dfsg-5.6 package.
+# Galician translation of mysql-5.7's debconf templates
+# This file is distributed under the same license as the mysql-5.7 package.
 # Jacobo Tarrio <jtarrio@debian.org>, 2007.
 #
 msgid ""
@@ -212,13 +212,13 @@ msgstr ""
 
 #, fuzzy
 #~| msgid ""
-#~| "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
+#~| "Please read the /usr/share/doc/mysql-server-5.7/README.Debian file for "
 #~| "more information."
 #~ msgid ""
-#~ "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
+#~ "Please read the /usr/share/doc/mysql-server-5.7/README.Debian file for "
 #~ "more information."
 #~ msgstr ""
-#~ "Consulte o ficheiro /usr/share/doc/mysql-server-5.6/README.Debian para "
+#~ "Consulte o ficheiro /usr/share/doc/mysql-server-5.7/README.Debian para "
 #~ "máis información."
 
 #~ msgid ""

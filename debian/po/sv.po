@@ -1,6 +1,6 @@
-# Translation of mysql-5.6 debconf template to Swedish
+# Translation of mysql-5.7 debconf template to Swedish
 # Copyright (C) 2009, 2012 Martin Bagge <brother@bsnet.se>
-# This file is distributed under the same license as the mysql-5.6 package.
+# This file is distributed under the same license as the mysql-5.7 package.
 # 
 # Andreas Henriksson <andreas@fatal.se>, 2007
 # Martin Bagge <brother@bsnet.se>, 2009, 2012
@@ -179,7 +179,7 @@ msgstr "NDB-kluster används inte"
 #: ../mysql-server-5.7.templates:9001
 #, fuzzy
 #| msgid ""
-#| "MySQL-5.6 no longer provides NDB Cluster support. Please migrate to the "
+#| "MySQL-5.7 no longer provides NDB Cluster support. Please migrate to the "
 #| "new mysql-cluster-server package and remove all lines starting with \"ndb"
 #| "\" from all config files below /etc/mysql/."
 msgid ""
@@ -187,7 +187,7 @@ msgid ""
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
 "all config files below /etc/mysql/."
 msgstr ""
-"Stödet för NDB-kluster har tagits bort i MySQL-5.6. Migrera till det nya "
+"Stödet för NDB-kluster har tagits bort i MySQL-5.7. Migrera till det nya "
 "paketet mysql-cluster-server  och ta bort alla rader som inleds med \"ndb\" "
 "från alla inställlningsfiler i /etc/mysql/."
 
@@ -210,10 +210,10 @@ msgstr ""
 #~ "Du bör kontrollera kontots lösenord efter installationen av paketet."
 
 #~ msgid ""
-#~ "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
+#~ "Please read the /usr/share/doc/mysql-server-5.7/README.Debian file for "
 #~ "more information."
 #~ msgstr ""
-#~ "Läs filen /usr/share/doc/mysql-server-5.6/README.Debian för mer "
+#~ "Läs filen /usr/share/doc/mysql-server-5.7/README.Debian för mer "
 #~ "information."
 
 #~ msgid ""

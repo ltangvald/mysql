@@ -1,6 +1,6 @@
-# Portuguese translation for mysql-dfsg-5.6's debconf messages
+# Portuguese translation for mysql-5.7's debconf messages
 # Copyright (C) 2006 Miguel Figueiredo <elmig@debianpt.org>
-# This file is distributed under the same license as the mysql-dfsg-5.6 package.
+# This file is distributed under the same license as the mysql-5.7 package.
 # Miguel Figueiredo <elmig@debianpt.org>, 2012
 #
 msgid ""
@@ -180,7 +180,7 @@ msgstr "NDB Cluster parece estar a ser utilizado"
 #: ../mysql-server-5.7.templates:9001
 #, fuzzy
 #| msgid ""
-#| "MySQL-5.6 no longer provides NDB Cluster support. Please migrate to the "
+#| "MySQL-5.7 no longer provides NDB Cluster support. Please migrate to the "
 #| "new mysql-cluster-server package and remove all lines starting with \"ndb"
 #| "\" from all config files below /etc/mysql/."
 msgid ""
@@ -188,7 +188,7 @@ msgid ""
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
 "all config files below /etc/mysql/."
 msgstr ""
-"MySQL-5.6 já não disponibiliza suporte para NDB Cluster. Por favor migre "
+"MySQL-5.7 já não disponibiliza suporte para NDB Cluster. Por favor migre "
 "para o novo pacote mysql-cluster-server e remova todas as linhas que comecem "
 "por \"ndb\" em todos os ficheiros de configuração em /etc/mysql/."
 
@@ -213,11 +213,11 @@ msgstr ""
 #~ "Você deve verificar a palavra-passe da conta após a instalação do pacote."
 
 #~ msgid ""
-#~ "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
+#~ "Please read the /usr/share/doc/mysql-server-5.7/README.Debian file for "
 #~ "more information."
 #~ msgstr ""
 #~ "Para mais informações, por favor leia o ficheiro /usr/share/doc/mysql-"
-#~ "server-5.6/README.Debian."
+#~ "server-5.7/README.Debian."
 
 #~ msgid ""
 #~ "To use MySQL, the following entries for users and groups should be added "
@@ -233,14 +233,14 @@ msgstr ""
 #~ "Recent versions of MySQL can no longer use the old ISAM table format and "
 #~ "it is necessary to convert your tables to e.g. MyISAM before upgrading by "
 #~ "using \"mysql_convert_table_format\" or \"ALTER TABLE x ENGINE=MyISAM\". "
-#~ "The installation of mysql-server-5.6 will now abort. In case your old "
+#~ "The installation of mysql-server-5.7 will now abort. In case your old "
 #~ "mysql-server-4.1 gets removed nevertheless just reinstall it to convert "
 #~ "those tables."
 #~ msgstr ""
 #~ "As versões recentes de MySQL já não podem utilizar o antigo formato de "
 #~ "tabelas ISAM e é por isso necessário converter as suas tabelas pra e.g. "
 #~ "MyISAM antes da actualização, utilizando \"mysql_convert_table_format\" "
-#~ "ou \"ALTER TABLE x ENGINE=MyISAM\". A instalação de mysql-server-5.6 irá "
+#~ "ou \"ALTER TABLE x ENGINE=MyISAM\". A instalação de mysql-server-5.7 irá "
 #~ "agora ser cancelada. Se o seu antigo mysql-server-4.1 for removido apenas "
 #~ "reinstale para converter essas tabelas."
 

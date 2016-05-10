@@ -1,4 +1,4 @@
-# Dutch mysql-dfsg-5.6 po-debconf translation,
+# Dutch mysql-5.7 po-debconf translation,
 # Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
 #
 # Vincent Zweije <zweije@xs4all.nl>, 2006.
@@ -182,7 +182,7 @@ msgstr "De NDB-cluster lijkt in gebruik te zijn"
 #: ../mysql-server-5.7.templates:9001
 #, fuzzy
 #| msgid ""
-#| "MySQL-5.6 no longer provides NDB Cluster support. Please migrate to the "
+#| "MySQL-5.7 no longer provides NDB Cluster support. Please migrate to the "
 #| "new mysql-cluster-server package and remove all lines starting with \"ndb"
 #| "\" from all config files below /etc/mysql/."
 msgid ""
@@ -190,7 +190,7 @@ msgid ""
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
 "all config files below /etc/mysql/."
 msgstr ""
-"MySQL-5.6 biedt niet langer ondersteuning voor NDB Cluster. Migreer naar het "
+"MySQL-5.7 biedt niet langer ondersteuning voor NDB Cluster. Migreer naar het "
 "nieuwe pakket mysql-cluster en verwijder alle regels die beginnen met \"ndb"
 "\" van alle configuratiebestanden onder /etc/mysql/."
 
@@ -214,8 +214,8 @@ msgstr ""
 #~ "is geÃ¯nstalleerd."
 
 #~ msgid ""
-#~ "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
+#~ "Please read the /usr/share/doc/mysql-server-5.7/README.Debian file for "
 #~ "more information."
 #~ msgstr ""
-#~ "Leest u het bestand /usr/share/doc/mysql-server-5.6/README.Debian voor "
+#~ "Leest u het bestand /usr/share/doc/mysql-server-5.7/README.Debian voor "
 #~ "meer informatie."

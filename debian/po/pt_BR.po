@@ -1,6 +1,6 @@
-# Debconf translations for mysql-5.6.
-# Copyright (C) 2015 THE mysql-5.6'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the mysql-5.6 package.
+# Debconf translations for mysql-5.7.
+# Copyright (C) 2015 THE mysql-5.7'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mysql-5.7 package.
 # André Luís Lopes <andrelop@debian.org>, 2004, 2006, 2007.
 # Adriano Rafael Gomes <adrianorg@arg.eti.br>, 2014-2015.
 #
@@ -181,7 +181,7 @@ msgstr "Cluster NDB parece estar em uso"
 #: ../mysql-server-5.7.templates:9001
 #, fuzzy
 #| msgid ""
-#| "MySQL-5.6 no longer provides NDB Cluster support. Please migrate to the "
+#| "MySQL-5.7 no longer provides NDB Cluster support. Please migrate to the "
 #| "new mysql-cluster-server package and remove all lines starting with \"ndb"
 #| "\" from all config files below /etc/mysql/."
 msgid ""
@@ -189,7 +189,7 @@ msgid ""
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
 "all config files below /etc/mysql/."
 msgstr ""
-"O MySQL-5.6 não oferece mais suporte a Cluster NDB. Por favor, migre para o "
+"O MySQL-5.7 não oferece mais suporte a Cluster NDB. Por favor, migre para o "
 "novo pacote mysql-cluster-server e remova todas as linhas que iniciem com "
 "\"ndb\" de todos os arquivos de configuração abaixo de /etc/mysql/."
 
@@ -212,8 +212,8 @@ msgstr ""
 #~ "Você deverá verificar a senha dessa conta após a instalação deste pacote."
 
 #~ msgid ""
-#~ "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
+#~ "Please read the /usr/share/doc/mysql-server-5.7/README.Debian file for "
 #~ "more information."
 #~ msgstr ""
-#~ "Por favor, leia o arquivo /usr/share/doc/mysql-server-5.6/README.Debian "
+#~ "Por favor, leia o arquivo /usr/share/doc/mysql-server-5.7/README.Debian "
 #~ "para mais informações."

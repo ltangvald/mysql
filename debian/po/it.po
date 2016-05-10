@@ -1,6 +1,6 @@
-# Italian (it) translation of debconf templates for mysql-dfsg-5.6
+# Italian (it) translation of debconf templates for mysql-5.7
 # Copyright (C) 2009 Software in the Public Interest
-# This file is distributed under the same license as the mysql-dfsg-5.6 package.
+# This file is distributed under the same license as the mysql-5.7 package.
 # Luca Monducci <luca.mo@tiscali.it>, 2006 - 2009.
 # 
 msgid ""
@@ -178,7 +178,7 @@ msgstr "È in uso un cluster NDB"
 #: ../mysql-server-5.7.templates:9001
 #, fuzzy
 #| msgid ""
-#| "MySQL-5.6 no longer provides NDB Cluster support. Please migrate to the "
+#| "MySQL-5.7 no longer provides NDB Cluster support. Please migrate to the "
 #| "new mysql-cluster package and remove all lines starting with \"ndb\" from "
 #| "all config files below /etc/mysql/."
 msgid ""
@@ -186,7 +186,7 @@ msgid ""
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
 "all config files below /etc/mysql/."
 msgstr ""
-"MySQL-5.6 non fornisce più il supporto per i cluster NDB. Si dovrebbe "
+"MySQL-5.7 non fornisce più il supporto per i cluster NDB. Si dovrebbe "
 "migrare al nuovo pacchetto mysql-cluster e rimuovere tutte le righe che "
 "iniziano per \"ndb\" da tutti i file di configurazione sotto /etc/mysql/."
 
@@ -210,11 +210,11 @@ msgstr ""
 
 #, fuzzy
 #~| msgid ""
-#~| "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
+#~| "Please read the /usr/share/doc/mysql-server-5.7/README.Debian file for "
 #~| "more information."
 #~ msgid ""
-#~ "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
+#~ "Please read the /usr/share/doc/mysql-server-5.7/README.Debian file for "
 #~ "more information."
 #~ msgstr ""
 #~ "Per maggiori informazioni si consulti il file /usr/share/doc/mysql-"
-#~ "server-5.6/README.Debian."
+#~ "server-5.7/README.Debian."
