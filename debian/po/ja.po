@@ -10,20 +10,22 @@
 #         or http://www.debian.org/intl/l10n/po-debconf/README-trans
 #
 #    Developers do not need to manually edit POT or PO files.
-#
+# Takuma Yamada <tyamada@takumayamada.com>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mysql-dfsg-5.6 5.6.8-1\n"
 "Report-Msgid-Bugs-To: mysql-5.7@packages.debian.org\n"
 "POT-Creation-Date: 2016-03-16 15:13+0000\n"
-"PO-Revision-Date: 2009-09-01 08:25+0900\n"
-"Last-Translator: Hideki Yamane (Debian-JP) <henrich@debian.or.jp>\n"
+"PO-Revision-Date: 2016-03-03 10:13+0900\n"
+"Last-Translator: Takuma Yamada <tyamada@takumayamada.com>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #. Type: boolean
 #. Description
@@ -36,7 +38,7 @@ msgstr "本当にダウングレードを実行しますか?"
 #: ../mysql-server-5.7.templates:2001
 msgid "A file named /var/lib/mysql/debian-*.flag exists on this system."
 msgstr ""
-"このシステムには  /var/lib/mysql/debian-*.flag という名前のファイルが存在して"
+"このシステムには /var/lib/mysql/debian-*.flag という名前のファイルが存在して"
 "います。"
 
 #. Type: boolean
@@ -72,8 +74,8 @@ msgid ""
 "Using MySQL under NIS/YP requires a mysql user account to be added on the "
 "local system with:"
 msgstr ""
-"NIS/YP 配下で MySQL を使うにはローカルのシステムに mysql のユーザアカウントを"
-"追加するのが必要です。"
+"NIS/YP 配下で MySQL を使うには、次のようにしてローカルのシステムに mysql の"
+"ユーザアカウントを追加する必要があります: "
 
 #. Type: note
 #. Description
@@ -81,7 +83,9 @@ msgstr ""
 msgid ""
 "You should also check the permissions and ownership of the /var/lib/mysql "
 "directory:"
-msgstr "/var/lib/mysql の所有者権限をチェックする必要もあります。"
+msgstr ""
+"/var/lib/mysql のパーミッションと所有者権限が以下のようになっているかチェック"
+"する必要もあります:"
 
 #. Type: boolean
 #. Description
@@ -115,9 +119,9 @@ msgid ""
 "version or if a different mysql-server package is already using it, the data "
 "should be kept."
 msgstr ""
-"後でより新しいバージョンのものをインストールしようとするために MySQL パッケー"
-"ジを削除しようとしている、あるいは別の mysql-server パッケージを既に使ってい"
-"る場合、データは保持する必要があります。"
+"後でより新しいバージョンをインストールするために MySQL パッケージを削除する場"
+"合、あるいはすでに別の mysql-server パッケージを使っている場合は、データを残"
+"しておく必要があります。"
 
 #. Type: boolean
 #. Description
@@ -187,16 +191,16 @@ msgstr "NDB クラスタが利用されているようです"
 #, fuzzy
 #| msgid ""
 #| "MySQL-5.6 no longer provides NDB Cluster support. Please migrate to the "
-#| "new mysql-cluster package and remove all lines starting with \"ndb\" from "
-#| "all config files below /etc/mysql/."
+#| "new mysql-cluster-server package and remove all lines starting with \"ndb"
+#| "\" from all config files below /etc/mysql/."
 msgid ""
 "MySQL-5.7 no longer provides NDB Cluster support. Please migrate to the new "
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
 "all config files below /etc/mysql/."
 msgstr ""
 "MySQL-5.6 では NDB クラスタのサポートを提供しなくなっています。新たな mysql-"
-"cluster パッケージに移行して、/etc/mysql 以下の設定ファイルすべてから「ndb」"
-"で始まる行を削除してください。"
+"cluster-server パッケージに移行して、/etc/mysql 以下の設定ファイルすべてから"
+"「ndb」で始まる行を削除してください。"
 
 #~ msgid "Unable to set password for the MySQL \"root\" user"
 #~ msgstr "MySQL の \"root\" ユーザのパスワードを設定できません"
@@ -216,10 +220,6 @@ msgstr ""
 #~ "パッケージのインストール後、アカウントのパスワードを確認する必要がありま"
 #~ "す。"
 
-#, fuzzy
-#~| msgid ""
-#~| "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
-#~| "more information."
 #~ msgid ""
 #~ "Please read the /usr/share/doc/mysql-server-5.6/README.Debian file for "
 #~ "more information."
