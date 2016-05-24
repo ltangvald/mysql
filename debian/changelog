@@ -134,8 +134,20 @@ mysql-5.7 (5.7.12-1~exp1) UNRELEASED; urgency=medium
     dependencies, since these are required according to "mysql_config --
     libmysqld-libs". This fixes FTBFS of packages that use libmysqld-
     dev.
+  * d/p/fix-man-page-links.patch: drop (fixed upstream)
+  * Update translations for ja, pt_BR and tr
+    (Closes: #817088, #815522, #804780, #801352)
+  * Update translated references from 5.6 to 5.7
 
- -- Robie Basak <robie.basak@canonical.com>  Wed, 16 Mar 2016 13:48:32 +0000
+  [ Lars Tangvald ]
+  * Try to fail postinst with useful error message if server can't start
+  * Restart server after running mysqld_upgrade (LP: #1576647)
+  * Removed workaround for ALTER USER setting user to expired
+  * Strip lines from log that may contain passwords
+  * Fix deprecated commented-out config options (LP: #1577096)
+  * Change d/additions/debian-start to no-op (LP: #1577712)
+
+ -- Robie Basak <robie.basak@canonical.com>  Tue, 24 May 2016 15:39:33 +0100
 
 mysql-5.6 (5.6.28-1) unstable; urgency=medium
 
