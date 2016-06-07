@@ -35,7 +35,6 @@ usr/lib/mysql/plugin/semisync_slave.so
 usr/lib/mysql/plugin/validate_password.so
 usr/lib/mysql/plugin/version_token.so
 usr/share/doc/mysql-server-5.7/
-usr/share/mysql/debian-start.inc.sh
 usr/share/mysql/debian_create_root_user.sql
 usr/share/mysql/docs/INFO_BIN
 usr/share/mysql/docs/INFO_SRC
