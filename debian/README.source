@@ -1,3 +1,45 @@
+The Unified GIT Repository
+==========================
+
+To simplify the concurrent maintenance of several major MySQL releases
+for multiple distributions all related source packages are kept within
+one GIT repository:
+   git+ssh://git.debian.org/git/pkg-mysql/mysql.git
+
+The following naming scheme is used for branches and tags to
+distinguish the different packages:
+
+* Upstream:
+
+  Branches: <package>/upstream
+  Tags:     <package>/upstream/<version>
+
+* Packaging:
+
+  Branches: <package>/<vendor>/master
+            <package>/<vendor>/<codename>
+  Tags:     <package>/<vendor>/<version>
+
+* User:
+
+  Branches: <package>/<user>/<feature-branch>
+  Tags:     None
+
+Example branches:
+
+  mysql-5.7/upstream
+  mysql-5.7/debian/master
+  mysql-5.7/debian/experimental
+  mysql-5.7/ubuntu/yakkety
+  mysql-5.6/debian/jessie-backports
+  mysql-5.5/debian/jessie
+  mysql-5.8/<user>/foobar
+
+Please update debian/gbp.conf (and Vcs-Git in debian/control) when
+creating new vendor or codename branches.
+
+
+
 MySQL source package
 ====================
 The question arises why we have the mysql-source-* packages and why
