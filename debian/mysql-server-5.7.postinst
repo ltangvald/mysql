@@ -222,6 +222,7 @@ case "$1" in
       echo "USE mysql; " >> "$initfile"
       db_get mysql-server/root_password && rootpw="$RET"
       if [ ! -z "$rootpw" ]; then
+        rootpw=$(printf %q "${rootpw}")
         echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$rootpw';" >> "$initfile"
       fi
       echo "CREATE USER IF NOT EXISTS 'debian-sys-maint'@'localhost' IDENTIFIED BY '$pass';" >> "$initfile"
@@ -282,6 +283,7 @@ if [ "$1" = "configure" ]; then
   if test_mysql_access; then
     db_get mysql-server/root_password && rootpw="$RET"
     if [ ! -z "$rootpw" ]; then
+      rootpw=$(printf %q "${rootpw}")
       invoke stop
       initfile=`mktemp --tmpdir=/var/lib/mysql-files/`
       chown mysql:mysql "$initfile"
