@@ -7,6 +7,9 @@ mysql-5.7 (5.7.13-1~exp1) UNRELEASED; urgency=medium
   * Switch to Unix socket authentication for the MySQL root user. This
     applies only if the root password is blank. If it is set, then
     behaviour does not change. See NEWS.Debian for details.
+  * Detect and rename key_buffer and mysam-recover to non-deprecated names in
+    my.cnf.migrated where users have local modifications and still use the old
+    names. This fixes service startup failure (LP: 1571865).
   * Add systemd service unit. This uses mysqld directly instead of
     mysqld_safe, which interferes with systemd's service
     handling and is no longer needed.
@@ -23,8 +26,8 @@ mysql-5.7 (5.7.13-1~exp1) UNRELEASED; urgency=medium
   * Drop mysql-common; it is now produced by src:mysql-defaults.
   * Drop Perl dependencies, since upstream tooling no longer requires
     Perl.
-  * Thanks to Lars Tangvald, Adam Conrad, Bjoern Boschman and Andreas
-    Beckmann.
+  * Thanks to Lars Tangvald, Adam Conrad, Bjoern Boschman, Andreas
+    Beckmann and Martin Pitt.
   * Update translations for ja, pt_BR and tr (Closes: #817088, #815522,
     #804780, #801352). Thanks to Takuma Yamada, Adriano Rafael Gomes and
     Atila KOÇ.
