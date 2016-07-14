@@ -67,6 +67,7 @@ test_mysqld_startup() {
 # options that were removed in 5.7. They were renamed, so we can fix this
 # automatically. We create a backup of the old file
 fix_old_config_options() {
+  [ -f /etc/mysql/my.cnf.migrated ] || return 0
   sed -e 's/[[:space:]]*key_buffer[[:space:]]*=/# Obsolete key_buffer option renamed to key_buffer_size by maintainer script\nkey_buffer_size\t\t=/' \
       -e 's/[[:space:]]*myisam-recover[[:space:]]*=/# Obsolete myisam-recover option renamed to myisam_recover_options by maintainer script\nmyisam_recover_options\t=/' /etc/mysql/my.cnf.migrated --in-place=.bak
   # If nothing was changed, remove the new file
