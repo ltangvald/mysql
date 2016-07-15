@@ -1,4 +1,4 @@
-mysql-5.7 (5.7.13-1~exp1) UNRELEASED; urgency=medium
+mysql-5.7 (5.7.13-1~exp1) experimental; urgency=medium
 
   * Update to new upstream version 5.7.13. This includes major packaging
     changes. This changelog entry contains only a summary. For full
@@ -31,8 +31,9 @@ mysql-5.7 (5.7.13-1~exp1) UNRELEASED; urgency=medium
   * Update translations for ja, pt_BR and tr (Closes: #817088, #815522,
     #804780, #801352). Thanks to Takuma Yamada, Adriano Rafael Gomes and
     Atila KOÇ.
+  * Upload to experimental.
 
- -- Robie Basak <robie.basak@canonical.com>  Tue, 24 May 2016 15:39:33 +0100
+ -- Robie Basak <robie.basak@canonical.com>  Fri, 15 Jul 2016 03:15:14 +0200
 
 mysql-5.6 (5.6.28-1) unstable; urgency=medium
 

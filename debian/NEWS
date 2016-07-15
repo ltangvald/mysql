@@ -1,4 +1,4 @@
-mysql-5.7 (5.7.12-1~exp1) UNRELEASED; urgency=medium
+mysql-5.7 (5.7.13-1~exp1) experimental; urgency=medium
 
   * Password behaviour when the MySQL root password is empty has
     changed. Packaging now enables socket authentication when the MySQL
@@ -32,4 +32,4 @@ mysql-5.7 (5.7.12-1~exp1) UNRELEASED; urgency=medium
     http://dev.mysql.com/doc/refman/5.6/en/sql-mode.html#sql-mode-setting
     for details about the default settings in older versions.
 
- -- Robie Basak <robie.basak@ubuntu.com>  Wed, 20 Apr 2016 11:05:18 +0100
+ -- Robie Basak <robie.basak@canonical.com>  Fri, 15 Jul 2016 03:15:14 +0200
