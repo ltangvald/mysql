@@ -1,3 +1,9 @@
+mysql-5.7 (5.7.14-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+
+ -- Bjoern Boschman <bjoern@boschman.de>  Wed, 03 Aug 2016 19:51:54 +0200
+
 mysql-5.7 (5.7.13-1~exp1) experimental; urgency=medium
 
   * Update to new upstream version 5.7.13. This includes major packaging
