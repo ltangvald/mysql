@@ -1,3 +1,4 @@
+perl mysql-test-run.pl --debug-server --timer --force --parallel=auto --comment=x --vardir=var-x --suite=x --experimental=collections/default.experimental
 # This file contains the old default.release, the plan is to replace that
 # with something like the below (remove space after #):
 # include default.daily

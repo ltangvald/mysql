@@ -15,3 +15,4 @@ perl mysql-test-run.pl --timer --force  --testcase-timeout=60 --debug-server --p
 
 # Memcached tests
 perl mysql-test-run.pl --timer --force --debug-server --comment=memcached-debug --vardir=var-debug-memcached --experimental=collections/default.experimental --parallel=1 --retry=0 --suite=memcached  --skip-test-list=collections/disabled-daily.list
+perl mysql-test-run.pl --debug-server --timer --force --parallel=auto --comment=x --vardir=var-x --suite=x --experimental=collections/default.experimental
