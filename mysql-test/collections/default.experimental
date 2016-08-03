@@ -33,3 +33,7 @@ main.xa_prepared_binlog_off              # Bug#19502202 2015-12-02 erlend experi
 # FC : SUMA bug related to CREATE NODEGROUP/DROP NODEGROUP/CREATE NODEGROUP
 ndb.ndb_addnode_withbinlog
 
+# For easier human reading (MTR doesn't care), please keep entries
+# in alphabetical order. This also helps with merge conflict resolution.
+
+

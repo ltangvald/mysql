@@ -56,3 +56,4 @@ perl mysql-test-run.pl  --timer --force --testcase-timeout=60 --parallel=auto --
 
 # Run all tests under the suite interactive_utilities
 perl mysql-test-run.pl --force --timer  --testcase-timeout=60 --parallel=auto --experimental=collections/default.experimental --comment=var-interactive  --vardir=interactive-tests  --suite=interactive_utilities
+perl mysql-test-run.pl --debug-server --timer --force --parallel=auto --comment=x --vardir=var-x --suite=x --experimental=collections/default.experimental
