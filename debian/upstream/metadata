@@ -1,0 +1,8 @@
+Name: MySQL Server
+Bug-Database: https://bugs.mysql.com/
+Bug-Submit: http://bugs.mysql.com/report.php
+Changelog: http://dev.mysql.com/doc/relnotes/mysql/5.7/en/
+FAQ: http://www.mysql.com/about/faq/
+Repository: git://github.com/mysql/mysql-server.git
+Repository-Browse: https://github.com/mysql/mysql-server
+Security-Contact: security@mysql.com
